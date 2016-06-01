@@ -464,9 +464,13 @@ $$ \sum_{v \in V(G)} (\frac{3}{2}d_G(v) - 5) + \sum_{f\in F} (d_G(f) -5) = 3m -5
 \ep 
 
 Connaissant la charge des sommets, on sait que,
-$$ w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2$$
-$$ w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 3$$
-$$ w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 4$$
+$$
+\gathered
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2\\
+w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 3\\
+w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 4
+\endgathered
+$$
 
 On ne montre pas les charges des faces parce que toutes sont non négatives et ls règles qui seront définies ensite ne concerne pas les faces. Alors, les règles qui vont distribuer la charge des sommets sont les suivantes;
 
@@ -494,7 +498,7 @@ Le théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine
 C'est pour ce fait qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et ce a été Robertson, Sanders, Seymour et Thomas qui l'ont prouvé en 1995. En fait dans ce nouvelle preuve ils se sont inspirés aussi dans la preuve de Appel et Haken, et ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
 \begin{theorem}
-Soit $G$ un graphe planaire. Alors $G$ est 4-coloriable.
+Soit $G$ un graphe planaire. empsAlors $G$ est 4-coloriable.
 \label{th:4CT}
 \end{theorem}
 
@@ -559,10 +563,30 @@ $$
 \end{definition}
 
 \begin{proposition}
-Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs pésentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi$ \emph{se réduit} vers une autre coloration $\varphi'$ si pour 
-
+Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si et seulement si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$
+\label{pro:étend}
 \end{proposition}
 
+\begin{definition}
+Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, l'ensemble d'arêtes sortantes $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble de couplages possibles parmi les arêtes de ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
+{\color{red} Je ne sais pas trop comme gérer ce définition et je ne sais pas comme la noter si phi sous ij ou sur ij ou sous ij et sur M. Ton avis?}
+\label{de:modif}
+\end{definition}
+
+\begin{proposition}
+Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas \emph{se réduit} vers  $\varphi$ s'il existe un pair de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$ \ref{de:phi}).
+\label{pro:phii}
+\end{proposition}
+
+\begin{definition}
+Soir $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement \ref{de:phi}. Autrement dit,
+$$
+\gathered
+\Phi_{i+1} = \lbrace \varphi \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \rbrace\\
+\Phi_0 = \lbrace \varphi \quad \textrm{telle que $\varphi$ s'étend à $C$} \rbrace
+\endgathered
+$$
+\end{definition}
 
 
 
