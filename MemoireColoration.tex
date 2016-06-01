@@ -444,6 +444,7 @@ représentant la charge initiale des faces. Puis on montre que la somme de la ch
 \begin{lemme}
 Soit $G$ un graphe planaire connexe. Alors,
 $$ \sum_{v \in V(G)} (\frac{3}{2} d_G(v) - 5) + \sum_{f\in F} (d_G(f) -5) = -10$$
+\label{le:cha2}
 \end{lemme}
 
 Preuve.
@@ -574,65 +575,64 @@ Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, l
 \end{definition}
 
 \begin{proposition}
-Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas \emph{se réduit} vers  $\varphi$ s'il existe un pair de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$ \ref{de:phi}).
+Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas \emph{se réduit} vers  $\varphi$ s'il existe un pair de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
 \label{pro:phii}
 \end{proposition}
 
 \begin{definition}
-Soir $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement \ref{de:phi}. Autrement dit,
+Soir $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathcal{N} \cup \lbrace 0\rbrace$ (Définition \ref{de:phi}). 
 $$
 \gathered
 \Phi_{i+1} = \lbrace \varphi \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \rbrace\\
-\Phi_0 = \lbrace \varphi \quad \textrm{telle que $\varphi$ s'étend à $C$} \rbrace
+\Phi_0 = \lbrace \varphi \quad \textrm{telle que $\varphi$ s'étend à $C$} \rbrace\\
+\Phi = \cup_{i \in \mathcal{N}\cup \lbrace 0 \rbrace} \Phi_i 
 \endgathered
 $$
 \end{definition}
 
+\begin{proposition}
+Soit $C$ une configuration, $C'$ une autre configuration avec la même disposition des arêtes de ring que $C$ et $\Phi'_0$ l'ensemble de colorations qui s'étendent directement à $C'$. Alors $C$ se réduit vers $C'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
+\end{proposition}
+\bigskip
+
+Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, ce qui nous permet définir des propriétés structurelles d'un graphe $G$. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée dans le chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
 
+\section{Déchargement}
 
+Dans ce chapitre, on présente la charge initiale et des règles de déchargement qui vont permettre de trouver la contradiction qui montre la conjecture. \` A partir des configuration réductibles qu'on a trouvé à l'aide de l'outil qu'on a créé, on déterminera des règles de distribution de charge. D'abord regardons quelle est la charge initiale. On a déjà connu le processus de cette règle dans un chapitre précédente (chapitre \ref{chap:easy}), dans ce cas-là on va faire pareil.
 
+\begin{definition}
+Soit $G$ un graphe planaire avec V(G) l'ensemble de sommets de $G$ et F l'ensemble de faces (sans prendre en compte la région infinie). La \emph{charge} des sommets et des faces est une application $w$ défini de la façon suivante.
+$$
+\gathered
+w: V(G) \to \mathcal{R} \qquad \textrm{telle que}\\
+w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v \in V(G)$}\\
+\endgathered
+$$
+et également
+$$
+\gathered
+w: F \to \mathcal{R} \qquad \textrm{telle que}\\
+w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f \in F$}\\
+\endgathered
+$$
+\end{definition}
 
+\begin{lemme}
+Soit $G$ un graphe planaire et $w$ la application de la charge initiale. Alors la charge initiale totale du graphe est $-8$ (comme dans la conjecture du chapitre précédente (lemme \ref{le:charge}).
+\end{lemme}
 
-
-
-
-
-Ensuite on passe à présenter une partie de la théorie de graphes où l'objectif s'agit de trouver la "partie" ou le "contre-exemple" minimal d'un graphe quelconque. Dans un graphe général on peut trouver plusieurs types de configurations, plus petites ou plus grandes, à partir des conditions principales qui vont définir les contraintes d'un graphe. Pour colorier un graphe quelconque l'idée de le colorier sommet par sommet ou arête par arête en parcourant tout le graphe est un peu bête. Même parcourir un graphe configuration par configuration serait impossible, alors on va étudier les différents types de configurations qui peuvent se donner dans un graphe. On pourra donc, de cette façon, supprimer des configurations, ou des possibilités de que certains sommets soient prêts des autres ou pas.
-
-Comme on a déjà dit la réduction d'un graphe est le fait de trouver la partie minimal des différentes configurations données dans le graphe courant. C'est à dire, on va montrer que si une configuration peut se réduire vers une autre plus petite, on pourra assurer que celle configuration initiale n'apparaîtra pas dans notre graphe. Mais qu'est ce que ça veut dire "se réduire"?
-
-On dira qu'une configuration se réduit vers une autre plus petite si et seulement si toutes les configurations possibles de la configuration réduite sont représentées dans la configuration initiale. Autrement dit, si on peut trouver .......
-
-La réduction est une technique très utilisée pou...... 
-
-Ci dessous on présente le cas 3-3, un exemple d'un cas irréductible car, comme on peut voir, il y a certains colorations du graphe réduite, lesquelles ne peuvent pas s'éteindre vers la configuration 3-3. Si on parle d'une $4$-coloration dans cette configuration 3-3, on voit le conflit le plus claire, quand on colorie les 4 arêtes extérieurs avec 4 couleurs différentes. Si on essaie cette même coloration sur la configuration réduite (image pour chacune), on voit que c'est possible car il n'y a pas l'arête de milieu, qui nous crée le conflit dans le premier cas. 
-
-Parmi les colorations qui ne marchent pas ou qui créent certain type de conflit, on peut toujours essayer de les devenir des bonnes colorations en faisant des échanges des pairs de couleurs. Pour faire ces échanges on prendra une paire de couleurs qui soient présentes dans au moins un arête extérieur chacune. Alors, si on trouve une paire de couleurs pour laquelle n'importe quelle couplage des arêtes extérieurs coloriés à ces couleurs, permet de faire une échange de couleurs pour lequel la coloration de la configuration devient bonne, on peut dire que la configuration se réduite.
-
-On a parlé des échanges des couleurs, qui représentent des chaînes qu'on peut trouver entre deux arêtes extérieurs. C'est à dire, à partir des arêtes extérieurs il peut exister des chaînes des arêtes colories à ces deux couleurs entre deux arêtes extérieurs. Pourtant, on a vu que le degré des sommets n'est pas toujours le même, c'est à dire, que le graphe ce n'est pas régulier donc, on n'aura pas la condition de parité. Alors, on peut trouver des chaînes qui sortent de notre configuration et qui ne reviennent jamais. Celle-là c 'est une des grandes différence entre le théorème de 4 couleurs, lequel on va étudier plus tard, et notre problème et c'est que dans notre cas il nous manque la parité qui oblige à trouver des couplages parfaits pour n'importe quelle paire de couleurs sur les arêtes extérieurs.
-
-Comme on a dit, on va voir d'abord le cas ci-dessous, le cas 3-3 qui ne se réduite pas, et la raison pour laquelle il ne se réduite pas. Puis on présente aussi le cas 2-4-3, un exemple d'une configuration qui se réduite à 4 couleurs. On montrera les possibles conflits et comme supprimer ces conflits avec les échanges des paires de couleurs. 
-
-
-......images du cas 3-3 et sa possible réduction
-
-Finalement voyons le cas 2-4-3, un exemple de configuration réductible. On verra qu'on peut trouver le même conflit que dans le cas précédant, dans la partie 4-3, mais voyons comme c'est possible supprimer ce conflit en jouant avec les paires de couleurs et les couplages. Ci dessous on peut voir l'exemple et les différents pas qu'on va donner pour montrer que ce graphe est réductible et qui se réduit vers le graphe qui est au dessous.
-
-.....images 2-4-3 avec ensuite sa réduction
-
-Pour résoudre notre problème on a développé un outil capable de vérifier si une configuration donnée se réduite vers une autre plus petite ou pas. Ce sera à nous de trouver les possibles réductions qui peut nous intéresser et qui soient réellement des réductions.
-
-Depuis avoir parlé de la réductibilité on passe sur la méthode principale, ou la méthode qui va "deviner" ou plutôt démontrer si un graphe il est $k$-coloriable ou pas. On parle de la méthode de déchargement laquelle normalement est liée à la réductibilité car on verra que on cherche à appliquer cette méthode sur des configurations irréductibles.
-
-
-
-%\subsection{Déchargement}
-
-Une autre technique ou méthode très utilisée c'est la méthode de déchargement, une méthode qui a comme objectif prouver ...... pour essayer de deviner les classes de configurations ou les différents structures de sous-graphes qui vont se donner dans notre graphe à cause des conditions initiales et aussi à l'aide de la réductibilité. 
-
-Comme on a déjà expliqué dans la parti consacrée à la réductibilité, si on trouve une configuration réductible, on la remplacera pour la réduction et on ne regardera que les contre-exemples minimaux. A partir de là, la méthode de déchargement est, comme on a déjà expliqué, une méthode qui permettre de prouver la vérité d'un lemme. Généralement c'est une méthode pour lequel on définira des règles grâce, lesquelles on utilisera pour.......
-
+Preuve.
+On considère, comme précédemment la formule d'Euler et la formule de poignées de mains.
+$$
+n - m + f = 2, \qquad \sum_{u \in V(G)} d_G(v) = 2m, \qquad \sum_{f \in F} d_G(f) = 2m
+$$
+Alors,
+$$
+\sum_{u \in V(G)} (d_G(v) - 4) + \sum_{f \in F} (d_G(f) - 4) = 2m - 4n + 2m - 4f = -4( n - m + f) = -4 \cdot 2 = -8
+$$
+\ep
 
 
 
@@ -642,9 +642,6 @@ Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résou
 
 Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
 
-\subsection{Héritage du 4-Colour Theorem}
-
-Est ce que c'est nécessaire? je ne le pense pas.
 
 \subsection{Réductibilité}
 
@@ -686,7 +683,7 @@ La condition nécessaire et suffisante pour qu'une "mauvaise" coloration se réd
 
 ---image de mauvaise coloration qui se réduit vers une bonne et image de la bonne aussi-----
 
-Il existe différentes types de "mauvaises" colorations, celles qui se réduisent vers une "bonne" coloration (on les appellera Type 1), celles qui se réduisent vers une "mauvaise" coloration du Type 1 ou de Type 2 (on appellera a ces dernières colorations "mauvaises de Type 2) et celles qui ne se réduisent pas. On fera donc, répeter ce processus de couplages en tant qu'il existe des colorations "mauvaises" qui se réduisent jusqu'à on ne trouve plus de colorations de Type 2.
+Il existe différentes types de "mauvaises" colorations, celles qui se réduisent vers une "bonne" coloration (on les appellera Type 1), celles qui se réduisent vers une "mauvaise" coloration du Type 1 ou de Type 2 (on appellera a ces dernières colorations "mauvaises de Type 2) et celles qui ne se réduisent pas. On fera donc, répéter ce processus de couplages en tant qu'il existe des colorations "mauvaises" qui se réduisent jusqu'à on ne trouve plus de colorations de Type 2.
 
 \subsubsection{Colorations étendues}
 
