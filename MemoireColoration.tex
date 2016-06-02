@@ -15,6 +15,7 @@
 \newtheorem{exemple}{Exemple}
 \newtheorem{lemme}{Lemme}
 \newtheorem{conjecture}{Conjecture}
+\newtheorem{corollaire}{Corollaire}
 
 
 \newcommand{\ep}{{\hfill $\square$}}
@@ -597,6 +598,47 @@ Soit $C$ une configuration, $C'$ une autre configuration avec la même dispositi
 
 Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, ce qui nous permet définir des propriétés structurelles d'un graphe $G$. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée dans le chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
+Ensuite on va montrer des propriétés structurelles de $G$ comme on a déjà fait pour les deux conjectures précédentes.
+
+\begin{lemme}
+Il n'existe pas de sommet $v \in V(G)$ tel que $d_G(v)$ = 1.
+\end{lemme}
+
+Preuve. 
+La preuve pour cette condition est la même qu'on a déjà fait pour les deux cas précédentes (Lemme \ref{le:14} et Lemme \ref{le:1})
+\ep
+
+\begin{lemme}
+Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ n'a que des voisins de degré 4.
+\end{lemme}
+
+Preuve. 
+Cette preuve on l'a fait aussi dans le cas précédente (Lemme \ref{le:23}) et l'argument c'est exactement le même.
+\ep 
+
+\begin{lemme}
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ et $u\in N(v)$ tel que $d_G(u) = 2$. Alors pour tout $w \in N(v)$, $w \neq u$, $d_G(w) = 4$.
+\end{lemme}
+
+Preuve.
+Cette preuve aussi est la même que celle-ci qu'on a fait dans le cas précédente (Lemme \ref{le:243}).
+\ep
+
+\begin{lemme}
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$. Alors $v$ a au moins deux voisins de degré 4.
+\end{lemme}
+
+Preuve.
+C'est la même que dans le Lemme \ref{le:333}.
+\ep
+
+Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{red}travail}. Les configurations avec leurs réductions seront montrées dans le chapitre suivant.
+
+\begin{lemme}
+Soit $G$ un contr-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+\end{lemme}
+
+ 
 
 \section{Déchargement}
 
@@ -634,8 +676,37 @@ $$
 $$
 \ep
 
+\begin{corollaire}
+Soit $G$ un graphe et $w$ la fonction de charge définie dessus. Alors, pour les sommets,
+$$
+\gathered
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 2\\
+w(v) = -1 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 3\\
+w(v) = 0 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 4
+\endgathered
+$$
+Et également pour les faces on obtient,
+$$
+\gathered
+w(f) = 0 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 4\\
+w(f) = 1 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 5\\
+w(f) \geq 2 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) \geq 6
+\endgathered
+$$
+\end{corollaire}
 
+Connaissant les charges et les structures ou configurations qu'on peut trouver dans un graphe $G$, les règles qu'on définit ensuite vont permettre de distribuer la charge des sommets vers les faces obtenant une somme de la charge totale positive.
 
+\begin{proposition}
+Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Alors les règles de distribution de la charge sont les suivantes.
+\begin{enumerate}
+\item (R1) $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
+\item (R2) $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donne une unité de charge négative $(-1)$ à une face voisine $f$ telle que $d_G(f) \geq 5$.
+\item (R3) $forall v \in V(G)$ tel que $d_G(v) = 4$, $v$ ne distribue aucune charge car il ne l'a pas.
+\end{enumerate}
+\end{proposition}
+
+Vérifions que ces trois règles expliquent la distribution de charge dans tous les cas possibles (tous les cas où on a trouvé des réductions), sur toutes les configurations afin de montrer que la somme de la charge totale finale est positive.
 \section{Méthodes}
 
 Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
@@ -709,14 +780,9 @@ Les règles qu'on définit viennent numérotes ci dessous.
 On remarque que la plus grande partie du travail a été dirigé à développer l'outil capable de vérifier la réductibilité donc les résultats les plus visibles sont ceux concernant ce chapitre et ce sont ceux qu'on présente ensuite.
 
 D'abord, on présente les configurations qui marchent bien, celles que nous ont permis demontrer la réductibilité sur des situations des sommets différents. Ces situations sont celles qui ont défini les règles de déchargement, autrement dit, c'est grâce à ces situations qu'on a défini les règles de cette manière. Puis on donne aussi, des exemples de réductions que n'ont pas marché pour qu'on peut montrer que pas toutes les réductions sont valides et qu'il existe un dur travail derrière la recherche des réductions. 
- 
-\subsection{Réductions bonnes:}
-\subsubsection{Pair de sommets de degré 3}
-\subsubsection{Sommet de degré 2}
-\subsubsection{Sommet de degré 3}
-\subsection{Réductions mauvaises:}
-
-
+\subsection{Pair de sommets de degré 3}
+\subsection{Sommet de degré 2}
+\subsection{Sommet de degré 3}
 \section{Conclusion}
 
 
