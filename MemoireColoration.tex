@@ -178,7 +178,7 @@ Soit $G$ un graphe. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
 La question de déterminer/caractériser les classes de graphes pour lesquelles on a $\chi'(G) = \Delta(G)$ (on les appelle aussi les graphes de classe 1) reste une question centrale. 
 
 Il existe des résultats concernant la classification des graphes de classe 1 pour les graphes planaires.
-C'est Vizing \cite{Vizing} qui a montré que les graphes planaires avec $\Delta(G)\ge 8$ sont des graphes de classe 1. Le cas de $\Delta = 7$ a été prouvé en 2001 par Sanders et Zhao [citation]. 
+C'est Vizing \cite{Vizing} qui a montré que les graphes planaires avec $\Delta(G)\ge 8$ sont des graphes de classe 1. Le cas de $\Delta = 7$ a été prouvé en 2001 par Sanders et Zhao \cite{SandersZhao}. 
 En revanche, pour $\Delta\le 5$ il existe des graphes planaires avec $\chi'(G)=\Delta(G)+1$ -- il suffit de subdiviser par un sommet de degré 2 une arête d'un graphe $\Delta$-régulier et $\Delta$-arête-coloriable \cite{Vizing2}.
 Le cas $\Delta = 6$ reste largement ouvert. 
 
@@ -197,11 +197,10 @@ Cette conjecture est le problème principal à traiter dans cet écrit.
 Nous allons refaire la démonstration de deux propositions voisines de la conjecture étudiée, afin de pouvoir illustrer sur ces deux exemples-ci non-triviaux les méthodes utilisées pour démontrer ce type d'énoncé. Nous introduisons d'abord quelques notions et notation techniques.
 
 Soit $G$ un graphe avec les arêtes coloriées. 
-Considérons le sous-graphe $H^{c_1,c_2}$ de $G$ induit par les arêtes coloriés $c_1$ et $c_2$. Par la définition d'une coloration, aucun sommet de $H^{c_1,c_2}$ ne peut avoir un degré supérieur à 2. Par conséquent, toute composante connexe de $H^{c_1,c_2}$ est une chaîne ou un cycle. Si on choisit une composante connexe $C$ de $H^{c_1,c_2}$, qu'on échange les couleurs $c_1$ et $c_2$ le long de $C$ et qu'on garde la couleur de toutes les autres arêtes, on obtiendra une autre coloration de $G$.
+Considérons le sous-graphe $G[c_1,c_2]$ de $G$ induit par les arêtes coloriés $c_1$ et $c_2$. Par la définition d'une coloration, aucun sommet de $G[c_1,c_2]$ ne peut avoir un degré supérieur à 2. Par conséquent, toute composante connexe de $G[c_1,c_2]$ est une chaîne ou un cycle. Si on choisit une composante connexe $C$ de $G[c_1,c_2]$, qu'on échange les couleurs $c_1$ et $c_2$ le long de $C$ et qu'on garde la couleur de toutes les autres arêtes, on obtiendra une autre coloration de $G$.
 
-Étant donné une arête $e$ de $G$ de couleur $c$ et une autre couleur $c'$, il existe une et une seule composante connexe de $H^{c,c'}$ contenant $e$.
-Nous allons appeler celle-là la \emph{$(c,c_1)$-chaîne de Kempe} de $e$. 
-
+Étant donné une arête $e$ de $G$ de couleur $c$ et une autre couleur $c'$, il existe une et une seule composante connexe de $G[c,c]$ contenant $e$.
+Nous allons appeler celle-là la \emph{$(c,c')$-chaîne de Kempe} de $e$.
 
 
 %Cette partie sera consacrée à la présentation des deux propositions qui ont été décrites précédemment. Ces deux propositions vont introduire la conjecture qu'on va traiter après.
@@ -298,26 +297,28 @@ Par conséquent, il existe une arête incidente à $w$ coloriée 1, disons $f$. 
 Après avoir alterné les couleurs la $(1,3)$-chaîne de Kempe de $f$, en recoloriant $\varphi(vw)=1$ et en posant $\varphi(e)=2$ on obtient une coloration de $G$, une contradiction. \ep
 
 \begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ aura au plus, deux voisins $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$.
+Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré 3.
 \label{le:5333}
 \end{lemme}
 
 
 Preuve.
-Supposons que cette condition n'est pas vrai. Soit $e_i = u_iv$ pour tout $i \in {1,2,3}$, $e_4$ et $e_5$ les arêtes incidentes de $v$ qui restent et puis ${e_{i1}, e_{i2}}$ l'ensemble des arêtes incidentes à $u_i$ pour $i \in {1,2,3}$. Considérons une $5$-arête-coloration $\varphi$ de $G' = G \setminus e_3$. On suppose par exemple, que $\varphi(e_{31}) = 5$ et que les arêtes incidentes de $v$ sont coloriées avec les 4 couleurs restantes dont $\varphi(e_1)=1$ et $\varphi(e_2)=2$.
+Supposons que cette condition n'est pas vrai, i.e., que $v$ ait trois voisins de degré 3, disons $u_1$, $u_2$ et $u_3$. Soit $u_4$ et $u_5$ les autres voisins de $v$. Soit $e_i = u_iv$ pour tout $i \in \{1,2,3,4,5\}$. Soit $\{e_i, e_{i1}, e_{i2}\}$ l'ensemble des arêtes incidentes à $u_i$ pour $i \in {1,2,3}$. Considérons une $5$-arête-coloration $\varphi$ de $G' = G \setminus e_1$. On peut supposer que $\varphi(e_2)=2$, $\varphi(e_3)=3$, $\varphi(e_4)=4$ et $\varphi(e_5)=5$, et que $\varphi(e_{11}) = 1$. 
 
-Pour $i = 1,2,3,4$ il y a des $(5,i)$-chaînes de Kempe reliant $e_{31}$ aux arêtes incidentes de $v$, ce qui provoque que par exemple pour $i \in {1,2}$ $\varphi(e_{i1}) = 5$.
+On peut même supposer que $\varphi(e_{32}) \in \{3,5\}$.
+Donc, pour $i \in \{2,4\}$, la $(1,i)$-chaîne de Kempe relie $e_{11}$ à $e_i$, ce qui provoque que $u_2$ est incident à une arête coloriée 1, disons $e_{21}$. 
 
-Alors, il existe une couleur $c$ que $u_2$ ne voit pas ($u_2$ ou $u_1$, dépendant de la couleur de  que $\varphi(e_{32})$ soit différente de $\varphi(e_1)$ ou de $\varphi(e_2)$)  pour laquelle il existe une autre $(c,5)$-chaîne de Kempe reliant $e_{31}$ avec une arête incidente de $v$ (qui n'est pas $e_2$). Disons par exemple que cette couleur est 4, alors il existe déjà une $(4,5)$-chaîne de Kempe reliant $e_{31}$ avec $e_4$ (par exemple; une arête incidente de $v$ qui ait la couleur $4$), on peut supposer donc, que la $(4,5)$-chaîne sortant de $e_{21}$ est différente à celle-là qui sort de $e_{32}$.
+Si $\varphi(e_{22}) \ne 4$, alors la $(1,4)$-chaîne de Kempe de $e_{21}$ est bien différente de celle reliant $e_{11}$ et $e_4$. En alternant les couleurs de la $(1,4)$-chaîne de Kempe de $e_{21}$, on trouverait une coloration $\varphi'$ avec $\varphi'(e_{21})=4$, ce qui permettrait de recolorier $\varphi'(e_2) = 1$ laissant disponible la couleur $2$ pour l'arête $e_1$. On obtiendrait donc une coloration de $G$, ce qui est absurde. 
 
-Par conséquence, on obtient une nouvelle coloration $\varphi$ alternant les couleurs, qui donne $\varphi(e_{21}) = 4$, ce qui permet recolorier $\varphi(e_2) = 5$ laissant disponible la couleur $2$ pour l'arête $e_3$. On obtient donc, une coloration de G, ce qui est absurde.
+Par conséquence, $\varphi(e_{22}) = 4$. Colorions $\varphi(e_1)=2$, recolorions $\varphi(e_2)=3$ et enlevons la couleurs de $e_3$.
+On peut supposer que $\varphi_{31}=1$, sinon, la couleur $1$ serait libre pour l'arête $e_3$.
 
-Pour les cas où cette couleur choisi $c$ ne soit pas 4, on regarde que $c$ doit être une couleur pas vue par le sommet de degré 3 choisi ni par le sommet $u_3$ duquel on a supprimé une arête incidente pour construire $G'$. Ces deux conditions nous laisse toujours une couleur libre qui est présente dans les chaînes reliant $e_{31}$ avec une arête incidente de $v$.
+En considérant les $(1,2)$-chaînes de Kempe, on peut déduire que $\varphi(e_{32})=2$. Or, dans ce cas-là, la $(1,4)$-chaîne de Kempe de $e_{31}$ est bien différente de celle reliant $e_{11}$ et $e_4$, que cette dernière passe par $u_2$ ou pas. On peut donc transformer $\varphi$ en une autre coloration avec $\varphi(e_{31}=4)$ et colorier $e_3$ de la couleur 1, ce qui est absurde.
 \ep
 
 
 \bigskip
-Ensuite, on va montrer que les propriétés structurelles de $G$ montrées entraînent une contradiction à l'aide de la technique de déchargement. Cette technique a été utilisée aussi pour prouver le théorème de 4 couleur. 
+Ensuite, on va montrer que les propriétés structurelles de $G$ montrées entraînent une contradiction à l'aide de la technique de déchargement. Cette technique a été utilisée aussi pour prouver le théorème de quatre couleur. 
 
 %Pour la méthode de déchargement, premièrement une condition est définie. 
 Soit $w: V(G) \to \mathbb{R}$  la fonction définie par
@@ -327,7 +328,7 @@ Soit $w: V(G) \to \mathbb{R}$  la fonction définie par
  w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f\in F(G)$,} 
 \endgathered 
 $$
-appelée aussi, la \emph{charge initiale} des sommets et des faces de $G$. On montre d'abord que la somme totale de la charge dans $G$ est négative, puis des règles de redistribution de charge sont définies telle que la somme totale de la charge reste invariante et finalement on marque que, après la redistribution il ne reste plus de charge négative, ce qui est absurde.
+appelée aussi la \emph{charge initiale} des sommets et des faces de $G$. Nous montrons d'abord que la somme totale de la charge dans $G$ est strictement négative, puis nous définissons des règles de redistribution de charge telles que la somme totale de la charge reste invariante, finalement, nous observons qu'après la redistribution il ne reste plus de charge strictement négative, ce qui est absurde.
 
 \begin{lemme}
 Soit $G$ un graphe planaire connexe. Alors,
@@ -358,7 +359,7 @@ w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 5.
 \endgathered
 $$
 
-La charge initiale de toutes les faces est positive puisque $g(G)\ge 4$.
+Par ailleurs, la charge initiale de toutes les faces est positive puisque $g(G)\ge 4$.
 
 Nous redistribuons la charge selon les règles suivantes:
 \begin{enumerate}
@@ -368,7 +369,7 @@ Nous redistribuons la charge selon les règles suivantes:
 
 Évidemment, la somme totale de charge reste invariante et la charge de toutes les faces reste positive.
 
-Vérifions que pour toute sommet de $G$ la charge finale est positive également, c qui nous donnera la contradiction.
+Vérifions que pour toute sommet de $G$ la charge finale est positive également, ce qui nous donnera la contradiction.
 Selon Lemme \ref{le:1} il n'y a pas de sommet de degré 1.
 Selon Lemme \ref{le:2}, tout sommet que reçoit de la charge par (R1) est de degré 5. Donc, les sommets de degré 4 ni donnent ni reçoivent rien, leur charge reste nulle.
 
@@ -377,7 +378,7 @@ Soit $v$ un sommet de degré 2. D'après (R1), sa charge finale est de $-2 - 2\c
 Soit $v$ un sommet de degré 3. Selon Lemme \ref{le:434}, il a au moins deux voisins de degré 5. D'après (R2), sa charge finale est au moins $-1 - 2\cdot (-1/2) = 0$.
 
 Soit $v$ un sommet de degré 5. Si $v$ a un voisin de degré 2, selon Lemme \ref{le:254} il n'a pas d'autre voisins de degré 2 ou 3, donc, il ne reçoit que de la charge de son (unique) voisin de degré 2. Sa charge finale est donc de $1+(-1)=0$.
-Supposons alors que $v$ n'ait pas de voisin de degré 2. S'il a des voisins de degré 3, il en a au plus deux, grâce à Lemme \ref{le:5333}. Sa charge finale est alors d'au moins $1+2\cdot(-1/2) = 0$. Si $v$ n'a ni voisin de degré 2 ni voisins de degré 3, il ne reçoit pas de charge négative, alors sa charge reste (strictement) positive.
+Supposons alors que $v$ n'ait pas de voisin de degré 2. Si $v$ a des voisins de degré 3, il en a au plus deux, grâce à Lemme \ref{le:5333}. Sa charge finale est alors d'au moins $1+2\cdot(-1/2) = 0$. Si $v$ n'a ni voisin de degré 2 ni voisins de degré 3, il ne reçoit pas de charge négative, alors sa charge reste (strictement) positive.
 %Ces règles sur un graphe qui respecte les propriétés structurelles définies précédemment, après la redistribution de charge, il reste positif ou nul, ce qui provoque une contradiction sur la proposition initiale.
 \ep
 
@@ -388,35 +389,28 @@ Supposons alors que $v$ n'ait pas de voisin de degré 2. S'il a des voisins de d
 Soit $G$ un graphe planaire avec $\Delta = 4$ et $g \geq 5$. Alors $G$ est $4$-arête-coloriable.
 \end{proposition}
 
-Preuve. On va supposer que la proposition est fausse. Soit $G$ un contre-exemple minimal. Dans ce cas aussi on va d'abord montrer des propriétés structurelles de $G$.
+Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal. Dans ce cas aussi nous allons d'abord montrer des propriétés structurelles de $G$. Les deux premières sont exactement les mêmes que pour la proposition précédente, nous omettons la preuve.
 
 \begin{lemme}
-Pour $G$ contre-exemple minimal,  $\nexists v \in V(G)$ tell que $d(v) = 1$.
+Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
 \label{le:14}
 \end{lemme}
 
-Preuve.
-Pareil que dans la proposition précédente, soit $G$ un contre-exemple minimal et $v$ un sommet tel que $d_G(v) = 1$. Considérons, à partir de $G$ $G' = G-uv$ un sous-graphe de $G$ tel qu'il admet une $4$-arête-coloration. Regardons que $d_G(u) \leq 4$ par hypothèse donc $d_{G'}(u) \leq 3$. Alors, on peut colorier $u$ avec $3$ couleurs ce qui nous permet d'utiliser une quatrième couleur pour colorier l'arête $uv$. Alors, $G$ est $4$-arête-coloriable.
-\ep
-
 \begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d(v) = 2$ Alors $\forall u \in N(v)$, $d(u) = 4$.
+Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$.
 \label{le:23}
 \end{lemme} 
 
-Preuve.
-Supposons que ce n'est pas vrai, c'est à dire, qu'on peut trouver $u \in N(v)$ tel que $d(u) = 3$. Considérons $G' = G-uv$ et regardons une coloration pour $G'$ qui puisse créer un conflit pour une $4$-arête-coloration de $G$. $G'$ a 3 arêtes donc, quoi que ce soit la coloration trouvée pour $G'$ il aura toujours au moins une couleur disponible pour colorier l'arête supprimé, ce qui provoque une contradiction.
-\ep
 
 \begin{lemme}
 Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré 4.
 \label{le:243}
 \end{lemme}
 
-Preuve.
-Supposons par l'absurde que $v \in V(G)$ a un voisin $w \in N(v)$ tel que $d(w) = 3$. Soit $e = uv$ et $e'$ l'autre arête incidente de $u$ comme on a fait au \ref{le:254}. Considérons une $4$-arête-coloration $\varphi$ de $G' = G \setminus e$  où on suppose que $\varphi(e') = 1$ et que les trois arêtes incidentes de $v$ dans $G'$ sont coloriées avec les couleurs 2,3 et 4 dont $\varphi(vw) = 2$. 
+Preuve. Nous suivons les idées de la preuve de Lemme \ref{le:254}.
+Supposons par l'absurde que $v$ ait un voisin $w$ tel que $d_G(w) = 3$. Soit $e = uv$ et $e'$ l'autre arête incidente de $u$ . Considérons une $4$-arête-coloration $\varphi$ de $G' = G \setminus e$. On peut supposer que $\varphi(e') = 1$ et que les trois arêtes incidentes de $v$ dans $G'$ sont coloriées avec les couleurs 2, 3 et 4, dont $\varphi(vw) = 2$.
 
-On a déjà marqué plusieurs fois qu'il existe forcement des $(1,i)$-chaînes pour tout $i \in {2,3,4}$ reliant $e'$ avec les arêtes incidentes de $v$ dans $G'$. Par conséquence, afin de pouvoir relier l'arête $vw$ avec $e'$ il existe forcement une arête incidente de $w$ coloriée avec la couleur 1 (disons $e''$. D'ailleurs, il existe une couleur $c$ que $w$ ne voit pas (par exemple 4) pour laquelle existe déjà une $(1,c)$-chaîne reliant une arête incidente de $v$ et $e'$. On peut supposer donc qu'on peut renverser la couleur 1 et $c$ obtenant $\varphi(e'') = 4$ ce qui permet colorier $\varphi(vw) = 1$ et $\varphi(e) = 2$. On trouve alors une 4-arête-coloration de $G$ ce qui est absurde 
+Il existe forcément une $(1,i)$-chaîne de Kempe reliant $e'$ à une arête incidente à $v$ dans $G'$ pour tout $i \in \{2,3,4\}$. Par conséquence, il existe une arête incidente à $w$ coloriée avec la couleur 1, disons $e''$. D'ailleurs, il existe une couleur $c\in \{3,4\}$ que $w$ ne voit pas. On peut donc renverser la couleur 1 et $c$ obtenant $\varphi(e'') = 4$ ce qui permet de colorier $\varphi(vw) = 1$ et $\varphi(e) = 2$. On trouve alors une 4-arête-coloration de $G$ ce qui est absurde.
 \ep
 
 \begin{lemme}
@@ -425,69 +419,64 @@ Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d(v)=3$. Alors, $v$ 
 \end{lemme}
 
 Preuve.
-Supposons que ce n'est pas vrai. Disons qu'il existe $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$. Notons les arêtes incidentes de $v$, $e_1 = u_1v$, $e_2 = u_2v$ et $e_3$. Puis on va noter $e_{i,j}$ aux arêtes incidentes de $u_i$ pour tout $i \in {1,2}$ et $j \in {1,2}$. Soit $G' = G \setminus e_1$, on peut considérer une $4$-arête-coloration pour $G'$ qui ne soit pas une coloration de $G$. Alors, on peut supposer que  $\varphi(e_2)=1$, $\varphi(e_3)=2$,$\varphi(e_{11})=3$ et $\varphi(e_{12})=4$. il existe forcement des $(i,j)$-chaînes pour $i \in {1,2}$ et $j \in {3,4}$ (sinon ce serait facile de trouver une $4$-arête-coloration de $G$) reliant les arêtes incidentes de $v$ avec les arêtes incidentes de $u_1$ dans $G'$, donc on peut supposer que les arêtes incidentes de $u_2$, non-incidentes de $v$ ont la couleur 3 et 4. 
+Supposons qu'il existe $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$. Soient $e_1 = u_1v$, $e_2 = u_2v$ et $e_3$ les arêtes incidentes à $v$. Notons $e_{ij}$ les arêtes incidentes à $u_i$ différentes de $e_i$, pour $i \in \{1,2\}$, $j \in \{1,2\}$. Considérons une $4$-arête-coloration de $G' = G \setminus e_1$ qui ne soit pas une coloration de $G$. Alors, on peut supposer que  $\varphi(e_2)=1$, $\varphi(e_3)=2$,$\varphi(e_{11})=3$ et $\varphi(e_{12})=4$. De plus, il existe forcément des $(i,j)$-chaînes de Kempe pour $i \in {1,2}$ et $j \in {3,4}$ (sinon il serait facile de trouver une $4$-arête-coloration de $G$) reliant les arêtes incidentes à $v$ avec les arêtes incidentes à $u_1$ dans $G'$. On peut donc supposer que $\varphi(e_{21})=3$ et $\varphi(e_{22})=4$.
 
-Regardons maintenant, la $(2,4)$-chaîne reliant $e_{12}$ avec $e_2$ et considérons la $(2,4)$ chaîne sortant de l'arête incidente de $u_2$ (disons $e_{22}$). Alors on peut trouver, renversant les couleurs de cette dernière chaîne, une $\varphi$ coloration de $G$ telle que $\varphi(e_{22}) = 2$, ce qui permet que $\varphi(e_2) = 4$ laissant la possibilité de colorier $e_1$ avec la couleur 2. On obtient donc, une $4$-arête-coloration de $G$ ce qui provoque une contradiction.
+Observons maintenant que la $(2,4)$-chaîne de Kempe reliant $e_{12}$ et $e_2$ est bien différente de la $(2,4)$-chaîne de Kempe de $e_{22}$. Alors on peut trouver, en renversant les couleurs de cette dernière chaîne, une coloration de $G'$ telle que $\varphi(e_{22}) = 2$, ce qui permet de poser $\varphi(e_2) = 4$ tout en laissant la possibilité de colorier $e_1$ avec la couleur 2. On obtient donc une $4$-arête-coloration de $G$ ce qui provoque une contradiction.
 \ep
 
 
-Ces propriétés qu'on vient de définir vont entraîner une contradiction grâce à la règle de déchargement. Pareil que dans la proposition précédant, on défini d'abord la charge initiale avec la fonction suivante;
-$$w: V(G) \to \mathbb{R} \textrm{ telle que} $$
- $$w(v) = \frac{3}{2} d_G(v) - 5 \qquad \textrm{pour tout $v\in V(G)$,}$$
+Les propriétés que nous venons de vérifier vont entraîner une contradiction grâce à la procédure de déchargement. Similairement que dans la proposition précédant, on définit d'abord la charge initiale par la fonction suivante :
+$$
+\gathered
+w(v) = \frac{3}{2} d_G(v) - 5 \qquad \textrm{pour tout $v\in V(G)$,} \\
+w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f\in F(G)$.}
+\endgathered
+$$
 
-pour les sommets et,
+Puis, nous montrons que la somme de la charge totale est strictement négative, et après la redistribution de la charge par des règles de déchargement, nous vérifierons que la charge de tous les éléments du graphe deviendra positive, ce qui provoquera une contradiction.
 
-$$w: F \to \mathbb{R} \textrm{ telle que} $$
- $$w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f\in F$,}$$
- 
-représentant la charge initiale des faces. Puis on montre que la somme de la charge totale est négative, et après on redistribuons la charge à l'aide des règles de déchargement, pour vérifier que la somme de la charge totale change et reste non-négative provoquent une contradiction.
 
 \begin{lemme}
 Soit $G$ un graphe planaire connexe. Alors,
-$$ \sum_{v \in V(G)} (\frac{3}{2} d_G(v) - 5) + \sum_{f\in F} (d_G(f) -5) = -10$$
+$$
+\sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F} \left(d_G(f) -5\right) = -10.
+$$
 \label{le:cha2}
 \end{lemme}
 
 Preuve.
-On considère la formule d'Euler pour les graphes planaires et les propriétés liées à cette formule, comme on a déjà fait dans \ref{le:charge}. Alors, pour un graphe planaire $G$ à $n$ sommets, $m$ arêtes et $f$ faces, on a
-
-$$ n - m + f = 2 $$
-puis les propriétés
-$$ \sum_{v\in V(G)} d_G(v) = 2m$$
-$$ \sum_{f\in F} d_G(f) = 2m$$
-
-et finalement les charges initiales $w(v)$ pour chaque sommet et $w(f)$ pour chaque face
-$$ w(v) = \frac{3}{2}d_G(v) - 5 \qquad \textrm{pour tout $v \in V(G)$}$$
-$$ w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f \in F$}$$.
-
-Alors,
-
-$$ \sum_{v \in V(G)} (\frac{3}{2}d_G(v) - 5) + \sum_{f\in F} (d_G(f) -5) = 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10$$
+Tout comme pour Lemme \ref{le:charge}, on déduit de la formule d'Euler que
+$$ 
+\sum_{v \in V(G)} \left(\frac{3}{2}d_G(v) - 5\right) + \sum_{f\in F} \left(d_G(f) -5\right) = 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10.
+$$
 \ep 
 
 Connaissant la charge des sommets, on sait que,
 $$
 \gathered
-w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2\\
-w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 3\\
-w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que} d_G(v) = 4
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2,\\
+w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 3,\\
+w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4.
 \endgathered
 $$
 
-On ne montre pas les charges des faces parce que toutes sont non négatives et ls règles qui seront définies ensite ne concerne pas les faces. Alors, les règles qui vont distribuer la charge des sommets sont les suivantes;
+D'ailleurs, nous avons observé que la charge d'une face est $w(f) = d_G(f) - 5$. Sachant par définition, que $d_G(f) \geq 5$ nous nous rendons en compte de que la charge totale des faces reste toujours positive.
+
+Alors, les règles qui vont distribuer la charge des sommets sont les suivantes :
 
 \begin{enumerate}
-\item (R1) $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donnera une unité de charge négative ($-1$) à chacun de ses voisins.
-\item (R2) $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donnera une unité de charge négative ($-1/4$) à chaque voisin de degré 4.
+\item[(R1)] tout sommet de degré 2 donne $(-1)$ de charge à chacun de ses voisins.
+\item[(R2)] tout sommet de degré 3 donne $(-1/4)$ de charge à chaque voisin de degré 4.
 \end{enumerate}
 
-On va vérifier que ces règles appliquées sur les structures qu'on vient de définir redistribuent la charge de façon que le graphe reste positivement chargé, ce qui donnera la contradiction. On a déjà montré inexistence des sommets de degré 1 dans ces configurations grâce à \ref{le:14}. Puis, selon \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4,donc par (R1) la charge finale du sommet de degré 2 reste nulle.
+On va vérifier que ces règles appliquées sur les structures qu'on vient de vérifier redistribuent la charge de façon que le graphe reste positivement chargé, ce qui donnera la contradiction. On a déjà montré inexistence des sommets de degré 1 dans ces configurations grâce à \ref{le:14}. Puis, selon \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4,donc par (R1) la charge finale du sommet de degré 2 reste nulle.
 
 D'ailleurs, ces sommets adjacentes aux sommets de degré deux on sait qu'ils ne reçoivent plus de charge de ses autres voisins car selon \ref{le:243}, tout sommet adjacent d'un sommet de degré 2 n'a que des voisins de degré 4 (sauf le voisin de degré 2). Alors, d'après (R1) l'endroit autour d'un sommet de degré 2 reste avec une charge finale positive.
 
+
 Ensuite, soit $v$ un sommet de degré 3. Selon \ref{333} $v$ a au moins deux voisins de degré 4. Regardons d'abord le cas où $v$ a exactement deux voisins de degré 3. Par (R2) on sait que $v$ donne 1/4 d'unité de charge négative à ses deux voisins de degré 4. De cette façon la charge finale de $v$ reste nulle et chacun de ses voisins de degré 4 restent avec une charge finale positive. Supposons que ces sommets de degré 4 n'ont que des voisins de degré 3 dont ils reçoivent 1/4 d'unité de charge négative (pire des cas) de chacun de ses voisins. Alors ces sommets resteraient avec une charge finale nulle, c-à-d positive. Pour le cas où $v$ n'a que des voisins de degré 4, par (R2) on distribue complètement la charge de $v$ entre deux de ses voisins, obtenant que l'endroit reste avec une charge finale positive.
 
-Finalement, soit $v$ un sommet de degré 4. $v$ ne fait que recevoir charge négative de ses voisins avec un degré inférieur. Si on a le cas où $v$ a un voisin de degré 2, sachant que ses autres trois voisins seront de degré 3, sa charge finale reste positive d'après avoir reçu la charge de son voisin de degré 2. Par contre si on a le cas où $v$ a des voisins de degré 3, on sait par définition que $v$ ne peut avoir que 4 voisin, donc au plus il peut recevoir $4 \cdot (-1/4)$ de charge c-à-d $1$ unité de charge négative. Alors la charge finale sur $v$ sera $4\cdot(-1/4) + 1 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
+%Finalement, soit $v$ un sommet de degré 4. $v$ ne fait que recevoir charge négative de ses voisins avec un degré inférieur. Si on a le cas où $v$ a un voisin de degré 2, sachant que ses autres trois voisins seront de degré 3 {\color{blue} QUOI?}, sa charge finale reste positive d'après avoir reçu la charge de son voisin de degré 2. Par contre si on a le cas où $v$ a des voisins de degré 3, on sait par définition que $v$ ne peut avoir que 4 voisin, donc au plus il peut recevoir $4 \cdot (-1/4)$ de charge c-à-d $1$ unité de charge négative. Alors la charge finale sur $v$ sera $4\cdot(-1/4) + 1 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
 
 Alors, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $5$-arête-coloriable.
 \ep 
@@ -635,10 +624,28 @@ C'est la même que dans le Lemme \ref{le:333}.
 Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{red}travail}. Les configurations avec leurs réductions seront montrées dans le chapitre suivant.
 
 \begin{lemme}
-Soit $G$ un contr-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+\label{le:33pent}
 \end{lemme}
 
- 
+Preuve.
+On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ce n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
+\ep
+
+\begin{lemme}
+Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
+\label{le:2pent}
+\end{lemme}
+
+Preuve.
+Dans ce cas là aussi on a prouvé le lemme par l'absurde. D'abord, on a vérifié un pair de sommets avec deux carrés autour de lui et on a trouvé une réduction qui montre que ce n'était pas un contre-exemple minimal. Puis on a fait également pour le cas où autour du sommet de degré deux il y a un pentagone.
+\ep
+
+\begin{lemme}
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
+\label{le:3}
+\end{lemme}
+
 
 \section{Déchargement}
 
@@ -707,6 +714,13 @@ Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Al
 \end{proposition}
 
 Vérifions que ces trois règles expliquent la distribution de charge dans tous les cas possibles (tous les cas où on a trouvé des réductions), sur toutes les configurations afin de montrer que la somme de la charge totale finale est positive.
+
+On a déjà montré que dans $G$ il n'y a aucun sommet de degré 1. Puis on a montré par le Lemme \ref{le:2pent} que si $v$ a un degré 2, alors il existe autour de $v$ au moins, deux pentagones ou un hexagone donc, $v$ peut distribuer par (R1) une unité de charge à chaque pentagone voisin ou deux unité à l'hexagone. De cette façon $v$ aura une nouvelle charge nulle et les faces autour restent positives vu que le même lemme prouve que tous les sommets autour de ces faces (sauf $v$) ont degré 4 (par (R3) on sait que les sommets de degré 4 n'ont pas de charge à distribuer ni à recevoir).
+
+Pour un pair de sommets de degré 3, $v$ et $u$, on a trouvé grâce au Lemme \ref{le:33pent} que autour de $e = uv$ il y a au moins deux pentagones, ou une face de taille au moins 6, donc $u$ et $v$ peuvent distribuer sa charge vers ces faces grâce à (R2). Dans le cas où il y a deux pentagones, chacun des sommets vers un pentagone et sinon les deux sommets vers la même face. De cette manière $u$ et $v$ distribuent toute sa charge négative et restent nuls et la configuration reste avec une charge positive, car les faces n'ont que des sommets de degré 4 autour d'eux (sauf $v$ et $u$) et par (R3) les sommets de degré 4 n'ont pas de charge.
+
+Finalement, pour un sommet de degré 3, $v$ on a cherché par le Lemme \ref{le:3} au moins un pentagone autour qui décharge ce sommet, mais pour l'instant on a pas pu montrer cette réduction, donc c'est la seule situation qui nous reste pour prouver que le graphe se décharge complètement avec une somme de charge totale positive, ce qui concernerait une contradiction et montrerait la conjecture.
+
 \section{Méthodes}
 
 Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
@@ -801,9 +815,7 @@ SIAM J. Discrete Math. 13 (1) (2000), 25--32.
 
 \bibitem{Vizing} V.G.~Vizing, On an estimate of the chromatic class of a p-graph, Diskret. Analiz. (3) (1964), 25--30.
 \bibitem{Vizing2} V.G.~Vizing, Critical graphs with given chromatic class, Metody Diskret. Analiz (5) (1965), 9--17.
-
-\bibitem{zaks} J.~Zaks, Non-hamiltonian simple 3-polytopes having just two types of faces, Discrete Math. 29 (1980) 87--101.
-
+\bibitem{SandersZhao} D.P. Sanders et Y. Zhao, Planar graphs of maximum degree seven are class I, J. Combin. Theory Ser. B, {83} (2), (2001), 201--212.
 \end{thebibliography}
 
 
