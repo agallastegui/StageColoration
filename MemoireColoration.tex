@@ -517,136 +517,163 @@ La réductibilité des 633 configurations de $\mathcal{S}$ est vérifiée à l'a
 
 \section{Réductibilité}
 
-La réductibilité est la partie, la plus grande ou la plus étendue de cet écrit. C'est la méthode qui permet trouver un contre-exemple minimal à partir d'une configuration quelconque. Ci-dessous on défini des notions nécessaires pour comprendre la réductibilité et puis on introduit l'outil qui a été crée pour vérifier la réductibilité de la conjecture traitée dans cet écrit.
+Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal G contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de G.
+
+Nous allons généraliser celle notion.
 
 \begin{definition}
-Soit $G$ un graphe planaire et soit $H$ un sous-graphe induit de $G$  ($V(H) \subseteq V(G)$ et $E(H) \subseteq E(G)$). Une \emph{configuration} $C$ de $G$ est un sous-graphe induit de $G$ auquel on ajoute des demi-arêtes sortants ou extérieurs qui connectent le sous-graphe induit au reste du graphe.
+Soit $H$ un graphe étiqueté, c-à-d un graphe $H= (V(H), E(H))$ avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. $H$ est une configuration dans $G$ s'il existe un sous-graphe $\mathcal{X}$ de $G$ et un isomorphisme $\xi$: $H \to \mathcal{X}$ tel que $\forall v \in V(H)$, $\gamma(v) = g_G(\xi(v))$. Nous allons identifier $H$ et sa copie $\mathcal{X}=\xi(H)$ dans $G$.
 \label{de:conf}
 \end{definition}
 
-{\color{red} Dans notre cas nous avons voulu connecter ces demi-arêtes à des sommets de degré 1 pour que nous puissions avoir un ensemble des arêtes sortantes ou extérieures.}
-
 \begin{definition}
-Soit $G$ un graphe planaire et $C$ une configuration de $G$. Le \emph{ring}  $R$, d'une configuration est appelé à l'ensemble des arêtes sortantes du sous-graphe induit de $G$ ({\color{blue} de $C$}). Ce sont les seules arêtes de degré 1 présentes dans une configurations.
+Soit $H$ une configuration de $G$. Alors, $\partial_G(H) = \{e =uv \in V(G) : u \in V(H) et v \in V(G \setminus H)\}$ est l'ensemble des arêtes sortantes de $H$. Notons $r=|\partial_G(H)|$ est le nombre des arêtes sortantes.
 \label{de:ring}
 \end{definition}
 
-\begin{definition}
-Soit $G$ un graphe et $C$ une configuration. Un \emph{code de coloration} est un entier $k$ qui représente une coloration de $C$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
+%\begin{definition}
+%Soit $G$ un graphe et $C$ une configuration. Un \emph{code de coloration} est un entier $k$ qui représente une coloration de $C$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
 
-$$
-k = \sum_{i=0}^{ring-1} c(\varphi(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
-$$
-\label{de:code}
+%$$
+%k = \sum_{i=0}^{ring-1} c(\varphi(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
+%$$
+%\label{de:code}
+%\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ et $k$, $l \in \{1,2,3,4\}$ deux couleurs quelconques. Alors, $\mathcal{X}^{k,l}$ est un graphe résiduel planaire défini à partir des arêtes sortantes de $H$ tel que, 
+$V(\mathcal{X}^{k,l}) = \partial_G(H)$, 
+$E(\mathcal{X}^{k,l}) = \{ e_ie_j$, $e_i, e_j \in \partial_G(H)$ tel que $(k,l)$-chaîne de Kempe de $e_i$ est la même que la $(k,l)$-chaîne de Kempe de $e_j\}$ 
+\end{definition}
+
+
+%\begin{definition}
+%Soit $C$ une configuration et $R$ le ring de $C$. Un \emph{couplage} (matching) $m$ de $R$ est une paire d'arêtes $e$, $e' \in R$ qui ne sont pas incidentes au même sommet. Alors, $M$ est l'ensemble de \emph{couplages} possibles entre les arêtes de $R$.
+%\label{de:coup}
+%\end{definition}
+
+%\begin{definition}
+%Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$.
+%\label{de:étend}
+%\end{definition}
+\begin{definition}
+Soit $H$ une configuration du graphe $G$ non-coloriable et $H'$, une réduction de $H$. Prenons $G'$ le graphe avec $H'$ (à la place de $H$). Alors $\varphi'$ est une coloration quelconque de $G'$.{\color{blue}je bloque ici je verrai plus tard}
 \end{definition}
 
 \begin{definition}
-Soit $C$ une configuration et $R$ le ring de $C$. Un \emph{couplage} (matching) $m$ de $R$ est une paire d'arêtes $e$, $e' \in R$ qui ne sont pas incidentes au même sommet. Alors, $M$ est l'ensemble de \emph{couplages} possibles entre les arêtes de $R$.
-\label{de:coup}
+Soit $H$ une configuration de $G$. Alors, $\beta' = \varphi'|_{\partial_G(H)}$ est une coloration de $\partial_G(H')=\partial_G(H)$.
 \end{definition}
 
 \begin{definition}
-Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$.
-\label{de:étend}
-\end{definition}
-
-\begin{definition}
-Soit $C$ une configuration et $\varphi$ une coloration quelconque de $C$. Alors, $\Phi$ est l'ensemble de colorations qui s'étend à $C$. Autrement dit,
+Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $G$ s'il existe une coloration $\psi$ de $H$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Phi_0$ l'ensemble des colorations de $H$ qui s'étendent,
 $$
-\Phi = \{ \varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}.
+\Phi_0 = \{\beta, \quad \beta \textrm{ s'étend  vers }G\}
+$$
+\end{definition}
+
+\begin{definition}
+modification
+\end{definition}
+
+
+
+\begin{definition}
+Soit $C$ une configuration et $\varphi$ une coloration quelconque de $H$. Alors, $\Phi$ est l'ensemble de colorations qui s'étend à $H$. Autrement dit,
+$$
+\Phi = \{ \varphi, \quad \textrm{telle que $\varphi$ s'étend à $H$} \}.
 $$
 \label{de:phi}
 \end{definition}
 
-\begin{definition}
-Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, le ring $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble des couplages possibles parmi les arêtes du ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
-{\color{red} Je ne sais pas trop comme gérer ce définition et je ne sais pas comme la noter si phi sous ij ou sur ij ou sous ij et sur M. Ton avis?}
-\label{de:modif}
-\end{definition}
+%\begin{definition}
+%Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, le ring $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble des couplages possibles parmi les arêtes du ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
+%{\color{red} Je ne sais pas trop comme gérer ce définition et je ne sais pas comme la noter si phi sous ij ou sur ij ou sous ij et sur M. Ton avis?}
+%\label{de:modif}
+%\end{definition}
 
-\begin{proposition}
-Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas, \emph{se réduit} vers  $\varphi$ s'il existe une paire de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
-\label{pro:phii}
-\end{proposition}
+%\begin{definition}
+%Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas, \emph{se réduit} vers  $\varphi$ s'il existe une paire de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
+%\label{pro:phii}
+%\end{definition}
 
-\begin{definition}
-Soit $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathcal{N} \cup \{ 0\}$ (Définition \ref{de:phi}). 
-$$
-\gathered
-\Phi_{i+1} = \{ \varphi, \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \}\\
-\Phi_0 = \{\varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}\\
-\Phi = \cup_{i \in \mathcal{N}\cup \{0 \}} \Phi_i 
-\endgathered
-$$
-\end{definition}
+%\begin{definition}
+%Soit $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathbb{N} \cup \{ 0\}$ (Définition \ref{de:phi}). 
+%$$
+%\gathered
+%\Phi_{i+1} = \{ \varphi, \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \}\\
+%\Phi_0 = \{\varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}\\
+%\Phi = \cup_{i \in \mathcal{N}\cup \{0 \}} \Phi_i 
+%\endgathered
+%$$
+%\end{definition}
 
-\begin{proposition}
-Soit $C$ une configuration, $C'$ une autre configuration avec la même disposition des arêtes de ring que $C$ et $\Phi'_0$ l'ensemble de colorations qui s'étendent directement à $C'$. Alors $C$ se réduit vers $C'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
-\end{proposition}
-\bigskip
+%\begin{proposition}
+%Soit $C$ une configuration, $C'$ une autre configuration avec la même disposition des arêtes de ring que $C$ et $\Phi'_0$ l'ensemble de colorations qui s'étendent directement à $C'$. Alors $C$ se réduit vers $C'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
+%\end{proposition}
+%\bigskip
 
 Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, n'ayant que des contre-exemples minimaux. De cette façon on peut montrer des propriétés structurelles qui se donnent dans $G$, comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
-Montrons donc, des propriétés structurelles de $G$.
-
-\begin{lemme}
-Il n'existe pas de sommet $v \in V(G)$ tel que $d_G(v)$ = 1.
-\end{lemme}
-
-Preuve. 
-La preuve pour cette condition est la même qu'on a déjà fait pour les deux cas précédentes (Lemme \ref{le:14} et Lemme \ref{le:1})
-\ep
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ de degré 2 n'a que des voisins de degré 4.
-\end{lemme}
-
-Preuve. 
-Cette preuve on l'a fait aussi dans le cas précédente (Lemme \ref{le:23}) et l'argument c'est exactement le même.
-\ep 
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ qui a un voisin $u$ de degré 2. Alors tout voisin de $v$ (sauf $u$) est de degré 4.
-\end{lemme}
-
-Preuve.
-Cette preuve aussi est la même que celle-ci qu'on a fait dans le cas précédente (Lemme \ref{le:243}).
-\ep
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$. Alors $v$ a au moins deux voisins de degré 4.
-\end{lemme}
-
-Preuve.
-C'est la même que dans le Lemme \ref{le:333}.
-\ep
-
-Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
-\label{le:33pent}
-\end{lemme}
-
-Preuve.
-On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ces n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
-\ep
-
-\begin{lemme}
-Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
-\label{le:2pent}
-\end{lemme}
-
-Preuve.
-Dans ce cas là aussi on a prouvé le lemme par l'absurde. D'abord, on a vérifié un pair de sommets avec deux carrés autour de lui et on a trouvé une réduction qui montre que ce n'était pas un contre-exemple minimal. Puis on a fait également pour le cas où autour du sommet de degré deux il y a un pentagone.
-\ep
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
-\label{le:3}
-\end{lemme}
-
-Dans ce cas-là on n'a pas pu trouver une réduction pour le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.{\color{blue} J'en doute un peu comment mettre cette promesse de que ce parait vrai}.
+%Montrons donc, des propriétés structurelles de $G$.
+%
+%\begin{lemme}
+%Il n'existe pas de sommet $v \in V(G)$ tel que $d_G(v)$ = 1.
+%\end{lemme}
+%
+%Preuve. 
+%La preuve pour cette condition est la même qu'on a déjà fait pour les deux cas précédentes (Lemme \ref{le:14} et Lemme \ref{le:1})
+%\ep
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ de degré 2 n'a que des voisins de degré 4.
+%\end{lemme}
+%
+%Preuve. 
+%Cette preuve on l'a fait aussi dans le cas précédente (Lemme \ref{le:23}) et l'argument c'est exactement le même.
+%\ep 
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ qui a un voisin $u$ de degré 2. Alors tout voisin de $v$ (sauf $u$) est de degré 4.
+%\end{lemme}
+%
+%Preuve.
+%Cette preuve aussi est la même que celle-ci qu'on a fait dans le cas précédente (Lemme \ref{le:243}).
+%\ep
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$. Alors $v$ a au moins deux voisins de degré 4.
+%\end{lemme}
+%
+%Preuve.
+%C'est la même que dans le Lemme \ref{le:333}.
+%\ep
+%
+%Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+%\label{le:33pent}
+%\end{lemme}
+%
+%Preuve.
+%On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ces n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
+%\ep
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
+%\label{le:2pent}
+%\end{lemme}
+%
+%Preuve.
+%Dans ce cas là aussi on a prouvé le lemme par l'absurde. D'abord, on a vérifié un pair de sommets avec deux carrés autour de lui et on a trouvé une réduction qui montre que ce n'était pas un contre-exemple minimal. Puis on a fait également pour le cas où autour du sommet de degré deux il y a un pentagone.
+%\ep
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
+%\label{le:3}
+%\end{lemme}
+%
+%Dans ce cas-là on n'a pas pu trouver une réduction pour le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.{\color{blue} J'en doute un peu comment mettre cette promesse de que ce parait vrai}.
 
 \section{Déchargement}
 
