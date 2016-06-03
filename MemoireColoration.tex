@@ -517,65 +517,65 @@ La réductibilité des 633 configurations de $\mathcal{S}$ est vérifiée à l'a
 
 \section{Réductibilité}
 
-la réductibilité est la partie, la plus grande ou la plus étendue de cet écrit. C'est la méthode qui permet trouver un contre-exemple minimal à partir d'une configuration quelconque. Ensuite on défini des notions nécessaire pour comprendre la réductibilité et puis on introduit l'outil qui a été crée pour la conjecture traitée dans cet écrit.
+La réductibilité est la partie, la plus grande ou la plus étendue de cet écrit. C'est la méthode qui permet trouver un contre-exemple minimal à partir d'une configuration quelconque. Ci-dessous on défini des notions nécessaires pour comprendre la réductibilité et puis on introduit l'outil qui a été crée pour vérifier la réductibilité de la conjecture traitée dans cet écrit.
 
 \begin{definition}
-Soit $G$ un graphe planaire et soit $H$ un sous-graphe induit de $G$ tel que $V(H) \subseteq V(G)$ et $E(H) \subseteq E(G)$. Une \emph{configuration} $C$ de $G$ est un sous-graphe induit de $G$ auquel on ajoute des demi-arêtes sortants ou extérieurs qui connectent le sous-graphe induit au reste du graphe.
+Soit $G$ un graphe planaire et soit $H$ un sous-graphe induit de $G$  ($V(H) \subseteq V(G)$ et $E(H) \subseteq E(G)$). Une \emph{configuration} $C$ de $G$ est un sous-graphe induit de $G$ auquel on ajoute des demi-arêtes sortants ou extérieurs qui connectent le sous-graphe induit au reste du graphe.
 \label{de:conf}
 \end{definition}
 
-{\color{red} Dans notre cas on a voulu connecter ces demi-arêtes à des sommets de degré 1 pour qu'on puisse avoir un ensemble des arêtes sortants ou extérieurs.}
+{\color{red} Dans notre cas nous avons voulu connecter ces demi-arêtes à des sommets de degré 1 pour que nous puissions avoir un ensemble des arêtes sortantes ou extérieures.}
 
 \begin{definition}
-Soit $G$ un graphe planaire et $C$ une configuration de $G$. Le \emph{ring}  $R$, d'une configuration est appelé à l'ensemble des arêtes sortants du sous-graphe induit de $G$. Ce sont les seules arêtes de degré 1 présentes dans une configurations.
+Soit $G$ un graphe planaire et $C$ une configuration de $G$. Le \emph{ring}  $R$, d'une configuration est appelé à l'ensemble des arêtes sortantes du sous-graphe induit de $G$ ({\color{blue} de $C$}). Ce sont les seules arêtes de degré 1 présentes dans une configurations.
 \label{de:ring}
 \end{definition}
 
 \begin{definition}
-Soit $G$ un graphe et $C$ une configuration. Un \emph{code} de coloration est un entier $k$ qui représente une coloration de $C$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
+Soit $G$ un graphe et $C$ une configuration. Un \emph{code de coloration} est un entier $k$ qui représente une coloration de $C$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
 
 $$
-k = \sum_{i=0}^{ring-1} c(\varphi(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \lbrace 0,1,2,3 \rbrace \qquad \textrm{pour  } i \in \lbrace1,2,4,8 \rbrace
+k = \sum_{i=0}^{ring-1} c(\varphi(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
 $$
 \label{de:code}
 \end{definition}
 
 \begin{definition}
-Soit $C$ une configuration et $R$ l'ensemble des arêtes sortantes de $C$. Un \emph{couplage} (matchings) $m$ de $R$ est une paire des arêtes $e$, $e' \in R$ qui ne sont pas incidentes du même sommet. Alors, $M$ est l'ensemble de \emph{couplages} possibles entre les arêtes de $R$.
+Soit $C$ une configuration et $R$ le ring de $C$. Un \emph{couplage} (matching) $m$ de $R$ est une paire d'arêtes $e$, $e' \in R$ qui ne sont pas incidentes au même sommet. Alors, $M$ est l'ensemble de \emph{couplages} possibles entre les arêtes de $R$.
 \label{de:coup}
+\end{definition}
+
+\begin{definition}
+Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$.
+\label{de:étend}
 \end{definition}
 
 \begin{definition}
 Soit $C$ une configuration et $\varphi$ une coloration quelconque de $C$. Alors, $\Phi$ est l'ensemble de colorations qui s'étend à $C$. Autrement dit,
 $$
-\Phi = \lbrace \varphi, \quad \textrm{telle que $\varphi$ est une coloration de $C$} \rbrace.
+\Phi = \{ \varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}.
 $$
 \label{de:phi}
 \end{definition}
 
-\begin{proposition}
-Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si et seulement si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$
-\label{pro:étend}
-\end{proposition}
-
 \begin{definition}
-Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, l'ensemble d'arêtes sortantes $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble de couplages possibles parmi les arêtes de ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
+Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, le ring $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble des couplages possibles parmi les arêtes du ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
 {\color{red} Je ne sais pas trop comme gérer ce définition et je ne sais pas comme la noter si phi sous ij ou sur ij ou sous ij et sur M. Ton avis?}
 \label{de:modif}
 \end{definition}
 
 \begin{proposition}
-Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas \emph{se réduit} vers  $\varphi$ s'il existe un pair de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
+Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas, \emph{se réduit} vers  $\varphi$ s'il existe une paire de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
 \label{pro:phii}
 \end{proposition}
 
 \begin{definition}
-Soir $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathcal{N} \cup \lbrace 0\rbrace$ (Définition \ref{de:phi}). 
+Soit $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathcal{N} \cup \{ 0\}$ (Définition \ref{de:phi}). 
 $$
 \gathered
-\Phi_{i+1} = \lbrace \varphi \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \rbrace\\
-\Phi_0 = \lbrace \varphi \quad \textrm{telle que $\varphi$ s'étend à $C$} \rbrace\\
-\Phi = \cup_{i \in \mathcal{N}\cup \lbrace 0 \rbrace} \Phi_i 
+\Phi_{i+1} = \{ \varphi, \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \}\\
+\Phi_0 = \{\varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}\\
+\Phi = \cup_{i \in \mathcal{N}\cup \{0 \}} \Phi_i 
 \endgathered
 $$
 \end{definition}
@@ -585,9 +585,9 @@ Soit $C$ une configuration, $C'$ une autre configuration avec la même dispositi
 \end{proposition}
 \bigskip
 
-Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, ce qui nous permet définir des propriétés structurelles d'un graphe $G$. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée dans le chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
+Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, n'ayant que des contre-exemples minimaux. De cette façon on peut montrer des propriétés structurelles qui se donnent dans $G$, comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
-Ensuite on va montrer des propriétés structurelles de $G$ comme on a déjà fait pour les deux conjectures précédentes.
+Montrons donc, des propriétés structurelles de $G$.
 
 \begin{lemme}
 Il n'existe pas de sommet $v \in V(G)$ tel que $d_G(v)$ = 1.
@@ -598,7 +598,7 @@ La preuve pour cette condition est la même qu'on a déjà fait pour les deux ca
 \ep
 
 \begin{lemme}
-Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ n'a que des voisins de degré 4.
+Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ de degré 2 n'a que des voisins de degré 4.
 \end{lemme}
 
 Preuve. 
@@ -606,7 +606,7 @@ Cette preuve on l'a fait aussi dans le cas précédente (Lemme \ref{le:23}) et l
 \ep 
 
 \begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ et $u\in N(v)$ tel que $d_G(u) = 2$. Alors pour tout $w \in N(v)$, $w \neq u$, $d_G(w) = 4$.
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ qui a un voisin $u$ de degré 2. Alors tout voisin de $v$ (sauf $u$) est de degré 4.
 \end{lemme}
 
 Preuve.
@@ -621,7 +621,7 @@ Preuve.
 C'est la même que dans le Lemme \ref{le:333}.
 \ep
 
-Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{red}travail}. Les configurations avec leurs réductions seront montrées dans le chapitre suivant.
+Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
 
 \begin{lemme}
 Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
@@ -629,7 +629,7 @@ Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $
 \end{lemme}
 
 Preuve.
-On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ce n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
+On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ces n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
 \ep
 
 \begin{lemme}
@@ -646,6 +646,7 @@ Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
 \label{le:3}
 \end{lemme}
 
+Dans ce cas-là on n'a pas pu trouver une réduction pour le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.{\color{blue} J'en doute un peu comment mettre cette promesse de que ce parait vrai}.
 
 \section{Déchargement}
 
@@ -704,20 +705,23 @@ $$
 
 Connaissant les charges et les structures ou configurations qu'on peut trouver dans un graphe $G$, les règles qu'on définit ensuite vont permettre de distribuer la charge des sommets vers les faces obtenant une somme de la charge totale positive.
 
+{\color{blue} J'ai l'impression de trop répéter les choses n'est pas?}
+
 \begin{proposition}
 Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Alors les règles de distribution de la charge sont les suivantes.
+
 \begin{enumerate}
-\item (R1) $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
-\item (R2) $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donne une unité de charge négative $(-1)$ à une face voisine $f$ telle que $d_G(f) \geq 5$.
-\item (R3) $forall v \in V(G)$ tel que $d_G(v) = 4$, $v$ ne distribue aucune charge car il ne l'a pas.
+\item [(R1)] $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
+\item [(R2)] $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donne une unité de charge négative $(-1)$ à une face voisine $f$ telle que $d_G(f) \geq 5$.
+\item [(R3)] $forall v \in V(G)$ tel que $d_G(v) = 4$, $v$ ne distribue aucune charge car il ne l'a pas.
 \end{enumerate}
 \end{proposition}
 
-Vérifions que ces trois règles expliquent la distribution de charge dans tous les cas possibles (tous les cas où on a trouvé des réductions), sur toutes les configurations afin de montrer que la somme de la charge totale finale est positive.
+Vérifions comment ces règles distribuent la charge dans tous les cas possibles (tous les cas où on a trouvé des réductions), sur toutes les configurations afin de montrer que la somme de la charge totale finale est positive.
 
-On a déjà montré que dans $G$ il n'y a aucun sommet de degré 1. Puis on a montré par le Lemme \ref{le:2pent} que si $v$ a un degré 2, alors il existe autour de $v$ au moins, deux pentagones ou un hexagone donc, $v$ peut distribuer par (R1) une unité de charge à chaque pentagone voisin ou deux unité à l'hexagone. De cette façon $v$ aura une nouvelle charge nulle et les faces autour restent positives vu que le même lemme prouve que tous les sommets autour de ces faces (sauf $v$) ont degré 4 (par (R3) on sait que les sommets de degré 4 n'ont pas de charge à distribuer ni à recevoir).
+On a déjà montré que dans $G$ il n'y a aucun sommet de degré 1. Puis on a montré par le Lemme \ref{le:2pent} que si $v$ a un degré 2, alors il existe autour de $v$ au moins, deux pentagones ou un hexagone donc, $v$ peut distribuer par (R1) une unité de charge à chaque pentagone voisin ou deux unité à l'hexagone. De cette façon $v$ aura une nouvelle charge nulle et les faces autour restent positives vu que le même lemme prouve que tous les sommets autour de ces faces (sauf $v$) sont de degré 4. Par (R3) on sait que les sommets de degré 4 n'ont pas de charge à distribuer ni à recevoir.
 
-Pour un pair de sommets de degré 3, $v$ et $u$, on a trouvé grâce au Lemme \ref{le:33pent} que autour de $e = uv$ il y a au moins deux pentagones, ou une face de taille au moins 6, donc $u$ et $v$ peuvent distribuer sa charge vers ces faces grâce à (R2). Dans le cas où il y a deux pentagones, chacun des sommets vers un pentagone et sinon les deux sommets vers la même face. De cette manière $u$ et $v$ distribuent toute sa charge négative et restent nuls et la configuration reste avec une charge positive, car les faces n'ont que des sommets de degré 4 autour d'eux (sauf $v$ et $u$) et par (R3) les sommets de degré 4 n'ont pas de charge.
+Pour un pair de sommets de degré 3, $v$ et $u$, on a trouvé grâce au Lemme \ref{le:33pent} que autour de $e = uv$ il y a au moins deux pentagones, ou une face de taille au moins 6, donc $u$ et $v$ peuvent distribuer sa charge vers ces faces grâce à (R2). Dans le cas où il y a deux pentagones, chacun des sommets distribuent sa charge vers un pentagone et sinon les deux sommets vers la même face. De cette manière $u$ et $v$ distribuent toute sa charge négative et la charge d'eux devient nulle et la charge totale de la configuration devient positive, car les faces n'ont que des sommets de degré 4 autour d'eux (sauf $v$ et $u$).
 
 Finalement, pour un sommet de degré 3, $v$ on a cherché par le Lemme \ref{le:3} au moins un pentagone autour qui décharge ce sommet, mais pour l'instant on a pas pu montrer cette réduction, donc c'est la seule situation qui nous reste pour prouver que le graphe se décharge complètement avec une somme de charge totale positive, ce qui concernerait une contradiction et montrerait la conjecture.
 
