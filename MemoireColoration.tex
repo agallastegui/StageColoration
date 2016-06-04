@@ -40,11 +40,11 @@
 \maketitle
 
 \begin{abstract}
-Dans la démonstration du fameux théorème des quatre couleurs, la question principale est traduite en une recherche d'une 3-coloration des arêtes d'un graphes planaire cubique. L'existence d'une telle coloration est démontré en utilisant la méthode de déchargement ; la réductibilité de certaines configurations est démontrée à l'aide d'un ordinateur. En s'inspirant de cette technique, pour attaquer une question ouverte sur la coloration des arêtes des graphes planaires (4-arête-colorabilité des graphes planaires de degré max 4 sans triangles), nous avons conçu et implémenté un programme qui permettra de vérifier la réductibilité de configurations d'une façon automatisée. 
+Dans la démonstration du fameux Théorème des quatre couleurs, la question principale est traduite en une recherche d'une 3-coloration des arêtes d'un graphes planaire cubique. L'existence d'une telle coloration est démontré en utilisant la méthode de déchargement ; la réductibilité de certaines configurations est démontrée à l'aide d'un ordinateur. En s'inspirant de cette technique, pour attaquer une question ouverte sur la coloration des arêtes des graphes planaires (4-arête-colorabilité des graphes planaires de degré max 4 sans triangles), nous avons conçu et implémenté un programme qui permettra de vérifier la réductibilité de configurations d'une façon automatisée. 
 \end{abstract}
 
 \section*{Introduction}
-La Théorie des Graphes est un domaine des mathématiques discrètes qui remonte au XVIIIème siècle et le célèbre problème des ponts de Könisberg (Kaliningrad). Ce problème consiste à essayer de construire un promenade qui commence et finit au même point, tout en parcourant les 7 ponts qu'il y avait dans la ville à l'époque, chacun une seule fois. C'est un domaine très étendu et appliqué parmi des autres sciences. 
+La théorie des graphes est un domaine des mathématiques discrètes qui remonte au XVIIIème siècle et le célèbre problème des ponts de Könisberg (Kaliningrad). Ce problème consiste à essayer de construire un promenade qui commence et finit au même point, tout en parcourant les 7 ponts qu'il y avait dans la ville à l'époque, chacun une seule fois. C'est un domaine très étendu et appliqué parmi des autres sciences. 
 
 Un des problèmes principaux au sein de la théorie des graphes est le problème de coloration des graphes. Le champ d'applications de la coloration des graphes couvre notamment le problème de l'attribution de fréquences dans les télécommunications, la conception de puces électroniques ou l'allocation de registres en compilation.
 
@@ -80,7 +80,7 @@ Dans cette partie nous rappelons quelques notions de la théorie de graphes,  de
 Un \emph{graphe} $G$ est un couple $G = (V,E)$ d'ensembles finis, où 
 \begin{itemize}
 \item $V=V(G)$ est l'ensemble de \emph{sommets (Vertices)} de $G$, et
-\item $E=E(G)$ est un ensemble de pairs de sommets, appellées des \emph{arêtes (Edges)} de $G$.
+\item $E=E(G)$ est un ensemble de pairs de sommets, appelées des \emph{arêtes (Edges)} de $G$.
 \end{itemize}
 Si $e = uv \in E(G)$, on dit que $u$ et $v$ sont \emph{adjacent} (ou \emph{voisins}), d'ailleurs, l'arête $e$ est \emph{incidente} aux sommets $u$ et $v$.
 
@@ -199,14 +199,14 @@ Nous allons refaire la démonstration de deux propositions voisines de la conjec
 Soit $G$ un graphe avec les arêtes coloriées. 
 Considérons le sous-graphe $G[c_1,c_2]$ de $G$ induit par les arêtes coloriés $c_1$ et $c_2$. Par la définition d'une coloration, aucun sommet de $G[c_1,c_2]$ ne peut avoir un degré supérieur à 2. Par conséquent, toute composante connexe de $G[c_1,c_2]$ est une chaîne ou un cycle. Si on choisit une composante connexe $C$ de $G[c_1,c_2]$, qu'on échange les couleurs $c_1$ et $c_2$ le long de $C$ et qu'on garde la couleur de toutes les autres arêtes, on obtiendra une autre coloration de $G$.
 
-Étant donné une arête $e$ de $G$ de couleur $c$ et une autre couleur $c'$, il existe une et une seule composante connexe de $G[c,c]$ contenant $e$.
+Étant donné une arête $e$ de $G$ de couleur $c$ et une autre couleur $c'$, il existe une et une seule composante connexe de $G[c,c']$ contenant $e$.
 Nous allons appeler celle-là la \emph{$(c,c')$-chaîne de Kempe} de $e$.
 
 
 %Cette partie sera consacrée à la présentation des deux propositions qui ont été décrites précédemment. Ces deux propositions vont introduire la conjecture qu'on va traiter après.
 
 \begin{proposition}
-Soit $G$ un graphe planaire avec $\Delta = 5$ et $g \geq 4$. Alors $\chi'(G)=5$.
+Soit $G$ un graphe planaire avec $\Delta(G) = 5$ et $g(G) \geq 4$. Alors $\chi'(G)=5$.
 \end{proposition}
 
 Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal, c-à-d un graphe planaire avec $\Delta = 5$ et $g \geq 4$ qui n'est pas $5$-arête-coloriable, mais tout sous-graphe de $G$ l'est.
@@ -280,7 +280,7 @@ $\longrightarrow$
 \end{figure}
 
 \begin{lemme}
-Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré 5. 
+Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $5$. 
 \label{le:254}
 \end{lemme}
 
@@ -297,7 +297,7 @@ Par conséquent, il existe une arête incidente à $w$ coloriée 1, disons $f$. 
 Après avoir alterné les couleurs la $(1,3)$-chaîne de Kempe de $f$, en recoloriant $\varphi(vw)=1$ et en posant $\varphi(e)=2$ on obtient une coloration de $G$, une contradiction. \ep
 
 \begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré 3.
+Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré $3$.
 \label{le:5333}
 \end{lemme}
 
@@ -318,7 +318,7 @@ En considérant les $(1,2)$-chaînes de Kempe, on peut déduire que $\varphi(e_{
 
 
 \bigskip
-Ensuite, on va montrer que les propriétés structurelles de $G$ montrées entraînent une contradiction à l'aide de la technique de déchargement. Cette technique a été utilisée aussi pour prouver le théorème de quatre couleur. 
+Ensuite, on va montrer que les propriétés structurelles de $G$ montrées ci-dessus entraînent une contradiction à l'aide de la technique de déchargement. Cette technique a été utilisée aussi pour prouver le théorème de quatre couleurs. 
 
 %Pour la méthode de déchargement, premièrement une condition est définie. 
 Soit $w: V(G) \to \mathbb{R}$  la fonction définie par
@@ -386,7 +386,7 @@ Supposons alors que $v$ n'ait pas de voisin de degré 2. Si $v$ a des voisins de
 %De cette façon on prouve la conjecture pour les graphes planaires de degré maximum $\Delta = 5$ sans triangles. Ensuite on va faire la même procédure pour les graphes planaires de degré maximum $\Delta = 4$, pour une maille de taille 5 d'abord et puis pour une maille de taille 4.
 
 \begin{proposition}
-Soit $G$ un graphe planaire avec $\Delta = 4$ et $g \geq 5$. Alors $G$ est $4$-arête-coloriable.
+Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 5$. Alors $G$ est $4$-arête-coloriable.
 \end{proposition}
 
 Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal. Dans ce cas aussi nous allons d'abord montrer des propriétés structurelles de $G$. Les deux premières sont exactement les mêmes que pour la proposition précédente, nous omettons la preuve.
@@ -460,7 +460,7 @@ w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4.
 \endgathered
 $$
 
-D'ailleurs, nous avons observé que la charge d'une face est $w(f) = d_G(f) - 5$. Sachant par définition, que $d_G(f) \geq 5$ nous nous rendons en compte de que la charge totale des faces reste toujours positive.
+D'ailleurs, la charge initiale de toutes les faces est positive puisque $g(G) \geq 5$.
 
 Alors, les règles qui vont distribuer la charge des sommets sont les suivantes :
 
@@ -468,15 +468,15 @@ Alors, les règles qui vont distribuer la charge des sommets sont les suivantes 
 \item[(R1)] tout sommet de degré 2 donne $(-1)$ de charge à chacun de ses voisins.
 \item[(R2)] tout sommet de degré 3 donne $(-1/4)$ de charge à chaque voisin de degré 4.
 \end{enumerate}
+Dans ce cas là aussi, la somme totale de la charge reste invariante et la charge de toutes les faces reste positive.
 
-On va vérifier que ces règles appliquées sur les structures qu'on vient de vérifier redistribuent la charge de façon que le graphe reste positivement chargé, ce qui donnera la contradiction. On a déjà montré inexistence des sommets de degré 1 dans ces configurations grâce à \ref{le:14}. Puis, selon \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4,donc par (R1) la charge finale du sommet de degré 2 reste nulle.
+On va vérifier que pour tout sommet de $G$ la charge finale est positive, ce qui donnera la contradiction. On a déjà montré l'inexistence des sommets de degré 1 dans ces configurations grâce au Lemme \ref{le:14}. Puis, selon Lemme \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4,donc par (R1) la charge finale du sommet de degré 2 reste nulle.
 
-D'ailleurs, ces sommets adjacentes aux sommets de degré deux on sait qu'ils ne reçoivent plus de charge de ses autres voisins car selon \ref{le:243}, tout sommet adjacent d'un sommet de degré 2 n'a que des voisins de degré 4 (sauf le voisin de degré 2). Alors, d'après (R1) l'endroit autour d'un sommet de degré 2 reste avec une charge finale positive.
+Ensuite, soit $v$ un sommet de degré $3$. Selon le Lemme \ref{le:333} $v$ a au moins deux voisins de degré $4$. Regardons d'abord le cas où $v$ a exactement deux voisins de degré $3$. Par (R2) on sait que $v$ donne 1/4 d'unité de charge négative à ses deux voisins de degré $4$. De cette façon la charge finale de $v$ reste nulle et chacun de ses voisins de degré $4$ restent avec une charge finale positive. Pour le cas où $v$ n'a que des voisins de degré $4$, par (R2) on distribue complètement la charge de $v$ entre deux de ses voisins (même cas qu'avant), obtenant que l'endroit devient positive.
 
+%Finalement, ces sommets adjacentes aux sommets de degré deux on sait qu'ils ne reçoivent plus de charge de ses autres voisins car selon  Lemme \ref{le:243}, tout sommet adjacent d'un sommet de degré 2 n'a que des voisins de degré 4 (sauf le voisin de degré 2). Alors, d'après (R1) l'endroit autour d'un sommet de degré 2 reste avec une charge finale positive.
 
-Ensuite, soit $v$ un sommet de degré 3. Selon \ref{333} $v$ a au moins deux voisins de degré 4. Regardons d'abord le cas où $v$ a exactement deux voisins de degré 3. Par (R2) on sait que $v$ donne 1/4 d'unité de charge négative à ses deux voisins de degré 4. De cette façon la charge finale de $v$ reste nulle et chacun de ses voisins de degré 4 restent avec une charge finale positive. Supposons que ces sommets de degré 4 n'ont que des voisins de degré 3 dont ils reçoivent 1/4 d'unité de charge négative (pire des cas) de chacun de ses voisins. Alors ces sommets resteraient avec une charge finale nulle, c-à-d positive. Pour le cas où $v$ n'a que des voisins de degré 4, par (R2) on distribue complètement la charge de $v$ entre deux de ses voisins, obtenant que l'endroit reste avec une charge finale positive.
-
-%Finalement, soit $v$ un sommet de degré 4. $v$ ne fait que recevoir charge négative de ses voisins avec un degré inférieur. Si on a le cas où $v$ a un voisin de degré 2, sachant que ses autres trois voisins seront de degré 3 {\color{blue} QUOI?}, sa charge finale reste positive d'après avoir reçu la charge de son voisin de degré 2. Par contre si on a le cas où $v$ a des voisins de degré 3, on sait par définition que $v$ ne peut avoir que 4 voisin, donc au plus il peut recevoir $4 \cdot (-1/4)$ de charge c-à-d $1$ unité de charge négative. Alors la charge finale sur $v$ sera $4\cdot(-1/4) + 1 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
+Finalement, soit $v$ un sommet de degré 4. $v$ ne fait que recevoir charge négative de ses voisins avec un degré inférieur. Si $v$ a un voisin de degré 2, selon le Lemme \ref{le:243} tous ses autres voisins seront de degré 4, sa charge finale reste positive d'après avoir reçu la charge de son voisin de degré 2. Par contre si $v$ a des voisins de degré 3, on sait puisque $\Delta(G)\leq 4$ que $v$ ne peut avoir que 4 voisins de degré 3, donc au plus il peut recevoir $4 \cdot (-1/4)=-1$ de charge négative. Alors la charge finale sur $v$ sera $4\cdot(-1/4) + 1 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
 
 Alors, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $5$-arête-coloriable.
 \ep 
@@ -489,7 +489,7 @@ Le théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine
 C'est pour ce fait qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et ce a été Robertson, Sanders, Seymour et Thomas qui l'ont prouvé en 1995. En fait dans ce nouvelle preuve ils se sont inspirés aussi dans la preuve de Appel et Haken, et ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
 \begin{theorem}
-Soit $G$ un graphe planaire. empsAlors $G$ est 4-coloriable.
+Soit $G$ un graphe planaire. Alors $G$ est 4-coloriable.
 \label{th:4CT}
 \end{theorem}
 
