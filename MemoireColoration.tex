@@ -86,14 +86,25 @@ Si $e = uv \in E(G)$, on dit que $u$ et $v$ sont \emph{adjacent} (ou \emph{voisi
 
 Deux arêtes $e,e'\in E(G)$ sont \emph{adjacentes} si $e=uv$ et $e'=uv'$ pour $u,v,v'\in V(G)$, $v\ne v'$.
 \end{definition}
+  
 
 \begin{definition}
 Le \emph{degré} $d_{G}(v)$ d'un sommet $v$ d'un graphe $G$ est le nombre de voisins de $v$. Le degré maximum d'un graphe $G$ (le maximum des degrés de ses sommets) est noté $\Delta(G)$ et le degré min $\delta(G)$.
 \end{definition}
 
-%\begin{definition}
-%Soit G un graphe  
-%\end{definition}
+\begin{definition}
+Soit $G=(V(G),E(G))$ un graphe simple. Alors un \emph{couplage} $M$ est un ensemble d'arêtes deux à deux non adjacentes. C-à-d que $M$ est une partie de l'ensemble $E$ des arêtes telle que pour tout $(e,e') \in M^2$, $e \neq e' \Rightarrow e \cap e' = \varnothing$.
+
+Un \emph{couplage maximum} est un couplage contenant le plus grande nombre possible d'arêtes.
+
+Un \emph{couplage maximal} est un couplage du graphe tel que toute arête du graphe possède au moins un des sommets incidentes à elle qui est au même temps incidente à une arête du couplage. c-à-d $M$ est un couplage auquel ajoutant n'importe quelle arête $e \in E(G)$, $M \cup e$ n'est plus un couplage.
+
+Un \emph{couplage parfait} est un couplage du graphe tel que tout sommet du graphe est incident à une seule arête du couplage.
+\end{definition}
+
+\begin{definition}
+Soit $G$ un graphe non orienté. Un \emph{cycle} est une suite ou une chaîne des arêtes du graphe dont le premier sommet incident à la première arête et le dernier sommet incident à la dernière arête sont le même.
+\end{definition}
 
 \begin{definition}
 Soit $G=(V,E)$ un graphe. On dit que $G$ est un graphe \emph{planaire} si et seulement s'il peut être dessiné sur le plan sans croisement des arêtes. 
@@ -161,7 +172,7 @@ Le \emph{nombre chromatique} $\chi(G)$ d'un graphe $G$, est le plus petit entier
 %Le problème de $k$-coloration est un problème de décision, qui vérifie si un graphe peut être colorié avec $k$ couleurs différentes. Soit donc, un graphe $G$ et un entier $k$ et on se demande si le graphe $G$ est $k$-coloriable.
 %\end{definition}
 
-Le problème de $k$-coloration (le problème de décider si un graphe donné est $k$-coloriable) est NP-complet pour tout $k \geq 3$ {\color{blue}[citation!]}. Pour $k = 1$, un graphe $G$ est $1$-coloriable si et seulement si $G$ ne contient pas d'arêtes. Puis, pour $k =  2$, on revient sur la question de tester si un graphe $G$ est biparti (ce qui est le cas si et seulement si il ne contient aucun cycle impair). 
+Le problème de $k$-coloration (le problème de décider si un graphe donné est $k$-coloriable) est NP-complet pour tout $k \geq 3$ \cite{NP}. Pour $k = 1$, un graphe $G$ est $1$-coloriable si et seulement si $G$ ne contient pas d'arêtes. Puis, pour $k =  2$, on revient sur la question de tester si un graphe $G$ est biparti (ce qui est le cas si et seulement si il ne contient aucun cycle impair). 
 
 Dans le domaine de la coloration de graphes il existe plusieurs types de colorations et même si la coloration propre est la plus connue ou la plus utilisée, dans notre problème on va s'intéresser à la coloration d'arêtes également.
 
@@ -486,9 +497,9 @@ Alors, après la redistribution de charge on obtient un graphe chargé non-néga
 
 \subsection{Théorème de 4 Couleurs}
 
-Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken [cite] en 1976. Malheureusement, la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine difficile à vérifier et une autre partie dont l'explication n'était pas tout à fait précise.
+Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken \cite{A&H} en 1976. Malheureusement, la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine difficile à vérifier et une autre partie dont l'explication n'était pas tout à fait précise.
 
-C'est pour ce fait-ci qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et c'est Robertson, Sanders, Seymour et Thomas [cite] qui l'ont ré-prouvé en 1995. En fait, dans cette nouvelle preuve ils se sont inspirés largement de la preuve de Appel et Haken, cependant, ils ont simplifié d'une manière significative la procédure de déchargement, et leur programme de vérification de réductibilité automatisée est plus robuste et indépendant du déchargement.
+C'est pour ce fait-ci qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et c'est Robertson, Sanders, Seymour et Thomas \cite{T4C} qui l'ont ré-prouvé en 1995. En fait, dans cette nouvelle preuve ils se sont inspirés largement de la preuve de Appel et Haken, cependant, ils ont simplifié d'une manière significative la procédure de déchargement, et leur programme de vérification de réductibilité automatisée est plus robuste et indépendant du déchargement.
 %t ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
 \begin{theorem}[cite, cite]
@@ -892,12 +903,15 @@ SIAM J. Discrete Math. 13 (1) (2000), 25--32.
 \bibitem{good2} P.~R.~Goodey, Hamiltonian circuits in polytopes with even sided faces, Israel J. Math. 22 (1975) 52--56.
 \bibitem{JO} S.~Jendrol$\!$'~and P.~J.~Owens, {Longest cycles in generalized Buckminsterfullerene graphs}, J. Math. Chem. {18} (1995) 83--90.
 \bibitem{kral} D.~Kr\'al$\!$', O.~Pangr\'ac, J.-S.~Sereni, and R.~\v Skrekovski, Long cycles in fullerene graphs, J. Math. Chem. 45 (4) (2009), 1021--1031.
-\bibitem{mar2} K.~Kutnar and D.~Maru\v si\v c, On cyclic edge-connectivity of fullerenes, Discrete Appl. Math. 156 (10) (2008), 1661--1669.
-\bibitem{mar} D. Maru\v si\v c, {Hamilton Cycles and Paths in Fullerenes}, J. Chem. Inf. Model., {47} (3) (2007), 732--736. 
 
+
+
+\bibitem{NP} M.R. Garey, D.S. Johnson, L. Stockmeyer, Some simplified NP-complete problems, Proceedings of the Sixth Annual ACM Symposium on Theory of Computing (1974) 47--63.
 \bibitem{Vizing} V.G.~Vizing, On an estimate of the chromatic class of a p-graph, Diskret. Analiz. (3) (1964), 25--30.
 \bibitem{Vizing2} V.G.~Vizing, Critical graphs with given chromatic class, Metody Diskret. Analiz (5) (1965), 9--17.
 \bibitem{SandersZhao} D.P. Sanders et Y. Zhao, Planar graphs of maximum degree seven are class I, J. Combin. Theory Ser. B, {83} (2), (2001), 201--212.
+\bibitem{A&H} K. Appel, W. Haken, Every Planar Map is Four Colorable. I. Discharging, Illinois Journal of Mathematics 21 (3), (1977), 429--490
+\bibitem{T4C} N.Robertson, D.P.Sanders, P.Seymour, R.Thomas, The Four-Colour Theorem, J. Combin. Theory Ser. B 70 (1), (1997)  2--44,
 \end{thebibliography}
 
 
