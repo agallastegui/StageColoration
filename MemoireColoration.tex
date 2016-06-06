@@ -588,18 +588,6 @@ $$
 L'ensemble des colorations qui s'étendent ou se réduisent forment l'ensemble  $\Phi$ des colorations valides de $G$. Notons $\Phi = \cup_{i \in \mathbb{N}\cup\{0\}}$. 
 
 
-
-%\begin{definition}
-%Soit $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathbb{N} \cup \{ 0\}$ (Définition \ref{de:phi}). 
-%$$
-%\gathered
-%\Phi_{i+1} = \{ \varphi, \quad \textrm{telle que $\varphi$ se réduit vers $\varphi' \in \Phi_i$} \}\\
-%\Phi_0 = \{\varphi, \quad \textrm{telle que $\varphi$ s'étend à $C$} \}\\
-%\Phi = \cup_{i \in \mathcal{N}\cup \{0 \}} \Phi_i 
-%\endgathered
-%$$
-%\end{definition}
-
 \begin{proposition}
 Soit $H$ et $H'$ des configurations, de $G$ et $G'$, l'ensemble $\Phi$ des colorations valides de $G$ et l'ensemle $\Phi'_0$ des colorations de $G'$. Alors $H$ se réduit vers $H'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
 \end{proposition}
@@ -825,9 +813,19 @@ Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil
 \label{chap:concl}
 Finalement nous allons faire quelques remarques autour du sujet en soi ainsi que autour du stage de recherche et leurs apports lors de ces 5 mois de stage.
 
-D'abord, au niveau sujet il faut remarquer la fonctionnalité de l'outil de réductibilité qui nous a permis trouver des nouvelles configurations réductibles. Le développement de ce programme a pris la plupart de temps, mais il nous a fourni une manière de prouver la réductibilité pour le cas $\Delta(G) \leq 4$, $g(G) \geq 4$, $\chi'(G)=4$ ce qui a été fondamental. C'est aussi remarquable le fait d'avoir trouvé des nouvelles configurations réductibles qui soutiennent les règles de déchargement définis, malgré le fait de ne pas avoir pu trouver la réduction de ces deux derniers cas. Dans tout le cas, c'est un travail à continuer et grâce au programme de réductibilité j'ai la certitude de que nous n'allons pas tarder en la trouver. 
+Tout d'abord, un peu avant le démarrage du stage j'ai travaillé sur les notions de base de la réductibilité et le déchargement comme une mise a niveau. Pour ce fait j'ai montré à la main les deux conjecturés que nous avons présenté dans le chapitre \ref{chap:easy} afin de maîtriser ces deux techniques. Au même temps, une lecture exhaustive des articles du Théorème de 4 couleurs {\color{blue}citation} et de la conjecture des graphes planaires de classe 1 pour $\Delta = 7$ \cite{SandersZhao} m'a permis de bien comprendre le coté technique de la réductibilité. 
 
-Au niveau personnel, ce stage m'a permis d'approfondir dans la théorie des graphes, de développer des compétences comme chercheur et de contribuer moi-même à trouver la preuve pour une conjecture qui n'a pas encore été prouvé. Pour ces faits j'ai trouvé ce stage très enrichissant, 
+Une fois les aspects techniques et pratiques ont été compris, j'ai récupéré le code du programme qui traite la réductibilité du Théorème de 4 couleurs car nous nous sommes inspirés de ce programme pour développer le nôtre. Tout ce premier mois j'ai travaillé sur la compréhension du code, afin d'identifier les parties que nous pouvions utiliser, les parties à modifier et les parties à refaire. Bien que nous nous sommes inspirés de ce programme, nous n'avons utilisé que la fonction de lecture et la génération de colorations, lesquelles nous avons dû modifier. J'ai vu que l'inexistence de parité ainsi que des cas manquantes qui seraient présentes dans notre problème pouvaient créer des difficultés donc nous avons décidé refaire tout le reste du programme.
+
+J'ai utilisé la plupart de temps à développer l'outil et à la recherche des nouvelles configurations qui montrent les propriétés structurelles qui pouvaient nous intéresser. Finalement, le dernier mois et demi du stage je l'ai consacré à la technique de déchargement et a la recherche des deux derniers cas que nous n'avons pas été capables de trouver.
+
+Pourtant, malgré ces deux derniers cas que nous n'avons pas trouvé je considère que nous avons contribue à la démonstration d'une conjecture qui n'a pas été prouve depuis qu'elle a été conçu et nous avons trouvé des nouvelles configurations qui montrent des propriétés structurelles cruciales. Je crois que c'est possible trouver ces deux dernières réductions et même si le stage fini ici, nous allons continuer jusqu'au but. 
+
+Au niveau personnel, ce stage a été un défi, une expérience très enrichissante qui m'a permis d'une coté améliorer les compétences acquises lors de ma formation,et d'une autre coté apprendre des nouvelles techniques ainsi que des outils nécessaires pour le travail de recherche. Je dois remarquer la présence constante et le soutien de mon encadrant Monsieur Kardo\v s, qui m'a appris des aspects surtout liés à ce qui concerne être un chercheur et qui m'a aidé durant l'écriture de l'article, vu qu'il s'agit d'un article scientifique qui demande de la neutralité et de l'objectivité. Ce a été, a mon avis au même temps que la compréhension des aspects techniques les parties qui m'ont semblé les plus difficiles.
+
+Pour conclure, ce stage m'a apporté la confiance, la force et l'envie de continuer ma formation avec une thèse. Bien que ce soit vrai que je hésitait à continuer, ce stage m'a donné une piste du type de travail que je souhaiterait effectuer dans les prochains ans.
+
+
 
 \begin{thebibliography}{99}
 \bibitem{ABH} R.~E.~L.~Aldred, S.~Bau, D.~A.~Holton, and B.~D.~McKay,	
