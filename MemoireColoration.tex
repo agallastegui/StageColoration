@@ -363,22 +363,24 @@ Par ailleurs, la charge initiale de toutes les faces est positive puisque $g(G)\
 
 Nous redistribuons la charge selon les règles suivantes:
 \begin{enumerate}
-\item[(R1)] Tout sommet de degré 2 donne une unité de charge négative ($-1$) à chacun de ses voisins.
-\item[(R2)] Tout sommet de degré 3 donne ($-1/2$) de charge à chaque voisin de degré 5.
+\item[(R1)] Tout sommet de degré 5 donne une unité de charge à chacun de ses voisins de degré 2.
+\item[(R2)] Tout sommet de degré 5 donne $1/2$ de charge à chaque voisin de degré 3.
 \end{enumerate}
 
 Évidemment, la somme totale de charge reste invariante et la charge de toutes les faces reste positive.
 
 Vérifions que pour toute sommet de $G$ la charge finale est positive également, ce qui nous donnera la contradiction.
 Selon Lemme \ref{le:1} il n'y a pas de sommet de degré 1.
-Selon Lemme \ref{le:2}, tout sommet que reçoit de la charge par (R1) est de degré 5. Donc, les sommets de degré 4 ni donnent ni reçoivent rien, leur charge reste nulle.
+Les sommets de degré 4 ni donnent ni reçoivent rien, leur charge reste nulle.
 
-Soit $v$ un sommet de degré 2. D'après (R1), sa charge finale est de $-2 - 2\cdot (-1)=0$.
+Soit $v$ un sommet de degré 2. Selon Lemme \ref{le:2}, il a deux voisins de degré 5. D'après (R1), sa charge finale est de $-2 + 2\cdot 1=0$.
 
-Soit $v$ un sommet de degré 3. Selon Lemme \ref{le:434}, il a au moins deux voisins de degré 5. D'après (R2), sa charge finale est au moins $-1 - 2\cdot (-1/2) = 0$.
+Soit $v$ un sommet de degré 3. Selon Lemme \ref{le:434}, il a au moins deux voisins de degré 5. D'après (R2), sa charge finale est au moins $-1 + 2\cdot 1/2 = 0$.
 
-Soit $v$ un sommet de degré 5. Si $v$ a un voisin de degré 2, selon Lemme \ref{le:254} il n'a pas d'autre voisins de degré 2 ou 3, donc, il ne reçoit que de la charge de son (unique) voisin de degré 2. Sa charge finale est donc de $1+(-1)=0$.
-Supposons alors que $v$ n'ait pas de voisin de degré 2. Si $v$ a des voisins de degré 3, il en a au plus deux, grâce à Lemme \ref{le:5333}. Sa charge finale est alors d'au moins $1+2\cdot(-1/2) = 0$. Si $v$ n'a ni voisin de degré 2 ni voisins de degré 3, il ne reçoit pas de charge négative, alors sa charge reste (strictement) positive.
+Soit $v$ un sommet de degré 5. Si $v$ a un voisin de degré 2, selon Lemme \ref{le:254} il n'a pas d'autre voisins de degré 2 ou 3, donc, il ne donne que de la charge de son (unique) voisin de degré 2. Sa charge finale est donc de $1-1=0$.
+Supposons alors que $v$ n'ait pas de voisin de degré 2. Si $v$ a des voisins de degré 3, il en a au plus deux, grâce à Lemme \ref{le:5333}. Sa charge finale est alors d'au moins $1-2\cdot 1/2 = 0$. 
+
+Alors, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $5$-arête-coloriable.
 %Ces règles sur un graphe qui respecte les propriétés structurelles définies précédemment, après la redistribution de charge, il reste positif ou nul, ce qui provoque une contradiction sur la proposition initiale.
 \ep
 
@@ -403,29 +405,29 @@ Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$
 
 
 \begin{lemme}
-Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré 4.
+Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $4$.
 \label{le:243}
 \end{lemme}
 
 Preuve. Nous suivons les idées de la preuve de Lemme \ref{le:254}.
-Supposons par l'absurde que $v$ ait un voisin $w$ tel que $d_G(w) = 3$. Soit $e = uv$ et $e'$ l'autre arête incidente de $u$ . Considérons une $4$-arête-coloration $\varphi$ de $G' = G \setminus e$. On peut supposer que $\varphi(e') = 1$ et que les trois arêtes incidentes de $v$ dans $G'$ sont coloriées avec les couleurs 2, 3 et 4, dont $\varphi(vw) = 2$.
+Supposons par l'absurde que $v$ ait un voisin $w$ tel que $d_G(w) = 3$. Soit $e = uv$ et $e'$ l'autre arête incidente de $u$. Considérons une $4$-arête-coloration $\varphi$ de $G' = G \setminus e$. On peut supposer que $\varphi(e') = 1$ et que les trois arêtes incidentes de $v$ dans $G'$ sont coloriées avec les couleurs 2, 3 et 4, dont $\varphi(vw) = 2$.
 
-Il existe forcément une $(1,i)$-chaîne de Kempe reliant $e'$ à une arête incidente à $v$ dans $G'$ pour tout $i \in \{2,3,4\}$. Par conséquence, il existe une arête incidente à $w$ coloriée avec la couleur 1, disons $e''$. D'ailleurs, il existe une couleur $c\in \{3,4\}$ que $w$ ne voit pas. On peut donc renverser la couleur 1 et $c$ obtenant $\varphi(e'') = 4$ ce qui permet de colorier $\varphi(vw) = 1$ et $\varphi(e) = 2$. On trouve alors une 4-arête-coloration de $G$ ce qui est absurde.
+Il existe forcément une $(1,i)$-chaîne de Kempe reliant $e'$ à une arête incidente à $v$ dans $G'$ pour tout $i \in \{2,3,4\}$. Par conséquence, il existe une arête incidente à $w$ coloriée avec la couleur 1, disons $e''$. D'ailleurs, il existe une couleur $c\in \{3,4\}$ que $w$ ne voit pas. On peut donc renverser la couleur 1 et $c$ obtenant $\varphi(e'') = c$ ce qui permet de colorier $\varphi(vw) = 1$ et $\varphi(e) = 2$. On trouve alors une 4-arête-coloration de $G$ ce qui est absurde.
 \ep
 
 \begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d(v)=3$. Alors, $v$ a au moins deux voisins de degré 4.
+Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degré $4$.
 \label{le:333}
 \end{lemme}
 
 Preuve.
-Supposons qu'il existe $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$. Soient $e_1 = u_1v$, $e_2 = u_2v$ et $e_3$ les arêtes incidentes à $v$. Notons $e_{ij}$ les arêtes incidentes à $u_i$ différentes de $e_i$, pour $i \in \{1,2\}$, $j \in \{1,2\}$. Considérons une $4$-arête-coloration de $G' = G \setminus e_1$ qui ne soit pas une coloration de $G$. Alors, on peut supposer que  $\varphi(e_2)=1$, $\varphi(e_3)=2$,$\varphi(e_{11})=3$ et $\varphi(e_{12})=4$. De plus, il existe forcément des $(i,j)$-chaînes de Kempe pour $i \in {1,2}$ et $j \in {3,4}$ (sinon il serait facile de trouver une $4$-arête-coloration de $G$) reliant les arêtes incidentes à $v$ avec les arêtes incidentes à $u_1$ dans $G'$. On peut donc supposer que $\varphi(e_{21})=3$ et $\varphi(e_{22})=4$.
+Supposons qu'il existe $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$. Soient $e_1 = u_1v$, $e_2 = u_2v$ et $e_3$ les arêtes incidentes à $v$. Notons $e_{ij}$ les arêtes incidentes à $u_i$ différentes de $e_i$, pour $i \in \{1,2\}$, $j \in \{1,2\}$. Considérons une $4$-arête-coloration de $G' = G \setminus e_1$ qui ne soit pas une coloration de $G$. Alors, on peut supposer que  $\varphi(e_2)=1$, $\varphi(e_3)=2$, $\varphi(e_{11})=3$ et $\varphi(e_{12})=4$. De plus, il existe forcément des $(i,j)$-chaînes de Kempe pour $i \in {1,2}$ et $j \in {3,4}$ (sinon il serait facile de trouver une $4$-arête-coloration de $G$) reliant les arêtes incidentes à $v$ avec les arêtes incidentes à $u_1$ dans $G'$. On peut donc supposer que $\varphi(e_{21})=3$ et $\varphi(e_{22})=4$.
 
 Observons maintenant que la $(2,4)$-chaîne de Kempe reliant $e_{12}$ et $e_2$ est bien différente de la $(2,4)$-chaîne de Kempe de $e_{22}$. Alors on peut trouver, en renversant les couleurs de cette dernière chaîne, une coloration de $G'$ telle que $\varphi(e_{22}) = 2$, ce qui permet de poser $\varphi(e_2) = 4$ tout en laissant la possibilité de colorier $e_1$ avec la couleur 2. On obtient donc une $4$-arête-coloration de $G$ ce qui provoque une contradiction.
 \ep
 
 
-Les propriétés que nous venons de vérifier vont entraîner une contradiction grâce à la procédure de déchargement. Similairement que dans la proposition précédant, on définit d'abord la charge initiale par la fonction suivante :
+Les propriétés que nous venons de vérifier vont entraîner une contradiction grâce à la procédure de déchargement. Similairement que dans la proposition précédente, on définit d'abord la charge initiale par la fonction suivante :
 $$
 \gathered
 w(v) = \frac{3}{2} d_G(v) - 5 \qquad \textrm{pour tout $v\in V(G)$,} \\
@@ -433,13 +435,13 @@ w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f\in F(G)$.}
 \endgathered
 $$
 
-Puis, nous montrons que la somme de la charge totale est strictement négative, et après la redistribution de la charge par des règles de déchargement, nous vérifierons que la charge de tous les éléments du graphe deviendra positive, ce qui provoquera une contradiction.
+Puis, nous montrons que la somme de la charge totale est strictement négative, et que, après la redistribution de la charge par des règles de déchargement, la charge de tous les éléments du graphe deviendra positive, ce qui provoquera une contradiction.
 
 
 \begin{lemme}
 Soit $G$ un graphe planaire connexe. Alors,
 $$
-\sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F} \left(d_G(f) -5\right) = -10.
+\sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) = -10.
 $$
 \label{le:cha2}
 \end{lemme}
@@ -447,7 +449,7 @@ $$
 Preuve.
 Tout comme pour Lemme \ref{le:charge}, on déduit de la formule d'Euler que
 $$ 
-\sum_{v \in V(G)} \left(\frac{3}{2}d_G(v) - 5\right) + \sum_{f\in F} \left(d_G(f) -5\right) = 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10.
+\sum_{v \in V(G)} \left(\frac{3}{2}d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) = 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10.
 $$
 \ep 
 
@@ -465,30 +467,29 @@ D'ailleurs, la charge initiale de toutes les faces est positive puisque $g(G) \g
 Alors, les règles qui vont distribuer la charge des sommets sont les suivantes :
 
 \begin{enumerate}
-\item[(R1)] tout sommet de degré 2 donne $(-1)$ de charge à chacun de ses voisins.
-\item[(R2)] tout sommet de degré 3 donne $(-1/4)$ de charge à chaque voisin de degré 4.
+\item[(R1)] tout sommet de degré 4 donne $1$ de charge à chacun de ses voisins de degré 2.
+\item[(R2)] tout sommet de degré 4 donne $1/4$ de charge à chaque voisin de degré 3.
 \end{enumerate}
 Dans ce cas là aussi, la somme totale de la charge reste invariante et la charge de toutes les faces reste positive.
 
-On va vérifier que pour tout sommet de $G$ la charge finale est positive, ce qui donnera la contradiction. On a déjà montré l'inexistence des sommets de degré 1 dans ces configurations grâce au Lemme \ref{le:14}. Puis, selon Lemme \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4,donc par (R1) la charge finale du sommet de degré 2 reste nulle.
+On va vérifier que pour tout sommet de $G$ la charge finale est positive, ce qui donnera la contradiction. On a déjà montré l'inexistence des sommets de degré 1 dans ces configurations grâce au Lemme \ref{le:14}. Puis, selon Lemme \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4, donc par (R1) la charge finale d'un sommet de degré 2 reste nulle.
 
-Ensuite, soit $v$ un sommet de degré $3$. Selon le Lemme \ref{le:333} $v$ a au moins deux voisins de degré $4$. Regardons d'abord le cas où $v$ a exactement deux voisins de degré $3$. Par (R2) on sait que $v$ donne 1/4 d'unité de charge négative à ses deux voisins de degré $4$. De cette façon la charge finale de $v$ reste nulle et chacun de ses voisins de degré $4$ restent avec une charge finale positive. Pour le cas où $v$ n'a que des voisins de degré $4$, par (R2) on distribue complètement la charge de $v$ entre deux de ses voisins (même cas qu'avant), obtenant que l'endroit devient positive.
+Ensuite, soit $v$ un sommet de degré $3$. Selon Lemme \ref{le:333}, le sommet $v$ a au moins deux voisins de degré $4$. Par (R2) on sait que $v$ reçoit 1/4 d'unité de charge négative de chacun de ses deux voisins de degré $4$. Sa charge est donc d'au moins $-1/2+2\cdot 1/4 = 0$.
 
 %Finalement, ces sommets adjacentes aux sommets de degré deux on sait qu'ils ne reçoivent plus de charge de ses autres voisins car selon  Lemme \ref{le:243}, tout sommet adjacent d'un sommet de degré 2 n'a que des voisins de degré 4 (sauf le voisin de degré 2). Alors, d'après (R1) l'endroit autour d'un sommet de degré 2 reste avec une charge finale positive.
 
-Finalement, soit $v$ un sommet de degré 4. $v$ ne fait que recevoir charge négative de ses voisins avec un degré inférieur. Si $v$ a un voisin de degré 2, selon le Lemme \ref{le:243} tous ses autres voisins seront de degré 4, sa charge finale reste positive d'après avoir reçu la charge de son voisin de degré 2. Par contre si $v$ a des voisins de degré 3, on sait puisque $\Delta(G)\leq 4$ que $v$ ne peut avoir que 4 voisins de degré 3, donc au plus il peut recevoir $4 \cdot (-1/4)=-1$ de charge négative. Alors la charge finale sur $v$ sera $4\cdot(-1/4) + 1 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
-
-Alors, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $5$-arête-coloriable.
+Finalement, soit $v$ un sommet de degré 4. Si $v$ a un voisin de degré 2, selon le Lemme \ref{le:243} tous ses autres voisins sont de degré 4, alors, sa charge est de $1-1=0$. Si $v$ a des voisins de degré 3, on sait qu'il ne peut avoir que 4 voisins de degré 3, donc il peut donner au maximum $4 \cdot 1/4=1$ de charge à ces voisins. Alors la charge finale de $v$ est au moins $1 - 4\cdot 1/4 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
 \ep 
 
 
 \subsection{Théorème de 4 Couleurs}
 
-Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken en 1976. Malheureusement la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine pas vérifiable et une autre partie dont sa explication n'était pas précise.
+Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken [cite] en 1976. Malheureusement, la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine difficile à vérifier et une autre partie dont l'explication n'était pas tout à fait précise.
 
-C'est pour ce fait qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et ce a été Robertson, Sanders, Seymour et Thomas qui l'ont prouvé en 1995. En fait dans ce nouvelle preuve ils se sont inspirés aussi dans la preuve de Appel et Haken, et ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
+C'est pour ce fait-ci qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et c'est Robertson, Sanders, Seymour et Thomas [cite] qui l'ont ré-prouvé en 1995. En fait, dans cette nouvelle preuve ils se sont inspirés largement de la preuve de Appel et Haken, cependant, ils ont simplifié d'une manière significative la procédure de déchargement, et leur programme de vérification de réductibilité automatisée est plus robuste et indépendant du déchargement.
+%t ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
-\begin{theorem}
+\begin{theorem}[cite, cite]
 Soit $G$ un graphe planaire. Alors $G$ est 4-coloriable.
 \label{th:4CT}
 \end{theorem}
@@ -517,77 +518,149 @@ La réductibilité des 633 configurations de $\mathcal{S}$ est vérifiée à l'a
 
 \section{Réductibilité}
 \label{chap:red}
-Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal G contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de G.
+Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal $G$ contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de $G$.
 
-Nous allons généraliser celle notion.
+Nous allons généraliser cette notion.
 
 \begin{definition}
-Soit $H$ un graphe étiqueté, c-à-d un graphe $H= (V(H), E(H))$ avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. $H$ est une configuration dans $G$ s'il existe un sous-graphe $\mathcal{X}$ de $G$ et un isomorphisme $\xi$: $H \to \mathcal{X}$ tel que $\forall v \in V(H)$, $\gamma(v) = g_G(\xi(v))$. Nous allons identifier $H$ et sa copie $\mathcal{X}=\xi(H)$ dans $G$.
+Soit $H$ un graphe étiqueté, c-à-d un graphe $H= (V(H), E(H))$ avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
 \label{de:conf}
 \end{definition}
 
+Dans la suite, lorsque nous parlons d'une configuration $H$ dans un graphe $G$, nous identifions $H$ et sa copie $X=\xi(H)$ dans $G$.
+
 \begin{definition}
-Soit $H$ une configuration de $G$. Alors, $\partial_G(H) = \{e =uv \in V(G) : u \in V(H) et v \in V(G \setminus H)\}$ est l'ensemble des arêtes sortantes de $H$. Notons $r=|\partial_G(H)|$ est le nombre des arêtes sortantes.
+Soit $H$ une configuration de $G$. Notons
+$$
+\partial_G(H) = \{e =uv \in E(G) : u \in V(H)\textrm{ et }v \in V(G \setminus H)\},
+$$ l'ensemble des arêtes sortantes de $H$, et $r=|\partial_G(H)|$ leur nombre.
+Notons $H^* = H \cup \partial_G(H)$ et $G'=G\setminus H \cup \partial_G(H)$.
 \label{de:ring}
 \end{definition}
 
+Si $\varphi:E(G)\to \{1,2,3,4\}$ est une 4-arête-coloration de $G$, alors $\varphi$ induit une coloration de $\partial_G(H)$, de $H^*$, et de $G'$. Pour capturer la structure de la coloration $\varphi$ dans $G'$, nous introduisons les notions et notations suivantes :
+
 \begin{definition}
-Soit $H$ une configuration du graphe $G$ non-coloriable et $H'$, une autre configuration (avec moins de sommets ou d'arêtes) avec le même ensemble des arêtes sortantes que $H$. Alors $G'$ est le graphe contenant $H'$ à la place de $H$ de façon que $G'$ est coloriable et il existe alors une coloration $\varphi$ de $G'$.
+Soit $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$.
+Soit $\varphi:E(G')\to \{1,2,3,4\}$ une 4-arête-coloration de $G'$. 
+Soient $c, c' \in \{1,2,3,4\}$, $c\ne c'$ deux couleurs quelconques. 
+Une coloration $\varphi':E(G)\setminus E(H)\to \{1,2,3,4\}$ est \emph{adjacente} à $\varphi$, si $\varphi'$ peut être obtenu à partir de $\varphi$ en alternant les couleurs d'une $(c,c')$-chaîne de Kempe de $e$ pour un choix d'une arête $e\in\partial_G(H)$ et des couleurs $c,c'\in\{1,2,3,4\}$. Notons $N(\varphi)$ l'ensemble des colorations adjacentes à $\varphi$.
 \end{definition}
 
 \begin{definition}
-Soit $H$ et $H'$ des configurations de $G$ et $G'$, et une coloration $\varphi$ de $G'$. Alors, $\beta' = \varphi|_{\partial_G(H)}$ est une coloration de $\partial_G(H')=\partial_G(H)$.
+Soit $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$.
+Soit $\varphi:E(G')\to \{1,2,3,4\}$ une 4-arête-coloration de $G'$. 
+Soient $c, c' \in \{1,2,3,4\}$, $c\ne c'$ deux couleurs quelconques. 
+Le \emph{graphe résiduel}
+$\mathcal{X}^{\varphi}_{c,c'}$ est défini par
+\begin{itemize}
+\item $V(\mathcal{X}^{\varphi}_{c,c'}) = \partial_G(H)$, 
+\item $E(\mathcal{X}^{\varphi}_{c,c'}) = \{ e_ie_j$ tels que $(c,c')$-chaîne de Kempe de $e_i$ est la même que la $(c,c')$-chaîne de Kempe de $e_j\}$.
+\end{itemize}
+\end{definition}
+
+Il est claire que $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)\in\{0,1\}$ pour toute $e\in \partial_G(H)$. Le graphe résiduel est donc un couplage sur $\partial_G(H)$. Plus précisément, si un plongement de $G$ dans le plan est fixé et que les sommets du graphe résiduel sont placé de manière de respecter l'ordre circulaire des arêtes de $\partial_H(G)$, alors les arêtes de $\mathcal{X}_{\varphi}^{c,c'}$ ne se croisent pas, puisque les chaînes de Kempe ne se croisent pas non plus dans $G'$. Le graphe résiduel est donc un couplage planaire de $\partial_G(H)$.
+
+\begin{proposition}
+Soit $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$.
+Soit $\varphi:E(G')\to \{1,2,3,4\}$ une 4-arête-coloration de $G'$. 
+Soit $\varphi' \in N(\varphi)$ une coloration adjacente à $\varphi$ obtenu en alternant les couleurs de la $(c,c')$-chaîne de Kempe de $e\in \partial_G(H)$ pour $c,c'\in\{1,2,3,4\}$.
+Soient $\beta = \varphi|_{\partial_G(H)}$ et $\beta' = \varphi'|_{\partial_G(H)}$ les colorations de  $\partial_G(H)$ induites par $\varphi$ et $\varphi'$. Alors,
+$$
+|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}| \in \{1,2\},
+$$
+de plus, on a \\
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ si et seulement si $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=0$, et \\
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ si et seulement si $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
+\end{proposition}
+
+Preuve. Il est facile à observer que la modification de couleurs de la $(c,c')$-chaîne de Kempe de $e$ comporte un changement de couleur de $e$. Cela peut entraîne un changement de couleur d'une autre arête $e'$  de $\partial_G(H)$ si et seulement si cette chaîne-ci contient cette arête-là. \ep
+
+%À l'aide de ces notions auxiliaires, nous pouvons définir l'ensemble de colorations de $\partial_G(H)$ telles que s'il existe une coloration de $G\setminus H$, alors il existe une coloration de $G$.
+
+Considérons maintenant les colorations de $H$.
+
+\begin{definition}
+Soit $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$.
+Soit $\beta$ une coloration de $\partial_G(H)$. Soit $c,c'\in \{1,2,3,4\}$ deux couleurs quelconques. Soit $X$ un couplage planaire de $\partial_G(H)$ tel que si $\beta(e)\notin \{c,c'\}$, alors $d_X(e)=0$. Une coloration $\beta'$ est \emph{adjacente} à $\beta$ par rapport à $c,c'$ et $X$ si soit
+\begin{itemize}
+\item $\beta'$ est obtenu à partir de $\beta$ en alternant la couleur (modifiant $c$ en $c'$ et vice versa) de deux arêtes $e,e'\in \partial_H(G)$ telles que $ee'\in E(X)$, soit
+\item $\beta'$ est obtenu à partir de $\beta$ en alternant la couleur d'une arête $e$ telle que $d_e(X)=0$ et $\beta(e)\in\{c,c'\}$.
+\end{itemize}
+Nous notons $N^X_{c,c'}(\beta)$ l'ensemble de colorations adjacentes à $\beta$ par rapport à $c,c'$ et $X$.
 \end{definition}
 
 \begin{definition}
-Soit $H$ une configuration de $G$ et $k$, $l \in \{1,2,3,4\}$ deux couleurs quelconques. Alors, $\mathcal{X}^{k,l}$ est un graphe résiduel planaire défini à partir des arêtes sortantes de $H$ tel que, 
+Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $H$ s'il existe une coloration $\psi$ de $H^*$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Phi_0$ l'ensemble des colorations de $\partial_G(H)$ qui s'étendent vers $H$, i.e.,
 $$
-\gathered
-V(\mathcal{X}^{k,l}) = \{e_i, \quad e_i \in \partial_G(H), \textrm{ telle que $e_i$ est colorié avec la couleur $k$ ou $l$}\}, \\
-E(\mathcal{X}^{k,l}) = \{ e_ie_j, \quad e_i, e_j \in \partial_G(H)  \textrm{ tel que $(k,l)$-chaîne de Kempe de $e_i$ est la même que la $(k,l)$-chaîne de Kempe de $e_j$}\} 
-\endgathered
+\Psi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{ une coloration telle que } \psi|_{\partial_G(H)} = \beta\}.
 $$
-\end{definition}
-
-
-\begin{definition}
-Soit $H$ et $H'$ des configurations de $G$ et $G'$, une coloration $\varphi'$ de $G'$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $G$ s'il existe une coloration $\psi$ de $H$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons la colorations $\varphi$ de $G$ étendue telle que,
+Ensuite, pour $i\in\mathbb{N}$, soit
 $$
-\varphi(e) = \left\{ \begin{array}{lcc}
-\varphi'(e) & si & e \not\in H \\
-\psi(e) & si & e \in H 
-\end{array}
-\right.
+\Psi_{i+1} = 
+\{ 
+\beta : 
+\beta\in \Psi_i
+\textrm{ ou }
+\exists c,c'\in \{1,2,3,4\},\, 
+\forall X\textrm{ couplage planaire de $\partial_G(H)$, }
+N^X_{c,c'}(\beta) \cap \Psi_i \neq \emptyset 
+\},
 $$
-\end{definition}
-
-\begin{definition}
-Soit $H$ et $H'$ des configuration de $G$ et $G'$ et une coloration quelconque $\beta$ de $\partial_G(H)$. Alors, $\Phi_0$ est l'ensemble des colorations qui s'étendent,
+c-à-d, l'ensemble des colorations $\beta$ telles que pour une paire de couleurs $c,c'$, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe une coloration adjacente à $\beta$ déjà dans $\Psi_{i}$. Finalement, soit
 $$
-\Phi_0 = \{\beta, \quad \beta \textrm{ s'étend  vers }G\}
+\Psi(H)=\bigcup_{i\in \mathbb{N}} \Psi_i(H).
 $$
 \end{definition}
 
-\begin{definition}
-Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$, une paire de couleurs $k$ et $l$ et le graphe résiduel $\mathcal{X}^{k,l}$ des arêtes sortantes coloriées avec $k$ ou $l$. Alors une \emph{modification} est une altération des couleurs de $\beta$ telle que renversant $k$ et $l$ pour un sommet $x\in V(\mathcal{X}^{k,l})$ (deux sommets $x$ et $y$ s'il existe $e=xy \in E(\mathcal{X}^{k,l})$), on obtient $\beta'$ une autre coloration de $\partial_G(H)$.
-\label{de:mod}
-\end{definition}
+\begin{theorem}
+Soit $H$ une configuration de $G$, soit $H'$ une autre configuration telle que $\partial(H)=\partial(H')$. Soit $G'$ le graphe obtenu à partir de $G$ en remplaçant $H$ par $H'$.
+Si $\Psi_0(H')\subseteq \Psi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
+\label{th:red}
+\end{theorem}
 
-\begin{definition}
-Soit $H$ et $H'$ des configuration de $G$ et $G'$, une coloration $\psi$ de $H$ où  $\beta = \psi|_{partial_G(H)}$. Alors $\psi$ \emph{se réduit} vers une coloration $\varphi'$ de $G$, s'il existe une paire de couleurs $k$, $l$ pour laquelle n'importe quelle élément de $\mathcal{X}^{k,l}$ crée une modification obtenant $\beta' = \varphi'|_{\partial_G(H)}$.
-\label{de:sered}
-\end{definition}
+Preuve. Soit $\varphi'$ une coloration de $G'$, soit $\beta'=\varphi'|\partial_H(G)$. Comme $\varphi$ est une coloration de $G'$, $\beta'$ est une coloration de $\partial_G(H')$ qui s'étend vers $H'$, d'où $\beta'\in \Psi_0(H')$.
+Alors, il existe $i\in \mathbb{N}$ tel que $\beta' \in \Psi_{i}(H)$.
+Nous démontrons l'existence d'une coloration $\varphi$ de $G$ par récurrence par rapport à $i$.
 
-\begin{definition}
-Soit $H$ une configuration de $G$ et $\Phi_0$ l'ensemble des colorations qui s'étendent. Alors pour tout $i \geq 0$ $\Phi_{i+1}$ est l'ensemble des colorations $\beta$ de $\partial_G(H)$ qui se réduisent vers des colorations de $\Phi_i$.
+Si $i=0$, alors $\beta'$ s'étend vers $H$, c-à-d, il existe une coloration $\psi$ de $H^*$ telle que $\psi|\partial_G(H)=\beta'$. On définit
 $$
-\Phi_{i+1}= \{ \beta, \quad \textrm{telle que $\beta$ se réduit vers } \beta' \in \Phi_i\}
+\varphi (e) = 
+\begin{cases}
+\varphi'(e) & \text{si }e\notin H, \\
+\psi(e) & \text{si } e\in H.
+\end{cases}
 $$
-\end{definition}
+Il est évident que c'est une 4-arête-coloration de $G$.
 
-L'ensemble des colorations qui s'étendent ou se réduisent forment l'ensemble  $\Phi$ des colorations valides de $G$. Notons $\Phi = \cup_{i \in \mathbb{N}\cup\{0\}}$. 
+Supposons que $\beta' \in \Psi_{i+1}(H)\setminus \Psi_i(H)$ pour un $i\in \mathbb{N}$. Alors, il existe deux couleurs $c,c'$ telles que, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe $\beta''\in \Psi_i(H)$ adjacente à $\beta'$. Considérons maintenant le couplage planaire $\mathcal{X}_{\varphi'}^{c,c'}$. La coloration $\beta''$ adjacente à $\beta'$ correspondante est une restriction d'une coloration de $G'$ adjacente à $\varphi'$, disons $\varphi''$. Puisque $\beta''\in \Psi_i(H)$, par l'hypothèse de récurrence, pour $\varphi''$ il existe une 4-arête-coloration $\varphi$ de $G$.
 
+Autrement dit, il suffit de modifier la coloration $\varphi'$ le long des chaînes de Kempe un nombre fini de fois afin d'obtenir une coloration qui s'étend directement vers $H$. \ep
+ 
 
+%\begin{definition}
+%Soit $C$ une configuration et $R$ le ring de $C$. Un \emph{couplage} (matching) $m$ de $R$ est une paire d'arêtes $e$, $e' \in R$ qui ne sont pas incidentes au même sommet. Alors, $M$ est l'ensemble de \emph{couplages} possibles entre les arêtes de $R$.
+%\label{de:coup}
+%\end{definition}
+
+%\begin{definition}
+%Soit $H$ une configuration du graphe $G$ non-coloriable et $H'$, une réduction de $H$. Prenons $G'$ le graphe avec $H'$ (à la place de $H$). Alors $\varphi'$ est une coloration quelconque de $G'$.{\color{blue}je bloque ici je verrai plus tard}
+%\end{definition}
+
+%\begin{definition}
+%Soit $H$ une configuration de $G$. Alors, $\beta' = \varphi'|_{\partial_G(H)}$ est une coloration de $\partial_G(H')=\partial_G(H)$.
+%\end{definition}
+
+%\begin{definition}
+%Soit une configuration $C$, une $\varphi$ coloration de $C$ avec son code $k$, le ring $R$, une paire de couleurs $(i,j)$ et $M$ l'ensemble des couplages possibles parmi les arêtes du ring coloriées avec une de ces couleurs. Alors, une \emph{modification} de $\varphi$ est une changement des couleurs $(i,j)$ causée par une ($i,j)$-chaîne de Kempe, d'une arête seule de ring (le cas où la chaîne ne revient pas) ou une paire d'arêtes de ring  d'un couplage $m \in M$. Ce changement de couleurs provoque une modification du code de coloration et de la même façon de la coloration en soi.
+%{\color{red} Je ne sais pas trop comme gérer ce définition et je ne sais pas comme la noter si phi sous ij ou sur ij ou sous ij et sur M. Ton avis?}
+%\label{de:modif}
+%\end{definition}
+
+%\begin{definition}
+%Soit $\varphi$ une coloration de $C$, $i$ et $j$ deux couleurs présentes dans $R$ et $m = (e,f)$ un couplage de $M$ tel que les arêtes de $m$ sont coloriées avec $i$ ou $j$. Alors, $\varphi'$, une coloration de $C$ qui ne s'étend pas, \emph{se réduit} vers  $\varphi$ s'il existe une paire de couleurs $(i,j)$ pour lequel n'importe quel couplage des arêtes coloriées avec $i$ ou $j$ admet une modification vers un code de coloration qui s'étend (qui appartient à $\Phi$).
+%\label{pro:phii}
+%\end{definition}
 
 %\begin{definition}
 %Soit $C$ une configuration et $\Phi_i$ l'ensemble courant des colorations de $C$ qui s'étendent. Alors, $\Phi_{i+1}$ est l'ensemble de colorations $\varphi$ qui se réduisent vers les colorations de $\Phi_i$. $\Phi_0$ est l'ensemble des colorations qui s'étendent directement. $\Phi$ est l'union de tous les ensembles $\Phi_i$ pour tout $i \in \mathbb{N} \cup \{ 0\}$ (Définition \ref{de:phi}). 
@@ -600,12 +673,20 @@ L'ensemble des colorations qui s'étendent ou se réduisent forment l'ensemble  
 %$$
 %\end{definition}
 
-\begin{proposition}
-Soit $H$ et $H'$ des configurations, de $G$ et $G'$, l'ensemble $\Phi$ des colorations valides de $G$ et l'ensemle $\Phi'_0$ des colorations de $G'$. Alors $H$ se réduit vers $H'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
-\end{proposition}
-\bigskip
+%\begin{proposition}
+%Soit $C$ une configuration, $C'$ une autre configuration avec la même disposition des arêtes de ring que $C$ et $\Phi'_0$ l'ensemble de colorations qui s'étendent directement à $C'$. Alors $C$ se réduit vers $C'$ si et seulement si $\Phi'_0 \subseteq \Phi$.
+%\end{proposition}
+%\bigskip
 
-%Si une configuration $H$ se réduit vers $H'$, dans un graphe on peut remplacer $H$ par $H'$, obtenant un contre-exemple minimal de $G$. Comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas, c'est nécessaire travailler avec des contre-exemples minimaux. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
+\begin{definition}
+Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La configuration $H$ \emph{se réduit} vers $H'$ si $\Psi_0(H')\subseteq \Psi(H)$. La configuration $H$ est \emph{réductible} s'il existe une configuration $H'$ vers la quelle elle se réduit.
+\end{definition}
+
+Théorème \ref{th:red} permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
+
+Dans le chapitre suivant, nous donnons la description plus détaillée de l'implémentation de cette procédure.
+
+%Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, n'ayant que des contre-exemples minimaux. De cette façon on peut montrer des propriétés structurelles qui se donnent dans $G$, comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
 
 \section{Déchargement}
