@@ -1,0 +1,144 @@
+\documentclass{beamer}
+\usepackage{mathrsfs}
+\usepackage[français]{babel}
+\usepackage[cp1250]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage{graphicx}
+\mode<presentation>
+{ \usetheme{Berlin}
+%  \setbeamercovered{transparent}
+}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\newtheorem{definition}{Définition}
+\newtheorem{lemme}{Lemme}
+\newtheoreme{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+
+\def\ceps{3656}
+
+\title[Coloration des arêtes des graphes planaires]{Coloration des arêtes des graphes planaires}
+\author[A. Gallastegui and F. Kardo\v s]{\underbar{Antonio Gallastegui} \and Franti\v sek Kardo\v s}
+\institute[]{
+Laboratoire Bordelais de Recherche Informatique \\
+Université de Bordeaux\\
+}
+\date{Bordeaux, 10 juin, 2016}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+\begin{frame}
+ \tableofcontents
+\end{frame}
+\section{Introduction}
+\subsection{Notions de Base}
+\begin{frame}
+Un graphe $G$ est un couple $G=(V,E)$ d'ensembles finis, où
+\begin{itemize}
+\item $V=V(G)$ est l'ensemble de \emph{sommets} (vertices) de $G$, et
+\item $E=E(G)$ est un ensemble de pairs des sommets, appelées \emph{arêtes} de $G$.
+\end{itemize}
+$e$, $e' \in E(G)$ sont adjacents si $e=uv$ et $e'=uv'$ pour $u$, $v$, $v' \in V(G)$, $v \neq v'$.
+\pause
+Le degré $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
+\begin{itemize}
+\item $\Delta(G)$ degré maximum
+\item $\delta(G)$ degré minimum
+\end{itemize} 
+Figure------
+\end{frame}
+
+\begin{frame}
+Le graphe $G$ est planaire ssi il peut être dessiné sur le plan sans croisement des arêtes.
+Une face $f$, est une région connexe délimitée par des arêtes. Il y a toujours une face infinie.
+\pause
+\begin{theorem}[Euler, 1750]
+Soit $G$ un graphe planaire connexe à $n$ sommets, $m$ arêtes et $f$ faces. Alors,
+$$
+n-m+f=2
+$$
+\end{theorem}
+figure---
+\end{frame}
+
+\begin{frame}
+La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
+
+\pause
+
+\begin{proposition}
+Tout graphe planaire contient un sommet de degré au plus $5$.
+\end{proposition}
+
+
+
+
+\end{frame}
+\subsection{Coloration de Graphes}
+\begin{frame}
+Soit $G$ un graphe
+
+
+
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\subsection{Réductibilité et déchargement}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\section{Réductibilité}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\begin{frame}
+\end{frame}
+\section{Déchargement}
+\section{Description de l'outil}
+\section{Résultats}
+\subsection{Pair de sommets de degré 3}
+\subsection{Sommet de degré 2}
+\subsection{Sommet de degré 3}
+\section{Conclusion}
+\end{document}
+

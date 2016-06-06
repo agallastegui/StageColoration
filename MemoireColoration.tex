@@ -484,7 +484,7 @@ Alors, après la redistribution de charge on obtient un graphe chargé non-néga
 
 \subsection{Théorème de 4 Couleurs}
 
-Le théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken en 1976. Malheureusement la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine pas vérifiable et une autre partie dont sa explication n'était pas précise.
+Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken en 1976. Malheureusement la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine pas vérifiable et une autre partie dont sa explication n'était pas précise.
 
 C'est pour ce fait qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et ce a été Robertson, Sanders, Seymour et Thomas qui l'ont prouvé en 1995. En fait dans ce nouvelle preuve ils se sont inspirés aussi dans la preuve de Appel et Haken, et ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
@@ -516,7 +516,7 @@ La réductibilité des 633 configurations de $\mathcal{S}$ est vérifiée à l'a
 
 
 \section{Réductibilité}
-
+\label{chap:red}
 Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal G contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de G.
 
 Nous allons généraliser celle notion.
@@ -531,15 +531,6 @@ Soit $H$ une configuration de $G$. Alors, $\partial_G(H) = \{e =uv \in V(G) : u 
 \label{de:ring}
 \end{definition}
 
-%\begin{definition}
-%Soit $G$ un graphe et $C$ une configuration. Un \emph{code de coloration} est un entier $k$ qui représente une coloration de $C$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
-
-%$$
-%k = \sum_{i=0}^{ring-1} c(\varphi(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
-%$$
-%\label{de:code}
-%\end{definition}
-
 \begin{definition}
 Soit $H$ une configuration de $G$ et $k$, $l \in \{1,2,3,4\}$ deux couleurs quelconques. Alors, $\mathcal{X}^{k,l}$ est un graphe résiduel planaire défini à partir des arêtes sortantes de $H$ tel que, 
 $V(\mathcal{X}^{k,l}) = \partial_G(H)$, 
@@ -552,10 +543,6 @@ $E(\mathcal{X}^{k,l}) = \{ e_ie_j$, $e_i, e_j \in \partial_G(H)$ tel que $(k,l)$
 %\label{de:coup}
 %\end{definition}
 
-%\begin{definition}
-%Soit $C$ une configuration et $k$ un code de coloration. Une coloration $\varphi$ de $C$ \emph{s'étend} si à partir de la coloration des arêtes de ring donnée par $k$ on peut trouver une $4$-arête-coloration de $C$.
-%\label{de:étend}
-%\end{definition}
 \begin{definition}
 Soit $H$ une configuration du graphe $G$ non-coloriable et $H'$, une réduction de $H$. Prenons $G'$ le graphe avec $H'$ (à la place de $H$). Alors $\varphi'$ est une coloration quelconque de $G'$.{\color{blue}je bloque ici je verrai plus tard}
 \end{definition}
@@ -614,70 +601,10 @@ $$
 
 Si une configuration $C$ se réduit vers $C'$, dans un graphe on peut remplacer $C$ par $C'$, n'ayant que des contre-exemples minimaux. De cette façon on peut montrer des propriétés structurelles qui se donnent dans $G$, comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
-%Montrons donc, des propriétés structurelles de $G$.
-%
-%\begin{lemme}
-%Il n'existe pas de sommet $v \in V(G)$ tel que $d_G(v)$ = 1.
-%\end{lemme}
-%
-%Preuve. 
-%La preuve pour cette condition est la même qu'on a déjà fait pour les deux cas précédentes (Lemme \ref{le:14} et Lemme \ref{le:1})
-%\ep
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple minimal. Tout $v\in V(G)$ de degré 2 n'a que des voisins de degré 4.
-%\end{lemme}
-%
-%Preuve. 
-%Cette preuve on l'a fait aussi dans le cas précédente (Lemme \ref{le:23}) et l'argument c'est exactement le même.
-%\ep 
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v)=4$ qui a un voisin $u$ de degré 2. Alors tout voisin de $v$ (sauf $u$) est de degré 4.
-%\end{lemme}
-%
-%Preuve.
-%Cette preuve aussi est la même que celle-ci qu'on a fait dans le cas précédente (Lemme \ref{le:243}).
-%\ep
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$. Alors $v$ a au moins deux voisins de degré 4.
-%\end{lemme}
-%
-%Preuve.
-%C'est la même que dans le Lemme \ref{le:333}.
-%\ep
-%
-%Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
-%\label{le:33pent}
-%\end{lemme}
-%
-%Preuve.
-%On a supposé par l'absurde que ce n'est pas vrai. D'abord, on a considéré un pair de sommets avec 4 carrés autour mais on a trouvé sa réduction, donc ce n'était pas un contre-exemple minimal. Puis on vérifié le cas où il y a un pentagone (un cas où le pentagone est en haut et un autre avec le pentagone de coté) mais on a trouvé également des réductions qui ont prouvé pareillement que ces n'étaient pas des contre-exemples minimaux. Alors on a prouvé qu'autour de un pair de sommets de degré 3 il y a au moins deux pentagones ou une face encore plus grande.
-%\ep
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
-%\label{le:2pent}
-%\end{lemme}
-%
-%Preuve.
-%Dans ce cas là aussi on a prouvé le lemme par l'absurde. D'abord, on a vérifié un pair de sommets avec deux carrés autour de lui et on a trouvé une réduction qui montre que ce n'était pas un contre-exemple minimal. Puis on a fait également pour le cas où autour du sommet de degré deux il y a un pentagone.
-%\ep
-%
-%\begin{lemme}
-%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
-%\label{le:3}
-%\end{lemme}
-%
-%Dans ce cas-là on n'a pas pu trouver une réduction pour le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.{\color{blue} J'en doute un peu comment mettre cette promesse de que ce parait vrai}.
 
 \section{Déchargement}
-
-Dans ce chapitre, on présente la charge initiale et des règles de déchargement qui vont permettre de trouver la contradiction qui montre la conjecture. \` A partir des configuration réductibles qu'on a trouvé à l'aide de l'outil qu'on a créé, on déterminera des règles de distribution de charge. D'abord regardons quelle est la charge initiale. On a déjà connu le processus de cette règle dans un chapitre précédente (chapitre \ref{chap:easy}), dans ce cas-là on va faire pareil.
+\label{chap:Dec}
+Dans ce chapitre, nous présentons la charge initiale et des règles de déchargement qui vont permettre trouver la contradiction qui montre la conjecture. \` A partir de la fonction de charge initiale convenant, nous allons déterminer des règles de distribution de charge. D'abord regardons quelle est la charge initiale. Nous connaissons déjà le processus de cette règle dans un chapitre précédente (chapitre \ref{chap:easy}), dans ce cas-là nous allons faire pareil.
 
 \begin{definition}
 Soit $G$ un graphe planaire avec V(G) l'ensemble de sommets de $G$ et F l'ensemble de faces (sans prendre en compte la région infinie). La \emph{charge} des sommets et des faces est une application $w$ défini de la façon suivante.
@@ -730,12 +657,10 @@ w(f) \geq 2 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) \geq 6
 $$
 \end{corollaire}
 
-Connaissant les charges et les structures ou configurations qu'on peut trouver dans un graphe $G$, les règles qu'on définit ensuite vont permettre de distribuer la charge des sommets vers les faces obtenant une somme de la charge totale positive.
-
-{\color{blue} J'ai l'impression de trop répéter les choses n'est pas?}
+Connaissant les charges initiales de chaque sommet et chaque face, nous allons définir les règles suivantes afin de distribuer la charge initiale. Différemment aux cas précédents nous allons distribuer la charge (négative) des sommets vers les faces.
 
 \begin{proposition}
-Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Alors les règles de distribution de la charge sont les suivantes.
+Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Alors les règles de distribution de la charge sont,
 
 \begin{enumerate}
 \item [(R1)] $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
@@ -744,33 +669,70 @@ Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Al
 \end{enumerate}
 \end{proposition}
 
-Vérifions comment ces règles distribuent la charge dans tous les cas possibles (tous les cas où on a trouvé des réductions), sur toutes les configurations afin de montrer que la somme de la charge totale finale est positive.
+Observons comment ces règles pourraient distribuer la charge initiale, c-à-d sur quelles configurations pourrions obtenir que la somme de la charge totale finale soit positive.
 
-On a déjà montré que dans $G$ il n'y a aucun sommet de degré 1. Puis on a montré par le Lemme \ref{le:2pent} que si $v$ a un degré 2, alors il existe autour de $v$ au moins, deux pentagones ou un hexagone donc, $v$ peut distribuer par (R1) une unité de charge à chaque pentagone voisin ou deux unité à l'hexagone. De cette façon $v$ aura une nouvelle charge nulle et les faces autour restent positives vu que le même lemme prouve que tous les sommets autour de ces faces (sauf $v$) sont de degré 4. Par (R3) on sait que les sommets de degré 4 n'ont pas de charge à distribuer ni à recevoir.
+Dans le chapitre \ref{chap:easy} nous avons déjà montré quelques propriétés structurelles qui se donnent ici aussi. Selon le Lemme \ref{le:14}-\ref{le:333} nous savons déjà qu'il n'a aucun sommet de degré 1, que pour $v$ ayant un voisin de degré deux, le reste de voisins que $v$ a sont de degré 4, et que un sommet $v$ de degré 3 a au moins deux sommets de degré 4.
 
-Pour un pair de sommets de degré 3, $v$ et $u$, on a trouvé grâce au Lemme \ref{le:33pent} que autour de $e = uv$ il y a au moins deux pentagones, ou une face de taille au moins 6, donc $u$ et $v$ peuvent distribuer sa charge vers ces faces grâce à (R2). Dans le cas où il y a deux pentagones, chacun des sommets distribuent sa charge vers un pentagone et sinon les deux sommets vers la même face. De cette manière $u$ et $v$ distribuent toute sa charge négative et la charge d'eux devient nulle et la charge totale de la configuration devient positive, car les faces n'ont que des sommets de degré 4 autour d'eux (sauf $v$ et $u$).
+À partir de ce point, regardons quelles configurations seraient vont permettre que le graphe se décharge correctement. 
 
-Finalement, pour un sommet de degré 3, $v$ on a cherché par le Lemme \ref{le:3} au moins un pentagone autour qui décharge ce sommet, mais pour l'instant on a pas pu montrer cette réduction, donc c'est la seule situation qui nous reste pour prouver que le graphe se décharge complètement avec une somme de charge totale positive, ce qui concernerait une contradiction et montrerait la conjecture.
+Pour un sommet $v$ de degré 2, pour distribuer toute la charge de $v$ nous allons montrer (dans le chapitre suivant) qu'il existe une réduction pour une configuration qui a $v$ de degré 2 avec un carré et un pentagone autour de lui. De cette façon, ce sommet-ci aurait forcement deux faces de taille 5 ou une face de taille 4 et une autre de taille au moins 6, ce qui permettrait,  par la règle (R1), distribuer toute la charge négative de $v$ et devenir la charge totale finale de la configuration positive.
 
-\section{Méthodes}
+D'ailleurs, soit $v$ un sommet de degré 3. Selon le Lemme \ref{le:333} $v$ ne peut avoir que un seul voisin de degré 3, alors considérons les deux cas. D'abord considérons l'existence d'un sommet voisin $u$ de degré 3. Pour que la charge totale de l'environnement de l'arête $e=uv$ devient positive (par la règle (R2)) après la distribution de charge c'est nécessaire qu'il ait deux faces autour de $e$ de taille au moins 5 ou dans le cas échéant, une face de taille au moins 6. C'est à dire, c'est nécessaire trouver une réduction pour une configuration avec 3 carrés et un pentagone autour de $e$. 
 
-Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
+Dans l'autre cas, c-à-d, si $v$ n'a que des voisins de degré 4, la condition pour que la configuration ait une charge total positive est, selon (R2), qu'une des faces autour de $v$ ait une taille au moins 5.
 
-Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
-
-
-\subsection{Réductibilité}
-
-La méthode de la réductibilité a été la méthode la plus travaillée, celle que nous a permis de supprimer beaucoup des configurations qui pourraient avoir créé un conflit. Pour ce fait on a développé un outil, qui lit des configurations et ses possibles réductions et elle vérifie si les possibles réductions le sont vraiment ou pas. Le code créé pour l'outil on l'a partitionné en 3 grandes parties (4 si on compte la façon de préparer les instances ou les configurations) qu'on passe à expliquer une par une ensuite.
-
-\subsubsection{Préparation des Configurations et leurs réductions}
-
-Cette première partie est pour expliquer comme est-ce qu'on défini les configurations pour pouvoir être lues. D'abord il  faut remarquer que on a défini les configurations par paires (configuration et sa possible réduction) où les deux configurations ont la même structure. Cette structure s'agit d'une première ligne avec juste le nom de la configuration (ou le numéro, pour reconnaître la structure), puis la prochaine ligne aura une chiffre qui détermine le nombre de sommets qui a la configuration, une deuxième chiffre concernant le nombre des arêtes extérieurs (ou sortants) et finalement une troisième chiffre qui sera un boolean avec un "0" si c'est la configuration et avec un "1" si c'est la réduction. Puis, à partir de la troisième ligne chaque ligne détermine le sommet courant, son degré, et les sommets voisins. Chaque configuration on la stockera dans une matrice d'adjacence.
-
-La façon de définir les configurations suit une ordre pour que les parties suivantes puissent être conçu de la façon qui nous intéresse, c'est à dire, les premiers sommets ce seront les sommets des arêtes extérieurs ou sortants, ceux qui vont connecter la configuration avec le reste du graphe. Ces sommets auront degré 1 et leurs arêtes incidentes conformeront l'ensemble des arêtes extérieurs ou \emph{ring}.
+Finalement, soit $v$ un sommet de degré 4. $v$ il n'a pas de charge à distribuer donc, supposons que les sommets de degré 4 ils sont autour de toutes les faces incidentes aux sommets de degré inférieur pour que pour toute configuration possible d'un graphe $G$, obtient, d'après la redistribution, une charge totale positive, ce qui concerne une contradiction.
 
 
-\subsubsection{Coloration à 4 couleurs}
+
+
+
+%On a déjà montré que dans $G$ il n'y a aucun sommet de degré 1. Puis on a montré par le Lemme \ref{le:2pent} que si $v$ a un degré 2, alors il existe autour de $v$ au moins, deux pentagones ou un hexagone donc, $v$ peut distribuer par (R1) une unité de charge à chaque pentagone voisin ou deux unité à l'hexagone. De cette façon $v$ aura une nouvelle charge nulle et les faces autour restent positives vu que le même lemme prouve que tous les sommets autour de ces faces (sauf $v$) sont de degré 4. Par (R3) on sait que les sommets de degré 4 n'ont pas de charge à distribuer ni à recevoir.
+
+%Pour un pair de sommets de degré 3, $v$ et $u$, on a trouvé grâce au Lemme \ref{le:33pent} que autour de $e = uv$ il y a au moins deux pentagones, ou une face de taille au moins 6, donc $u$ et $v$ peuvent distribuer sa charge vers ces faces grâce à (R2). Dans le cas où il y a deux pentagones, chacun des sommets distribuent sa charge vers un pentagone et sinon les deux sommets vers la même face. De cette manière $u$ et $v$ distribuent toute sa charge négative et la charge d'eux devient nulle et la charge totale de la configuration devient positive, car les faces n'ont que des sommets de degré 4 autour d'eux (sauf $v$ et $u$).
+
+%Finalement, pour un sommet de degré 3, $v$ on a cherché par le Lemme \ref{le:3} au moins un pentagone autour qui décharge ce sommet, mais pour l'instant on a pas pu montrer cette réduction, donc c'est la seule situation qui nous reste pour prouver que le graphe se décharge complètement avec une somme de charge totale positive, ce qui concernerait une contradiction et montrerait la conjecture.
+
+\section{Description de l'outil de réductibilité}
+\label{chap:Des}
+
+Ce chapitre sera consacré à introduire les méthodes et les notions utilisés pour le développement de l'outil que nous avons crée afin de vérifier la réductibilité des configurations. Suite aux besoins générées par les règles de déchargement définis dans le chapitre précédent, nous avons cherché à réduire des configurations déterminées.
+
+%Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
+
+%Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
+
+\begin{definition}
+Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
+
+$$
+k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}
+$$
+\label{de:code}
+\end{definition}
+
+\begin{definition}
+
+\end{definition}
+%\subsection{Réductibilité}
+
+%La méthode de la réductibilité a été la méthode la plus travaillée, celle que nous a permis de supprimer beaucoup des configurations qui pourraient avoir créé un conflit. Pour ce fait on a développé un outil, qui lit des configurations et ses possibles réductions et elle vérifie si les possibles réductions le sont vraiment ou pas. Le code créé pour l'outil on l'a partitionné en 3 grandes parties (4 si on compte la façon de préparer les instances ou les configurations) qu'on passe à expliquer une par une ensuite.
+
+%\subsection{Préparation des Configurations et leurs réductions}
+
+
+
+
+
+%Cette première partie est pour expliquer comme est-ce qu'on défini les configurations pour pouvoir être lues. D'abord il  faut remarquer que on a défini les configurations par paires (configuration et sa possible réduction) où les deux configurations ont la même structure. Cette structure s'agit d'une première ligne avec juste le nom de la configuration (ou le numéro, pour reconnaître la structure), puis la prochaine ligne aura une chiffre qui détermine le nombre de sommets qui a la configuration, une deuxième chiffre concernant le nombre des arêtes extérieurs (ou sortants) et finalement une troisième chiffre qui sera un boolean avec un "0" si c'est la configuration et avec un "1" si c'est la réduction. Puis, à partir de la troisième ligne chaque ligne détermine le sommet courant, son degré, et les sommets voisins. Chaque configuration on la stockera dans une matrice d'adjacence.
+
+%La façon de définir les configurations suit une ordre pour que les parties suivantes puissent être conçu de la façon qui nous intéresse, c'est à dire, les premiers sommets ce seront les sommets des arêtes extérieurs ou sortants, ceux qui vont connecter la configuration avec le reste du graphe. Ces sommets auront degré 1 et leurs arêtes incidentes conformeront l'ensemble des arêtes extérieurs ou \emph{ring}.
+
+
 
 Une fois on a stocké le graphe dans une matrice on va chercher toutes les colorations des arêtes qui marchent et puis on va les stocker dans un vecteur sous forme de code. D'abord, avant de colorier le graphe, on va numéroter les arêtes. Pour ce fait on commencera par les arêtes extérieurs, et puis on numérotera les arêtes de l'intérieur par ordre croissant des sommets incidentes à chaque arête (on utilisera le sommet incidente le plus petit entre les deux).
 
@@ -787,7 +749,7 @@ Dans notre cas, on partira sur la dernière arête, on la colorie et on parcours
 ----exemple de graphe colorié----
 
 Pour chaque bonne coloration, on ne gardera que la coloration des arêtes de ring car c'est celle-là la seule qui nous intéresse. Puis on stockera cette coloration sous forme du code multipliant $0,1,2$ ou $3$ (selon la couleur) par $4^{i}$, étant i l'arête coloriée.
-\subsubsection{Génération de Couplages}
+\subsection{Génération de Couplages}
 
 Cette partie est peut être la plus compliquée et la plus importante car c'est la partie dans laquelle on cherche des "mauvaises" colorations ou des colorations qui ne marchent pas normalement, mais qui peuvent se réduire vers des bonnes colorations, en utilisant des couplages entre les arêtes extérieurs ou sortants. 
 
@@ -801,35 +763,65 @@ La condition nécessaire et suffisante pour qu'une "mauvaise" coloration se réd
 
 Il existe différentes types de "mauvaises" colorations, celles qui se réduisent vers une "bonne" coloration (on les appellera Type 1), celles qui se réduisent vers une "mauvaise" coloration du Type 1 ou de Type 2 (on appellera a ces dernières colorations "mauvaises de Type 2) et celles qui ne se réduisent pas. On fera donc, répéter ce processus de couplages en tant qu'il existe des colorations "mauvaises" qui se réduisent jusqu'à on ne trouve plus de colorations de Type 2.
 
-\subsubsection{Colorations étendues}
+\subsection{Colorations étendues}
 
 Enfin, la dernière partie de la réductibilité, c'est la vérification. C'est à dire, on a déjà trouvé les colorations "bonnes" du graphe donné ainsi que les colorations de Type 1 et du Type 2 qui se réduisent vers les "bonnes" et qui desormaient "bonnes". Ensuite on cherchera toutes les colorations possibles (que les "bonnes") du graphe réduite et on regardera que toutes les colorations possibles du graphe réduite (la comparaison on la fait à partir des codes de coloration des arêtes sortants) correspondent aux "bonnes" colorations du graphe original. 
 
 Autrement dit, si l'ensemble des "bonnes" colorations du graphe réduit est un sous ensemble des "bonnes" colorations du graphe original, alors le graphe est réductible et sa réduction est celle-ci qu'on a défini. Il faut toujours remarque qu'un graphe il a plusieurs possibles réductions. 
+\subsection{Propriétés structurelles de $G$}
 
-\subsection{Déchargement}
+Ensuite nous montrons, grâce à l'outil de réductibilité, des configurations avec leurs réductions qui vont prouver les propriétés qu'on observe ci dessous. Ces propriétés vont permettre que les règles de déchargement définis dans le chapitre précédent entraînent une contradiction, c-à-d, nous allons montrer les propriétés qui assurent que le graphe se décharge de manière positive.
 
-Dans ce chapitre on profitera l'information donnée par la réductibilité, on va étudier quels sommets peuvent être prêts de quels autres et on analysera les configurations possibles qui peuvent se donner dans un graphe général des contre-exemples minimaux. 
+D'abord, regardons les propriétés qui se donnaient dans la conjecture précédente ($\Delta(G) \leq 4$, $g(G) \geq 5$, $\chi'(G) =4$) car dans ce cas là aussi elles sont présentes. Ces configurations des Lemmes \ref{le:14}-\ref{le:243}, nous les avons testé pour vérifier que le programme était correct. 
 
-À partir de ce point on défini des règles qui vont permettre décharger le graphe de façon positive ou neutre assurant que notre hypothèse est vraie ou autrement dit, le graphe est 4 coloriable. Ces règles sont générales pour tout graphe sous ces conditions donc il faudra qu'elles marchent pour toute configuration possible. C'est pour ce fait qu'on travaille avec contre-exemples minimaux. 
+Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
 
-Les règles qu'on définit viennent numérotes ci dessous.
+\begin{lemme}
+Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+\label{le:33pent}
+\end{lemme}
 
-\begin{enumerate}
-\item Tout Sommet de degré 3 donne une charge d'une unité à une face incidente de taille plus grande ou égal 5.
-\item Tout Sommet de degré 2 donne une charge deux unités à une face de taille 6 ou plus incidentes ou il donne une charge d'une unité a deux faces incidentes de taille 5.
-\end{enumerate} 
+Pour prouver ce lemme nous avons vérifié que la configuration avec un pair de sommets $u$, $v$ avec 4 carrés autour de ce pair-ci était réductible (il existait déjà cette réduction). Puis nous avons trouvé une réduction pour ce pair de sommets avec 3 carrés et un pentagone autour, ce qui nous a permi prouver le lemme.
 
+\begin{definition}
+Pour un pair de sommets $u$ et $v$ de degré $3$ adjacentes, la distance à un autre sommet de degré $3$ est au moins $2$.
+\label{de:3343}
+\end{configuration}
+
+Pour prouver cette propriété nos avons vérifié une réduction pour une configuration $H$ "$3-3-4-3$" qui avait déjà été trouvée à la main. 
+
+
+\begin{lemme}
+Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
+\label{le:2pent}
+\end{lemme}
+
+Dans ce cas là nous avons essayé d'utiliser la même procédure que pour le Lemme \ref{le:33pent}, c-à-dire, nous avons trouvé une réduction pour un sommet $v$ de degré 2 avec deux carrés autour de lui, et pareil pour $v$ avec un carré et un pentagone. Malheureusement nous n'avons pas encore trouvé cette dernière réduction.
+
+\begin{lemme}
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
+\label{le:3}
+\end{lemme}
+
+Dans ce cas-là non plus, nous n'avons  n'avons pas réussi à réduire le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.
 
 \section{Résultats}
-On remarque que la plus grande partie du travail a été dirigé à développer l'outil capable de vérifier la réductibilité donc les résultats les plus visibles sont ceux concernant ce chapitre et ce sont ceux qu'on présente ensuite.
+\label{chap:res}
 
-D'abord, on présente les configurations qui marchent bien, celles que nous ont permis demontrer la réductibilité sur des situations des sommets différents. Ces situations sont celles qui ont défini les règles de déchargement, autrement dit, c'est grâce à ces situations qu'on a défini les règles de cette manière. Puis on donne aussi, des exemples de réductions que n'ont pas marché pour qu'on peut montrer que pas toutes les réductions sont valides et qu'il existe un dur travail derrière la recherche des réductions. 
+Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil de réductibilité. D'abord nous avons vérifié sur des configurations réductibles déjà connues qui montrent les Lemmes \ref{le:23}-\ref{le:333}, puis nous avons testé l'outil pour des configurations plus complexes qui ont été déjà prouvées aussi (Lemme \ref{le:33pent} (premier cas) et Lemme \ref{de:3343}) et finalement nous présentons les nouvelles configurations trouvées ainsi que ses réductions correspondantes lesquelles ont aidé a prouver certaines propriétés structurelles (Lemme \ref{le:33pent} (deuxième cas) et Lemme \ref{le:2pent})  
+
+\subsection{Vérification des configurations réductibles connues}
 \subsection{Pair de sommets de degré 3}
 \subsection{Sommet de degré 2}
 \subsection{Sommet de degré 3}
-\section{Conclusion}
 
+\section{Conclusion}
+\label{chap:concl}
+Finalement nous allons faire quelques remarques autour du sujet en soi ainsi que autour du stage de recherche et leurs apports lors de ces 5 mois de stage.
+
+D'abord, au niveau sujet il faut remarquer la fonctionnalité de l'outil de réductibilité qui nous a permis trouver des nouvelles configurations réductibles. Le développement de ce programme a pris la plupart de temps, mais il nous a fourni une manière de prouver la réductibilité pour le cas $\Delta(G) \leq 4$, $g(G) \geq 4$, $\chi'(G)=4$ ce qui a été fondamental. C'est aussi remarquable le fait d'avoir trouvé des nouvelles configurations réductibles qui soutiennent les règles de déchargement définis, malgré le fait de ne pas avoir pu trouver la réduction de ces deux derniers cas. Dans tout le cas, c'est un travail à continuer et grâce au programme de réductibilité j'ai la certitude de que nous n'allons pas tarder en la trouver. 
+
+Au niveau personnel, ce stage m'a permis d'approfondir dans la théorie des graphes, de développer des compétences comme chercheur et de contribuer moi-même à trouver la preuve pour une conjecture qui n'a pas encore été prouvé. Pour ces faits j'ai trouvé ce stage très enrichissant, 
 
 \begin{thebibliography}{99}
 \bibitem{ABH} R.~E.~L.~Aldred, S.~Bau, D.~A.~Holton, and B.~D.~McKay,	
