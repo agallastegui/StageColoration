@@ -502,7 +502,7 @@ Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine
 C'est pour ce fait-ci qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et c'est Robertson, Sanders, Seymour et Thomas \cite{T4C} qui l'ont ré-prouvé en 1995. En fait, dans cette nouvelle preuve ils se sont inspirés largement de la preuve de Appel et Haken, cependant, ils ont simplifié d'une manière significative la procédure de déchargement, et leur programme de vérification de réductibilité automatisée est plus robuste et indépendant du déchargement.
 %t ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
-\begin{theorem}[cite, cite]
+\begin{theorem}[Appel, Haken]
 Soit $G$ un graphe planaire. Alors $G$ est 4-coloriable.
 \label{th:4CT}
 \end{theorem}
@@ -523,7 +523,6 @@ Il est montré qu'il existe un ensemble $\mathcal{S}$ de 633 configurations cont
 Pour compléter la preuve, il faut encore vérifier que toute configuration $C$ de $\mathcal{S}$ est \emph{réductible}, c-à-d, si un graphe $G$ comporte $C$ comme sous-graphe, alors toute coloration du graphe $G'$ obtenu en remplaçant $C$ par un autre sous-graphe plus petit s'étend en une coloration de $G$, ce qui entraînerait une contradiction avec la supposition que $G$ soit le contre-exemple le plus petit.
 La réductibilité des 633 configurations de $\mathcal{S}$ est vérifiée à l'aide d'un ordinateur également.
 
-\newpage
 
 
 

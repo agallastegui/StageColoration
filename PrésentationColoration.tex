@@ -1,8 +1,8 @@
 \documentclass{beamer}
 \usepackage{mathrsfs}
-\usepackage[fran�ais]{babel}
-\usepackage[cp1250]{inputenc}
-\usepackage[IL2]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \mode<presentation>
 { \usetheme{Berlin}
@@ -11,18 +11,18 @@
 \usepackage{times}
 \usepackage[T1]{fontenc}
 
-\newtheorem{definition}{D�finition}
 \newtheorem{lemme}{Lemme}
-\newtheoreme{proposition}{Proposition}
+\newtheorem{proposition}{Proposition}
+
 \newtheorem{conjecture}{Conjecture}
 
 \def\ceps{3656}
 
-\title[Coloration des ar�tes des graphes planaires]{Coloration des ar�tes des graphes planaires}
+\title[Coloration des arêtes des graphes planaires]{Coloration des arêtes des graphes planaires}
 \author[A. Gallastegui and F. Kardo\v s]{\underbar{Antonio Gallastegui} \and Franti\v sek Kardo\v s}
 \institute[]{
 Laboratoire Bordelais de Recherche Informatique \\
-Universit� de Bordeaux\\
+Université de Bordeaux\\
 }
 \date{Bordeaux, 10 juin, 2016}
 
@@ -44,27 +44,36 @@ Universit� de Bordeaux\\
 \section{Introduction}
 \subsection{Notions de Base}
 \begin{frame}
-Un graphe $G$ est un couple $G=(V,E)$ d'ensembles finis, o�
+Un graphe $G$ est un couple $G=(V,E)$ d'ensembles finis, où
 \begin{itemize}
-\item $V=V(G)$ est l'ensemble de \emph{sommets} (vertices) de $G$, et
-\item $E=E(G)$ est un ensemble de pairs des sommets, appel�es \emph{ar�tes} de $G$.
+\item $V=V(G)$ \emph{sommets} de $G$,
+\item $E=E(G)$ pairs des sommets, \emph{arêtes} de $G$.
 \end{itemize}
 $e$, $e' \in E(G)$ sont adjacents si $e=uv$ et $e'=uv'$ pour $u$, $v$, $v' \in V(G)$, $v \neq v'$.
+
 \pause
-Le degr� $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
+
+Le degré $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
 \begin{itemize}
-\item $\Delta(G)$ degr� maximum
-\item $\delta(G)$ degr� minimum
+\item $\Delta(G)$ degré maximum
+\item $\delta(G)$ degré minimum
 \end{itemize} 
 Figure------
 \end{frame}
 
 \begin{frame}
-Le graphe $G$ est planaire ssi il peut �tre dessin� sur le plan sans croisement des ar�tes.
-Une face $f$, est une r�gion connexe d�limit�e par des ar�tes. Il y a toujours une face infinie.
+Soit $G$ simple. Un \emph{couplage} $M$ est un ensemble d'arêtes deux çà deux non-adjacentes.
+---figure couplage maximum, maximal, parfait----
+
+
+\end{frame}
+
+\begin{frame}
+Le graphe $G$ est planaire ssi il peut être dessiné sur le plan sans croisement des arêtes.
+Une face $f$, est une région connexe délimitée par des arêtes. Il y a toujours une face infinie.
 \pause
 \begin{theorem}[Euler, 1750]
-Soit $G$ un graphe planaire connexe � $n$ sommets, $m$ ar�tes et $f$ faces. Alors,
+Soit $G$ un graphe planaire connexe à $n$ sommets, $m$ arêtes et $f$ faces. Alors,
 $$
 n-m+f=2
 $$
@@ -78,67 +87,263 @@ La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle da
 \pause
 
 \begin{proposition}
-Tout graphe planaire contient un sommet de degr� au plus $5$.
+Tout graphe planaire contient un sommet de degré au plus $5$.
 \end{proposition}
 
+\pause
 
-
+Dans un graphe planaire les faces de taille $\geq 3$ peuvent être divisées en deux faces. Appliquant cet opération tant que ce soit possible on n'obtient que des faces triangulaires, c'est une triangulation.
 
 \end{frame}
+
 \subsection{Coloration de Graphes}
 \begin{frame}
-Soit $G$ un graphe
+Soit $G$ graphe, une \emph{coloration propre} de $G$ est application $\varphi: V(G) \to C$ où $C=\{1,2,...,k\}$ ensemble d'entiers, t.q. $\forall uv\in E(G) \Rightarrow \varphi(u) \neq \varphi(v)$. 
 
+Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier $G$
 
-
-
-\end{frame}
-\begin{frame}
+image---coloration nombre chromatique et k-coloration
 
 \end{frame}
 \begin{frame}
+Soit $G$ un graphe. Une coloration d'arêtes de $G$ est une application $\varphi:E(G) \to C$, où $C=\{1,2,...,k\}$ t.q. $\forall e$, $e' \in E(G)$ adjacentes $\Rightarrow$ $\varphi(e) \neq \varphi(e')$. 
+
+L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
+
+----image coloration d'aretes et apres indice chromatique etc----
+\end{frame}
+
+\begin{frame}
+\begin{theorem}[Vizing]
+Soit $G$ un graphe. Alors $\Delta(G) \leq \chi'(G) \leq \Delta(G) + 1$.
+Si $\chi'(G) = \Delta(G)$ alors $G$ est de classe 1.
+\end{theorem}
+\pause
+
+\begin{itemize}
+\item $\Delta(G) \geq 8$ $\chi'(G)=8$. (Vizing 1965).
+\item $\Delta(G) = 7$  $\chi'(G)=7$. (Sanders, Zhao 2001).
+\item $\Delta(G) = 5$ ($g(G) \geq 4$) $\chi'(G) = 5$.
+\item $\Delta(G) = 4$ ($g(G) \geq 5$) $\chi'(G) = 4$.
+\item $\Delta(G) = 4$ ($g(G) \geq 4$) $\chi'(G) = 4$?
+\end{itemize}
+
 
 \end{frame}
+
+\section{Réductibilité et déchargement}
+\begin{frame}
+Soit $G$ graphe avec arêtes coloriées et $G[c1,c2]$ sous graphe de $G$ induit par arêtes coloriées $c1$ et $c2$. 
+
+Tout composante connexe $C$ de $G[c1,c2]$ est une chaîne à laquelle renversants les couleurs on obtient nouvelle coloration de $G$.
+
+Pour $e\in E(G)$ t.q. $\varphi(e)=c$ et une autre couleur $c'$. Alors il existe une et une seule chaîne de $G[c,c']$ contenant $e$. C'est \emph{$(c, c')$-chaîne de Kempe}. 
+\end{frame}
+
+\subsection{$\Delta(G)=5$, $g(G)\geq 4$, $\chi'(G)=5$}
+\begin{frame}
+\begin{proposition}
+Soit $G$ un graphe planaire avec $\Delta(G) = 5$ et $g(G) \geq 4$. Alors $\chi'(G)=5$.
+\end{proposition}
+Preuve.
+\end{frame}
+\begin{frame}
+Propriétés Structurelles:
+\begin{lemme}
+Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\label{le:1}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 5$.
+\label{le:2}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, $\forall u \in N(v)$, $4\le d_G(u) \le 5$.
+\label{le:33}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, au moins deux voisins de $v$ sont de degré $5$.
+\label{le:434}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $5$. 
+\label{le:254}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré $3$.
+\label{le:5333}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+Déchargement:
+
+La charge initiale est une application  $w: V(G) \to \mathbb{R}$  la fonction définie par
+ $$
+ \gathered
+ w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v\in V(G)$,} \\
+ w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f\in F(G)$,} 
+\endgathered 
+$$
+
+$$ 
+\gathered
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2, \\
+w(v) = -1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 3, \\
+w(v) =  0 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4, \\
+w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 5.
+\endgathered
+$$
+
+La charge initiale de toutes les faces est positive puisque $g(G)\ge 4$.
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $G$ un graphe planaire connexe. Alors,
+$$ \sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F} (d_G(f) -4) = -8.$$
+\label{le:charge}
+\end{lemme}
+Preuve.
+$$
+\gathered 
+\sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F} (d_G(f) -4) = 2m -4n + 2m - 4f = \\
+ =-4(n - m + f) = -4\cdot 2 = -8.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+Les règles de déchargement:
+\begin{enumerate}
+\item[(R1)] Tout sommet de degré 5 donne une unité de charge à chacun de ses voisins de degré 2.
+\item[(R2)] Tout sommet de degré 5 donne $1/2$ de charge à chaque voisin de degré 3.
+\end{enumerate}
+\end{frame}
+
+\subsection{$\Delta(G)=4$, $g(G)\geq 5$, $\chi'(G)=4$}
+\begin{frame}
+\begin{proposition}
+Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 5$. Alors $G$ est $4$-arête-coloriable.
+\end{proposition}
+Preuve.
+\end{frame}
+
+\begin{frame}
+Propriétés Structurelles:
+\begin{lemme}
+Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\label{le:14}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$.
+\label{le:23}
+\end{lemme} 
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $4$.
+\label{le:243}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degré $4$.
+\label{le:333}
+\end{lemme}
+\end{frame}
+
+\begin{frame}
+Déchargement:
+
+La charge initiale est une application  $w: V(G) \to \mathbb{R}$  la fonction définie par
+
+$$
+\gathered
+w(v) = \frac{3}{2} d_G(v) - 5 \qquad \textrm{pour tout $v\in V(G)$,} \\
+w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f\in F(G)$.}
+\endgathered
+$$
+
+\pause
+
+$$
+\gathered
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2,\\
+w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 3,\\
+w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4.
+\endgathered
+$$
+
+D'ailleurs, la charge initiale de toutes les faces est positive puisque $g(G) \geq 5$.
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $G$ un graphe planaire connexe. Alors,
+$$
+\sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) = -10.
+$$
+\label{le:cha2}
+\end{lemme}
+Preuve.
+$$ 
+\gathered
+\sum_{v \in V(G)} \left(\frac{3}{2}d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) =\\
+= 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+Les règles de déchargement:
+\begin{enumerate}
+\item[(R1)] tout sommet de degré 4 donne $1$ de charge à chacun de ses voisins de degré 2.
+\item[(R2)] tout sommet de degré 4 donne $1/4$ de charge à chaque voisin de degré 3.
+\end{enumerate}
+Dans ce cas là aussi, la somme totale de la charge reste invariante et la charge de toutes les faces reste positive.
+\end{frame}
+
+
+\section{Réductibilité}
 \begin{frame}
 
 \end{frame}
-\subsection{R�ductibilit� et d�chargement}
+
 \begin{frame}
 
 \end{frame}
+
 \begin{frame}
 
 \end{frame}
-\begin{frame}
 
-\end{frame}
-\begin{frame}
-
-\end{frame}
-\begin{frame}
-
-\end{frame}
-\begin{frame}
-
-\end{frame}
-\begin{frame}
-
-\end{frame}
-\section{R�ductibilit�}
-\begin{frame}
-
-\end{frame}
-\begin{frame}
-
-\end{frame}
-\begin{frame}
-\end{frame}
-\section{D�chargement}
+\section{Déchargement}
 \section{Description de l'outil}
-\section{R�sultats}
-\subsection{Pair de sommets de degr� 3}
-\subsection{Sommet de degr� 2}
-\subsection{Sommet de degr� 3}
+\section{Résultats}
+\subsection{Pair de sommets de degré 3}
+\subsection{Sommet de degré 2}
+\subsection{Sommet de degré 3}
 \section{Conclusion}
 \end{document}
 
