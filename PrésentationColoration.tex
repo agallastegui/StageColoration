@@ -38,27 +38,22 @@ Université de Bordeaux\\
 \begin{frame}
   \titlepage
 \end{frame}
-\begin{frame}
- \tableofcontents
-\end{frame}
+%\begin{frame}
+% \tableofcontents
+%\end{frame}
 \section{Introduction}
 \subsection{Notions de Base}
 \begin{frame}
-Un graphe $G$ est un couple $G=(V,E)$ d'ensembles finis, où
-\begin{itemize}
-\item $V=V(G)$ \emph{sommets} de $G$,
-\item $E=E(G)$ pairs des sommets, \emph{arêtes} de $G$.
-\end{itemize}
-$e$, $e' \in E(G)$ sont adjacents si $e=uv$ et $e'=uv'$ pour $u$, $v$, $v' \in V(G)$, $v \neq v'$.
-
-\pause
-
 Le degré $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
 \begin{itemize}
 \item $\Delta(G)$ degré maximum
 \item $\delta(G)$ degré minimum
 \end{itemize} 
 Figure------
+
+\pause
+
+La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
 \end{frame}
 
 \begin{frame}
@@ -81,32 +76,18 @@ $$
 figure---
 \end{frame}
 
-\begin{frame}
-La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
-
-\pause
-
-\begin{proposition}
-Tout graphe planaire contient un sommet de degré au plus $5$.
-\end{proposition}
-
-\pause
-
-Dans un graphe planaire les faces de taille $\geq 3$ peuvent être divisées en deux faces. Appliquant cet opération tant que ce soit possible on n'obtient que des faces triangulaires, c'est une triangulation.
-
-\end{frame}
 
 \subsection{Coloration de Graphes}
 \begin{frame}
-Soit $G$ graphe, une \emph{coloration propre} de $G$ est application $\varphi: V(G) \to C$ où $C=\{1,2,...,k\}$ ensemble d'entiers, t.q. $\forall uv\in E(G) \Rightarrow \varphi(u) \neq \varphi(v)$. 
+Soit $G$ graphe, une \emph{coloration propre} de $G$ est application $\varphi: V(G) \to C$ où $C=\{1,2,...,k\}$ ensemble d'entiers, t.q. $\forall uv\in E(G) \implies\varphi(u) \neq \varphi(v)$. 
 
-Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier $G$
+Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier $G$.
 
 image---coloration nombre chromatique et k-coloration
 
 \end{frame}
 \begin{frame}
-Soit $G$ un graphe. Une coloration d'arêtes de $G$ est une application $\varphi:E(G) \to C$, où $C=\{1,2,...,k\}$ t.q. $\forall e$, $e' \in E(G)$ adjacentes $\Rightarrow$ $\varphi(e) \neq \varphi(e')$. 
+Soit $G$ un graphe. Une coloration d'arêtes de $G$ est une application $\varphi:E(G) \to C$, où $C=\{1,2,...,k\}$ t.q. $\forall e$, $e' \in E(G)$ adjacentes $\implies$ $\varphi(e) \neq \varphi(e')$. 
 
 L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
 
@@ -115,90 +96,64 @@ L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessi
 
 \begin{frame}
 \begin{theorem}[Vizing]
-Soit $G$ un graphe planaire. Alors $\Delta(G) \leq \chi'(G) \leq \Delta(G) + 1$.
-
-Si $\chi'(G) = \Delta(G)$ alors $G$ est de classe 1.
+Soit $G$ un graphe simple. Alors $\Delta(G) \leq \chi'(G) \leq \Delta(G) + 1$.
 \end{theorem}
+Si $\chi'(G) = \Delta(G)$,  $G$ est appelé graphe de classe 1.
+
 \pause
-
+Pour un graphe planaire $G$ voici quelques résultats connus
 \begin{itemize}
-\item $\Delta(G) \geq 8$ $\chi'(G)=8$. (Vizing 1965).
-\item $\Delta(G) = 7$  $\chi'(G)=7$. (Sanders, Zhao 2001).
-\item $\Delta(G) = 5$ ($g(G) \geq 4$) $\chi'(G) = 5$.
-\item $\Delta(G) = 4$ ($g(G) \geq 5$) $\chi'(G) = 4$.
-\item $\Delta(G) = 4$ ($g(G) \geq 4$) $\chi'(G) = 4$?
+\item $\Delta(G) \geq 8$ $\implies$ $\chi'(G)=8$. (Vizing 1965).
+\item $\Delta(G) = 7$ $\implies$ $\chi'(G)=7$. (Sanders, Zhao 2001).
+\item $\Delta(G) = 5$ $g(G) \geq 4$ $\implies$ $\chi'(G) = 5$.
+\item $\Delta(G) = 4$ $g(G) \geq 5$ $\implies$ $\chi'(G) = 4$.
 \end{itemize}
+\begin{conjecture}
+Soit $G$ un graphe planaire. Alors,
 
-
+$\Delta(G) = 4$ $g(G) \geq 4$ $\implies$ $\chi'(G) = 4$
+\end{conjecture}
 \end{frame}
 
-\section{Réductibilité et déchargement}
 \begin{frame}
-Soit $G$ graphe avec arêtes coloriées et $G[c1,c2]$ sous graphe de $G$ induit par arêtes coloriées $c1$ et $c2$. 
 
-Tout composante connexe $C$ de $G[c1,c2]$ est une chaîne à laquelle renversants les couleurs on obtient nouvelle coloration de $G$.
-
-Pour $e\in E(G)$ t.q. $\varphi(e)=c$ et une autre couleur $c'$. Alors il existe une et une seule chaîne de $G[c,c']$ contenant $e$. C'est \emph{$(c, c')$-chaîne de Kempe}. 
 \end{frame}
+\section{Résultats Connus}
+%\begin{frame}
+%Soit $G$ graphe avec arêtes coloriées et $G[c1,c2]$ sous graphe de $G$ induit par arêtes coloriées $c1$ et $c2$. 
+%
+%Tout composante connexe $C$ de $G[c1,c2]$ est une chaîne à laquelle renversants les couleurs on obtient nouvelle coloration de $G$.
+%
+%Pour $e\in E(G)$ t.q. $\varphi(e)=c$ et une autre couleur $c'$. Alors il existe une et une seule chaîne de $G[c,c']$ contenant $e$. C'est \emph{$(c, c')$-chaîne de Kempe}. 
+%\end{frame}
 
-\subsection{$\Delta(G)=5$, $g(G)\geq 4$, $\chi'(G)=5$}
+\subsection{$\Delta(G)=5$, $g(G)\geq 4$ $\implies$ $\chi'(G)=5$}
 \begin{frame}
 \begin{proposition}
 Soit $G$ un graphe planaire avec $\Delta(G) = 5$ et $g(G) \geq 4$. Alors $\chi'(G)=5$.
 \end{proposition}
-Preuve.
-\end{frame}
-\begin{frame}
-Propriétés Structurelles:
-\begin{lemme}
-Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
-\label{le:1}
-\end{lemme}
-\end{frame}
 
-\begin{frame}
-\begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 5$.
-\label{le:2}
-\end{lemme}
 \end{frame}
-
 \begin{frame}
-\begin{lemme}
-Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, $\forall u \in N(v)$, $4\le d_G(u) \le 5$.
-\label{le:33}
-\end{lemme}
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, au moins deux voisins de $v$ sont de degré $5$.
-\label{le:434}
-\end{lemme}
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $5$. 
-\label{le:254}
-\end{lemme}
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré $3$.
-\label{le:5333}
-\end{lemme}
+Propriétés structurelles de un contre-exemple minimal $G$:
+\begin{itemize}
+\item Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\item Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 5$.
+\item Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, $\forall u \in N(v)$, $4\le d_G(u) \le 5$.
+\item Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, au moins deux voisins de $v$ sont de degré $5$.
+\item Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $5$. 
+\item Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré $3$.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 Déchargement:
 
-La charge initiale est une application  $w: V(G) \to \mathbb{R}$  la fonction définie par
+La charge initiale est définie par
  $$
- \gathered
- w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v\in V(G)$,} \\
- w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f\in F(G)$,} 
+\gathered
+w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v\in V(G)$,} \\
+w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f\in F(G)$,} 
 \endgathered 
 $$
 
@@ -217,13 +172,12 @@ La charge initiale de toutes les faces est positive puisque $g(G)\ge 4$.
 \begin{frame}
 \begin{lemme}
 Soit $G$ un graphe planaire connexe. Alors,
-$$ \sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F} (d_G(f) -4) = -8.$$
-\label{le:charge}
+$$ \sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F(G)} (d_G(f) -4) = -8.$$
 \end{lemme}
 Preuve.
 $$
 \gathered 
-\sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F} (d_G(f) -4) = 2m -4n + 2m - 4f = \\
+\sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F(G)} (d_G(f) -4) = 2m -4n + 2m - 4f = \\
  =-4(n - m + f) = -4\cdot 2 = -8.
 \endgathered
 $$
@@ -237,47 +191,24 @@ Les règles de déchargement:
 \end{enumerate}
 \end{frame}
 
-\subsection{$\Delta(G)=4$, $g(G)\geq 5$, $\chi'(G)=4$}
+\subsection{$\Delta(G)=4$, $g(G)\geq 5$ $\implies$ $\chi'(G)=4$}
 \begin{frame}
 \begin{proposition}
 Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 5$. Alors $G$ est $4$-arête-coloriable.
 \end{proposition}
-Preuve.
-\end{frame}
-
-\begin{frame}
-Propriétés Structurelles:
-\begin{lemme}
-Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
-\label{le:14}
-\end{lemme}
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$.
-\label{le:23}
-\end{lemme} 
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $4$.
-\label{le:243}
-\end{lemme}
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degré $4$.
-\label{le:333}
-\end{lemme}
+Propriétés structurelles d'un contre-exemple $G$:
+\begin{itemize}
+\item Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\item Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$.
+\item Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $4$.
+\item Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degré $4$.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 Déchargement:
 
-La charge initiale est une application  $w: V(G) \to \mathbb{R}$  la fonction définie par
+La charge initiale est définie par,
 
 $$
 \gathered
@@ -305,7 +236,6 @@ Soit $G$ un graphe planaire connexe. Alors,
 $$
 \sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) = -10.
 $$
-\label{le:cha2}
 \end{lemme}
 Preuve.
 $$ 
@@ -327,12 +257,12 @@ Dans ce cas là aussi, la somme totale de la charge reste invariante et la charg
 
 
 \section{Réductibilité}
-\begin{frame}
-Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal $G$ contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de $G$.
-  
-
-Nous allons généraliser cette notion.
-\end{frame}
+%\begin{frame}
+%Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal $G$ contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de $G$.
+%  
+%
+%Nous allons généraliser cette notion.
+%\end{frame}
 
 \begin{frame}
 Soit $H$ un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
@@ -408,7 +338,7 @@ $$
 $$
 de plus, on a \\
 $|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ $\Leftrightarrow$ $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=0$, et \\
-$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ $\Leftrightarrow$ $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=2$ $\Leftrightarrow$ $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
 \end{proposition}
 \end{frame}
 
@@ -419,24 +349,24 @@ Considérons des coloration de $H$
 \begin{frame}
 Soit $H$ de $G$ et $\beta$ une coloration de $\partial_G(H)$. 
 
-Alors, $\beta$ \emph{s'étend} vers $H$ si $\exists \psi$ de $H*$ t.q. $\psi|_{\partial_G(H)}$
+Alors, $\beta$ \emph{s'étend} vers $H$ si $\exists \psi$ de $H^*$ t.q. $\psi|_{\partial_G(H)}$
 
 $$
-\Psi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{t.q.} \psi|_{\partial_G(H)} = \beta\}.
+\Phi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{t.q.} \psi|_{\partial_G(H)} = \beta\}.
 $$
 Pour $i\in\mathbb{N}$, soit
 $$
 \gathered
-\Psi_{i+1} = 
+\Phi_{i+1} = 
 \{ 
 \beta : 
-\beta\in \Psi_i
+\beta\in \Phi_i
 \textrm{ ou }
-\exists c,c'\in \{1,2,3,4\},\, 
-\forall X \quad
-N^X_{c,c'}(\beta) \cap \Psi_i \neq \emptyset 
+\exists c,c'\in \{1,2,3,4\},\,\\ 
+\forall X\textrm{ couplage planaire de $\partial_G(H)$, }
+N^X_{c,c'}(\beta) \cap \Phi_i \neq \emptyset 
 \},\\
-\Psi(H)=\bigcup_{i\in \mathbb{N}} \Psi_i(H).
+\Phi(H)=\bigcup_{i\in \mathbb{N}} \Phi_i(H).
 \endgathered
 $$
 \end{frame}
@@ -450,8 +380,7 @@ Soit
 \item $G'$ le graphe obtenu à partir de $G$ en remplaçant $H$ par $H'$.
 \end{itemize}
 
-Si $\Psi_0(H')\subseteq \Psi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
-\label{th:red}
+Si $\Phi_0(H')\subseteq \Phi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
 \end{theorem}
 
 Preuve.
@@ -459,65 +388,13 @@ il suffit de modifier la coloration $\varphi'$ le long des chaînes de Kempe un 
 \end{frame}
 
 \begin{frame}
-Théorème \ref{th:red} permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
+Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La configuration $H$ \emph{se réduit} vers $H'$ si $\Psi_0(H')\subseteq \Psi(H)$. La configuration $H$ est \emph{réductible} s'il existe une configuration $H'$ vers la quelle elle se réduit.
+
+\pause
+
+Ce théorème permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
 \end{frame}
 
-\section{Déchargement}
-\begin{frame}
-Soit $G$ un graphe planaire. V(G) ensemble de sommets et F ensemble de faces de $G$.
-
-La \emph{charge initiale} des sommets et des faces
-
-$$
-\gathered
-w: V(G)\cup F(G) \to \mathbb{R}, \\
-w(x) = d_G(x) - 4. \\
-\endgathered
-$$
-\end{frame}
-
-\begin{frame}
-\begin{lemme}
-Soit $G$ un graphe planaire et $w$ la application de la charge initiale. Alors la charge initiale totale du graphe est $-8$ (lemme \ref{le:charge}).
-\end{lemme}
-
-Preuve.
-$$
-\gathered
-\sum_{u \in V(G)} (d_G(v) - 4) + \sum_{f \in F} (d_G(f) - 4) = 2m - 4n + 2m - 4f =\\
-= -4( n - m + f) = -4 \cdot 2 = -8.
-\endgathered
-$$
-\end{frame}
-
-\begin{frame}
-Alors les charges pour chaque sommet et face,
-$$
-\gathered
-w(v) = -2 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 2,\\
-w(v) = -1 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 3,\\
-w(v) = 0 \qquad \forall  v \in V(G) \textrm{,  t.q.  } d_G(v) = 4
-\endgathered
-$$
-et
-$$
-\gathered
-w(f) = 0 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 4,\\
-w(f) = 1 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 5,\\
-w(f) \geq 2 \qquad \forall f \in F(G) \textrm{, t.q.  } d_G(f) \geq 6.
-\endgathered
-$$
-\end{frame}
-
-\begin{frame}
-Il ne suffit pas de définir les règles de déchargement parmi les sommets, puisqu'il n'y a pas de sommet de charge strictement positive. Nous sommes forcés à utiliser la charge des faces de taille au moins 5 pour éliminer la charge négative des sommets de degré 2 et 3.
-
-Les règles de déchargement:
-
-\begin{enumerate}
-\item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
-\end{enumerate}
-\end{frame}
 \section{Description de l'outil}
 \subsection{Notions du Programme}
 \begin{frame}
@@ -607,10 +484,66 @@ $H'$ est une réduction de  $H$ $\Leftrightarrow$ $\Psi_0$  $\Psi'_0 \subseteq \
 \end{center}
 \end{theorem}
 \end{frame}
-\subsection{Propriétés Structurelles}
+
+\section{Déchargement}
 \begin{frame}
-Les propriétés des Lemmes \ref{le:14}-\ref{le:243} se donnent aussi dans ce cas-là.
+Soit $G$ un graphe planaire. V(G) ensemble de sommets et F ensemble de faces de $G$.
+
+La \emph{charge initiale} des sommets et des faces
+
+$$
+\gathered
+w: V(G)\cup F(G) \to \mathbb{R}, \\
+w(x) = d_G(x) - 4. \\
+\endgathered
+$$
 \end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $G$ un graphe planaire et $w$ la application de la charge initiale. Alors la charge initiale totale du graphe est $-8$.
+\end{lemme}
+
+Preuve.
+$$
+\gathered
+\sum_{u \in V(G)} (d_G(v) - 4) + \sum_{f \in F} (d_G(f) - 4) = 2m - 4n + 2m - 4f =\\
+= -4( n - m + f) = -4 \cdot 2 = -8.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+Alors les charges pour chaque sommet et face,
+$$
+\gathered
+w(v) = -2 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 2,\\
+w(v) = -1 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 3,\\
+w(v) = 0 \qquad \forall  v \in V(G) \textrm{,  t.q.  } d_G(v) = 4
+\endgathered
+$$
+et
+$$
+\gathered
+w(f) = 0 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 4,\\
+w(f) = 1 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 5,\\
+w(f) \geq 2 \qquad \forall f \in F(G) \textrm{, t.q.  } d_G(f) \geq 6.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+Il ne suffit pas de définir les règles de déchargement parmi les sommets, puisqu'il n'y a pas de sommet de charge strictement positive. Nous sommes forcés à utiliser la charge des faces de taille au moins 5 pour éliminer la charge négative des sommets de degré 2 et 3.
+
+Les règles de déchargement:
+
+\begin{enumerate}
+\item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
+\end{enumerate}
+\end{frame}
+
+\section{Résultats}
+\subsection{Propriétés Structurelles}
 
 \begin{frame}
 \begin{lemme}
@@ -644,10 +577,6 @@ Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
 Ces deux derniers cas n'ont pas encore été prouvés et nous n'avons pas trouvé leurs réductions non plus.
 \end{frame}
 
-\section{Résultats}
-\begin{frame}
-
-\end{frame}
 \subsection{Pair de sommets de degré 3}
 \begin{frame}
 4 Carrés:
@@ -679,13 +608,13 @@ Ces deux derniers cas n'ont pas encore été prouvés et nous n'avons pas trouv�
 \section{Conclusion}
 \begin{frame}
 \begin{enumerate}
-\item Réussi
+\item Réussi:
 \begin{itemize}
 \item Développement d'un outil de vérification.
 \item 3 nouvelles configurations réductibles parmi plus de 50 essais.
 \item Des propriétés qui soutiennent les règles de déchargement.
 \end{itemize}
-\item Failli
+\item En cours de travail:
 \begin{itemize}
 \item Réduction pour $v$ de degré 2 avec 1 carré et 1 pentagone.
 \item Réduction pour $v$ de degré 3 avec 3 carrés
