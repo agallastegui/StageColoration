@@ -470,17 +470,8 @@ La \emph{charge initiale} des sommets et des faces
 
 $$
 \gathered
-w: V(G) \to \mathcal{R} \qquad \textrm{telle que}\\
-w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v \in V(G)$}\\
-\endgathered
-$$
-
-et également
-
-$$
-\gathered
-w: F \to \mathcal{R} \qquad \textrm{telle que}\\
-w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f \in F$}\\
+w: V(G)\cup F(G) \to \mathbb{R}, \\
+w(x) = d_G(x) - 4. \\
 \endgathered
 $$
 \end{frame}
@@ -503,33 +494,119 @@ $$
 Alors les charges pour chaque sommet et face,
 $$
 \gathered
-w(v) = -2 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 2\\
-w(v) = -1 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 3\\
+w(v) = -2 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 2,\\
+w(v) = -1 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 3,\\
 w(v) = 0 \qquad \forall  v \in V(G) \textrm{,  t.q.  } d_G(v) = 4
 \endgathered
 $$
-Et également pour les faces on obtient,
+et
 $$
 \gathered
-w(f) = 0 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 4\\
-w(f) = 1 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 5\\
-w(f) \geq 2 \qquad \forall f \in F(G) \textrm{, t.q.  } d_G(f) \geq 6
+w(f) = 0 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 4,\\
+w(f) = 1 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 5,\\
+w(f) \geq 2 \qquad \forall f \in F(G) \textrm{, t.q.  } d_G(f) \geq 6.
 \endgathered
 $$
 \end{frame}
 
 \begin{frame}
+Il ne suffit pas de définir les règles de déchargement parmi les sommets, puisqu'il n'y a pas de sommet de charge strictement positive. Nous sommes forcés à utiliser la charge des faces de taille au moins 5 pour éliminer la charge négative des sommets de degré 2 et 3.
+
 Les règles de déchargement:
 
 \begin{enumerate}
-\item [(R1)] $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
-\item [(R2)] $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donne une unité de charge négative $(-1)$ à une face voisine $f$ telle que $d_G(f) \geq 5$.
-\item [(R3)] $\forall v \in V(G)$ tel que $d_G(v) = 4$, $v$ ne distribue aucune charge car il ne l'a pas.
+\item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
 \end{enumerate}
 \end{frame}
-
-
 \section{Description de l'outil}
+\subsection{Notions du Programme}
+\begin{frame}
+Soit $H$ configuration de $G$ et $\partial_G(H)$ t.q. $|\partial_G(H)|=r$. 
+
+Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$.
+
+\pause
+
+Soit $H$ configuration de $G$ numérotée. 
+
+Alors, le \emph{voisinage} de $e$ est 
+$$
+N(e) = \{e': \textrm{ numérotation de $e'$ est plus grande}\}
+$$
+\end{frame}
+
+\begin{frame}
+Soit $H$ configuration de $G$ numérotée. 
+
+Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack).
+
+\pause
+
+-image-
+\end{frame}
+
+\begin{frame}
+Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+
+\pause
+
+Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
+\end{frame}
+
+\begin{frame}
+Soit $H$ configuration du graphe $G$, $\partial_G(H)$  et $\beta$ coloration de $\partial_G(H)$. 
+
+Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$.
+
+$$
+k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
+$$
+\end{frame}
+
+\begin{frame}
+Soit $H$ configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
+
+Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
+
+\pause
+
+Soit 
+\begin{itemize}
+\item $H$ configuration de $G$\\
+\item $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ \\
+\item $k$ Codes de colorations des $\beta$. 
+\end{itemize}
+Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+$$
+\begin{cases}
+k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si $e \in X$ renverse ses couleurs}\\
+k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si $(e,e')$-chaîne de Kempe renverse ses couleurs}
+\end{cases}
+$$
+\end{frame}
+
+\begin{frame}
+Soit $H$ configuration de $G$ et $\Psi_0$.
+
+ Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+ 
+\pause
+
+$$
+\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+$$
+\end{frame}
+
+\begin{frame}
+\begin{theorem}
+Soit $H$ configuration de $G$ et $H'$ une configuration t.q. $\partial_G(H)=\partial_G(H')$. 
+
+Alors,
+\begin{center}
+$H'$ est une réduction de  $H$ $\Leftrightarrow$ $\Psi_0$  $\Psi'_0 \subseteq \Psi$.
+\end{center}
+\end{theorem}
+\end{frame}
 \subsection{Propriétés Structurelles}
 \begin{frame}
 Les propriétés des Lemmes \ref{le:14}-\ref{le:243} se donnent aussi dans ce cas-là.

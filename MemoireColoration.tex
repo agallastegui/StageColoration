@@ -183,7 +183,7 @@ L'\emph{indice chromatique} $\chi'(G)$ d'un graphe $G$ est le nombre de couleurs
 \end{definition}
 
 \begin{theorem}[Vizing]
-Soit $G$ un graphe. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
+Soit $G$ un graphe planaire. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
 \end{theorem}
 
 La question de déterminer/caractériser les classes de graphes pour lesquelles on a $\chi'(G) = \Delta(G)$ (on les appelle aussi les graphes de classe 1) reste une question centrale. 
@@ -218,6 +218,7 @@ Nous allons appeler celle-là la \emph{$(c,c')$-chaîne de Kempe} de $e$.
 
 \begin{proposition}
 Soit $G$ un graphe planaire avec $\Delta(G) = 5$ et $g(G) \geq 4$. Alors $\chi'(G)=5$.
+\label{prop:545}
 \end{proposition}
 
 Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal, c-à-d un graphe planaire avec $\Delta = 5$ et $g \geq 4$ qui n'est pas $5$-arête-coloriable, mais tout sous-graphe de $G$ l'est.
@@ -400,6 +401,7 @@ Alors, après la redistribution de charge on obtient un graphe chargé non-néga
 
 \begin{proposition}
 Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 5$. Alors $G$ est $4$-arête-coloriable.
+\label{prop:454}
 \end{proposition}
 
 Preuve. Supposons que la proposition est fausse. Soit $G$ un contre-exemple minimal. Dans ce cas aussi nous allons d'abord montrer des propriétés structurelles de $G$. Les deux premières sont exactement les mêmes que pour la proposition précédente, nous omettons la preuve.
@@ -604,7 +606,7 @@ Nous notons $N^X_{c,c'}(\beta)$ l'ensemble de colorations adjacentes à $\beta$ 
 \end{definition}
 
 \begin{definition}
-Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $H$ s'il existe une coloration $\psi$ de $H^*$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Phi_0$ l'ensemble des colorations de $\partial_G(H)$ qui s'étendent vers $H$, i.e.,
+Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $H$ s'il existe une coloration $\psi$ de $H^*$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Psi_0$ l'ensemble des colorations de $\partial_G(H)$ qui s'étendent vers $H$, i.e.,
 $$
 \Psi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{ une coloration telle que } \psi|_{\partial_G(H)} = \beta\}.
 $$
@@ -621,8 +623,8 @@ N^X_{c,c'}(\beta) \cap \Psi_i \neq \emptyset
 \},
 $$
 c-à-d, l'ensemble des colorations $\beta$ telles que pour une paire de couleurs $c,c'$, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe une coloration adjacente à $\beta$ déjà dans $\Psi_{i}$. Finalement, soit
- +$$
- +\Psi(H)=\bigcup_{i\in \mathbb{N}} \Psi_i(H).
+$$
+\Psi(H)=\bigcup_{i\in \mathbb{N}} \Psi_i(H).
 $$
 \end{definition}
 
@@ -657,90 +659,77 @@ Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La c
 
 Théorème \ref{th:red} permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
 
-Dans le chapitre suivant, nous donnons la description plus détaillée de l'implémentation de cette procédure.
-%Si une configuration $H$ se réduit vers $H'$, dans un graphe on peut remplacer $H$ par $H'$, obtenant un contre-exemple minimal de $G$. Comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas, c'est nécessaire travailler avec des contre-exemples minimaux. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
+Dans le chapitre \ref{chap:Des}, nous donnons la description plus détaillée de l'implémentation de cette procédure.%Si une configuration $H$ se réduit vers $H'$, dans un graphe on peut remplacer $H$ par $H'$, obtenant un contre-exemple minimal de $G$. Comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas, c'est nécessaire travailler avec des contre-exemples minimaux. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
 
 \section{Déchargement}
 \label{chap:Dec}
-Dans ce chapitre, nous présentons la charge initiale et des règles de déchargement qui vont permettre trouver la contradiction qui montre la conjecture. \` A partir de la fonction de charge initiale convenant, nous allons déterminer des règles de distribution de charge. D'abord regardons quelle est la charge initiale. Nous connaissons déjà le processus de cette règle dans un chapitre précédente (chapitre \ref{chap:easy}), dans ce cas-là nous allons faire pareil.
+Dans ce chapitre, nous présentons la charge initiale et des règles de déchargement qui permettraient de démontrer la conjecture, si nous complétions la liste de configurations réductibles.
+Nous avons déjà introduit le processus de déchargement dans le chapitre \ref{chap:easy}, dans ce cas-là nous allons faire pareil.
 
 \begin{definition}
-Soit $G$ un graphe planaire avec V(G) l'ensemble de sommets de $G$ et F l'ensemble de faces (sans prendre en compte la région infinie). La \emph{charge} des sommets et des faces est une application $w$ défini de la façon suivante.
+Soit $G$ un graphe planaire avec $\Delta(G)=4$ et $g(G)\ge 4$.
+La charge initiale $w$ des sommets et des faces de $G$ est définie par
 $$
 \gathered
-w: V(G) \to \mathcal{R} \qquad \textrm{telle que}\\
-w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v \in V(G)$}\\
-\endgathered
-$$
-et également
-$$
-\gathered
-w: F \to \mathcal{R} \qquad \textrm{telle que}\\
-w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f \in F$}\\
+w: V(G)\cup F(G) \to \mathbb{R}, \\
+w(x) = d_G(x) - 4. \\
 \endgathered
 $$
 \end{definition}
 
-\begin{lemme}
-Soit $G$ un graphe planaire et $w$ la application de la charge initiale. Alors la charge initiale totale du graphe est $-8$ (comme dans la conjecture du chapitre précédente (lemme \ref{le:charge}).
-\end{lemme}
+Comme dans la démonstration du Proposition \ref{prop:545}, la somme de charge initial est égale à $-8$.
 
-Preuve.
-On considère, comme précédemment la formule d'Euler et la formule de poignées de mains.
-$$
-n - m + f = 2, \qquad \sum_{u \in V(G)} d_G(v) = 2m, \qquad \sum_{f \in F} d_G(f) = 2m
-$$
-Alors,
-$$
-\sum_{u \in V(G)} (d_G(v) - 4) + \sum_{f \in F} (d_G(f) - 4) = 2m - 4n + 2m - 4f = -4( n - m + f) = -4 \cdot 2 = -8
-$$
-\ep
-
-\begin{corollaire}
-Soit $G$ un graphe et $w$ la fonction de charge définie dessus. Alors, pour les sommets,
+Notons que la charge de tous le sommets est négative et la charge de toutes les faces est positive. Plus précisément, 
 $$
 \gathered
-w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 2\\
-w(v) = -1 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 3\\
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 2,\\
+w(v) = -1 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 3,\\
 w(v) = 0 \qquad \textrm{pour tout $v \in V(G)$, tel que  } d_G(v) = 4
 \endgathered
 $$
-Et également pour les faces on obtient,
+et
 $$
 \gathered
-w(f) = 0 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 4\\
-w(f) = 1 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 5\\
-w(f) \geq 2 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) \geq 6
+w(f) = 0 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 4,\\
+w(f) = 1 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) = 5,\\
+w(f) \geq 2 \qquad \textrm{pour tout $f \in F$, tel que  } d_G(f) \geq 6.
 \endgathered
 $$
-\end{corollaire}
 
-Connaissant les charges initiales de chaque sommet et chaque face, nous allons définir les règles suivantes afin de distribuer la charge initiale. Différemment aux cas précédents nous allons distribuer la charge (négative) des sommets vers les faces.
 
-\begin{proposition}
-Soit $G$ un graphe et $w$ la fonction de charge sur les sommets et les faces. Alors les règles de distribution de la charge sont,
+Contrairement au cas des propositions \ref{prop:545} et \ref{prop:454}, il ne suffit pas de définir les règles de déchargement parmi les sommets, puisqu'il n'y a pas de sommet de charge strictement positive. Nous sommes forcés à utiliser la charge des faces de taille au moins 5 pour éliminer la charge négative des sommets de degré 2 et 3.
+
+Nous proposons la règle de déchargement provisionnelle suivante :
 
 \begin{enumerate}
-\item [(R1)] $\forall v \in V(G)$ tel que $d_G(v) = 2$, $v$ donne une unité de charge négative $(-1)$ à chaque des deux faces de taille 5 incidentes à $v$ ou donne toute sa charge négative $(-2)$ à une face incidente $f$ telle que $d_G(f) \geq 6$.
-\item [(R2)] $\forall v \in V(G)$ tel que $d_G(v) = 3$, $v$ donne une unité de charge négative $(-1)$ à une face voisine $f$ telle que $d_G(f) \geq 5$.
-\item [(R3)] $forall v \in V(G)$ tel que $d_G(v) = 4$, $v$ ne distribue aucune charge car il ne l'a pas.
+\item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
 \end{enumerate}
-\end{proposition}
 
-Observons comment ces règles pourraient distribuer la charge initiale, c-à-d sur quelles configurations pourrions obtenir que la somme de la charge totale finale soit positive.
+Dans la suite, il faut montrer que tout élément de graphe (sommet ou face) dont la charge reste strictement négative après la redistribution fait partie d'une configuration réductible.
 
-Dans le chapitre \ref{chap:easy} nous avons déjà montré quelques propriétés structurelles qui se donnent ici aussi. Selon le Lemme \ref{le:14}-\ref{le:333} nous savons déjà qu'il n'a aucun sommet de degré 1, que pour $v$ ayant un voisin de degré deux, le reste de voisins que $v$ a sont de degré 4, et que un sommet $v$ de degré 3 a au moins deux sommets de degré 4.
+Dans le chapitre \ref{chap:easy} nous avons déjà montré quelques configurations réductibles qui s'appliquent ici aussi. Selon Lemmes \ref{le:14}-\ref{le:333} nous savons déjà qu'il n'y a aucun sommet de degré 1, qu'un sommet de degré 2 n'a que les voisins de degré 4, que pour $v$ ayant un voisin de degré deux, les autres voisins de $v$ sont de degré 4, et qu'un sommet de degré 3 a au moins deux voisins de degré 4.
+
+Soit $v$ un sommet de degré 2. Afin que sa charge devienne positive, il est nécessaire que toutes les deux faces incidentes à $v$ soient de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 2 incident à une face de taille 4.
+
+Soit $v$ un sommet de degré 3. Afin que sa charge devienne positive, il est nécessaire qu'il soit incident à au moins une face de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 3 incident à que des faces de taille 4.
+
+Les sommets de degré 4 et les faces de taille 4 ne participent pas au déchargement, leur charge reste nulle.
+
+Soit $f$ une face de taille 5. Si $f$ est incidente à un sommet de degré 2, selon Lemme \ref{le:243} tous les autres sommets incidents à $f$ sont de degré 4, donc la charge de $f$ est $1-1=0$. Il reste à éliminer les cas où $f$ est incidente à plusieurs sommets de degré 3.
+
+Pareil pour les faces de taille supérieur à 5, il va falloir trouver des configurations réductibles.
+
+%Il est essentiel de trouver aussi des configurations réductible contenant les sommets avec charge strictement négative (sommets de degré 2 et 3) ainsi que les faces sans charge strictement positive (des carrés). Il va falloir trouver également les configurations permettant d'éliminer le cas où une face de taille $k$ est incident à $\ell$ sommets de degré 2 ou 3, où $\ell \ge k-4$.
 
 À partir de ce point, regardons quelles configurations seraient vont permettre que le graphe se décharge correctement. 
 
-Pour un sommet $v$ de degré 2, pour distribuer toute la charge de $v$ nous allons montrer (dans le chapitre suivant) qu'il existe une réduction pour une configuration qui a $v$ de degré 2 avec un carré et un pentagone autour de lui. De cette façon, ce sommet-ci aurait forcement deux faces de taille 5 ou une face de taille 4 et une autre de taille au moins 6, ce qui permettrait,  par la règle (R1), distribuer toute la charge négative de $v$ et devenir la charge totale finale de la configuration positive.
 
-D'ailleurs, soit $v$ un sommet de degré 3. Selon le Lemme \ref{le:333} $v$ ne peut avoir que un seul voisin de degré 3, alors considérons les deux cas. D'abord considérons l'existence d'un sommet voisin $u$ de degré 3. Pour que la charge totale de l'environnement de l'arête $e=uv$ devient positive (par la règle (R2)) après la distribution de charge c'est nécessaire qu'il ait deux faces autour de $e$ de taille au moins 5 ou dans le cas échéant, une face de taille au moins 6. C'est à dire, c'est nécessaire trouver une réduction pour une configuration avec 3 carrés et un pentagone autour de $e$. 
+%D'ailleurs, soit $v$ un sommet de degré 3. Selon le Lemme \ref{le:333} $v$ ne peut avoir que un seul voisin de degré 3, alors considérons les deux cas. D'abord considérons l'existence d'un sommet voisin $u$ de degré 3. Pour que la charge totale de l'environnement de l'arête $e=uv$ devient positive (par la règle (R2)) après la distribution de charge c'est nécessaire qu'il ait deux faces autour de $e$ de taille au moins 5 ou dans le cas échéant, une face de taille au moins 6. C'est à dire, c'est nécessaire trouver une réduction pour une configuration avec 3 carrés et un pentagone autour de $e$. 
 
-Dans l'autre cas, c-à-d, si $v$ n'a que des voisins de degré 4, la condition pour que la configuration ait une charge total positive est, selon (R2), qu'une des faces autour de $v$ ait une taille au moins 5.
+%Dans l'autre cas, c-à-d, si $v$ n'a que des voisins de degré 4, la condition pour que la configuration ait une charge total positive est, selon (R2), qu'une des faces autour de $v$ ait une taille au moins 5.
 
-Finalement, soit $v$ un sommet de degré 4. $v$ il n'a pas de charge à distribuer donc, supposons que les sommets de degré 4 ils sont autour de toutes les faces incidentes aux sommets de degré inférieur pour que pour toute configuration possible d'un graphe $G$, obtient, d'après la redistribution, une charge totale positive, ce qui concerne une contradiction.
+%Finalement, soit $v$ un sommet de degré 4. $v$ il n'a pas de charge à distribuer donc, supposons que les sommets de degré 4 ils sont autour de toutes les faces incidentes aux sommets de degré inférieur pour que pour toute configuration possible d'un graphe $G$, obtient, d'après la redistribution, une charge totale positive, ce qui concerne une contradiction.
 
 
 
@@ -762,8 +751,21 @@ Ce chapitre sera consacré à introduire les méthodes et les notions utilisés 
 %Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
 
 \begin{definition}
-Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$
+Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
 \end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack). 
+\label{de:col}
+\end{definition}
+
+Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+
+Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
 
 \begin{definition}
 Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
@@ -774,15 +776,35 @@ $$
 \label{de:code}
 \end{definition}
 
+À partir du code de coloration nous pouvons également récupérer la coloration des arêtes sortantes $\beta$.
+
 \begin{definition}
-
+Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs quelconques $c$ et $c'$. Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
 \end{definition}
-%\subsection{Réductibilité}
 
-%La méthode de la réductibilité a été la méthode la plus travaillée, celle que nous a permis de supprimer beaucoup des configurations qui pourraient avoir créé un conflit. Pour ce fait on a développé un outil, qui lit des configurations et ses possibles réductions et elle vérifie si les possibles réductions le sont vraiment ou pas. Le code créé pour l'outil on l'a partitionné en 3 grandes parties (4 si on compte la façon de préparer les instances ou les configurations) qu'on passe à expliquer une par une ensuite.
+\begin{definition}
+Soit $H$ une configuration de $G$, $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ et les codes $k$ de colorations des $\beta$. Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+$$
+\begin{cases}
+k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
+k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
+\end{cases}
+$$
+{\color{blue} A revoir, je ne suis pas content}
+\end{definition}
 
-%\subsection{Préparation des Configurations et leurs réductions}
+\begin{definition}
+Soit $H$ une configuration de $G$ et $\Psi_0$ l'ensemble des colorations qui s'étendent. Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
 
+Généralement, l'ensemble de toutes les colorations étendues ou \emph{valides} de $G$ sont,
+$$
+\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+$$
+\end{definition}
+
+\begin{theorem}
+Soit $H$ une configuration de $G$ et $H'$ une configuration telle que $\partial_G(H)=\partial_G(H')$. Alors $H'$ est une réduction de  $H$ si et seulement si, $\Psi_0$ l'ensemble des colorations qui s'étendent directement à $G$, $\Psi'_0 \subseteq \Psi$.
+\end{theorem}
 
 
 
@@ -793,40 +815,7 @@ $$
 
 
 
-Une fois on a stocké le graphe dans une matrice on va chercher toutes les colorations des arêtes qui marchent et puis on va les stocker dans un vecteur sous forme de code. D'abord, avant de colorier le graphe, on va numéroter les arêtes. Pour ce fait on commencera par les arêtes extérieurs, et puis on numérotera les arêtes de l'intérieur par ordre croissant des sommets incidentes à chaque arête (on utilisera le sommet incidente le plus petit entre les deux).
 
-....image avec exemple de numérotation...
-
-Le prochain pas sera définir le voisinage de chaque arête, c'est à dire, stocker les arêtes adjacentes de chaque arête, mais pour ce qui nous intéresse on ne va stocker que les arêtes plus grandes (aven un numéro plus grande). La raison on l'expliquera au moment de colorier les arêtes. sachant que $\Delta \leq 4$ une arête elle ne pourrait pas avoir plus de 6 voisins.
-
-... image avec exemple de voisinage
-
-Finalement, la coloration, le pas principal pour lequel on a décidé de colorier la configuration en utilisant une méthode de \emph{backtracking}. Le \emph{backtracking} est une méthode qui revient en arrière sur des décisions déjà prises à chaque fois qu'on tombe sur une violation de contrainte ou que la solution courante ne admet aucune option. 
-
-Dans notre cas, on partira sur la dernière arête, on la colorie et on parcours les arêtes de façon descendante et tant qu'on peut les colorier on continuera jusqu'à la première arête. Si on trouve un conflit, on revient sur la dernière arête coloriée et on utilise la prochaine couleur et on continue. Un conflit se crée quand une arête ne peut pas être coloriée car ses voisin sont déjà coloriées avec toutes les autres couleurs. Pour chaque arête ils existeront des couleurs "interdites" 
-
-----exemple de graphe colorié----
-
-Pour chaque bonne coloration, on ne gardera que la coloration des arêtes de ring car c'est celle-là la seule qui nous intéresse. Puis on stockera cette coloration sous forme du code multipliant $0,1,2$ ou $3$ (selon la couleur) par $4^{i}$, étant i l'arête coloriée.
-\subsection{Génération de Couplages}
-
-Cette partie est peut être la plus compliquée et la plus importante car c'est la partie dans laquelle on cherche des "mauvaises" colorations ou des colorations qui ne marchent pas normalement, mais qui peuvent se réduire vers des bonnes colorations, en utilisant des couplages entre les arêtes extérieurs ou sortants. 
-
-D'abord on génère tous les couplages possibles à $k$ sommets extérieurs, on verra après qu'on aura besoin de tous. Puis on prendra les codes qui soient représentants des "mauvaises" colorations ou des colorations qui ne marchent pas. Le prochain pas ce sera de prouver si la coloration peut désormais bonne en faisant des échanges ou modifications. 
-
-----image des chaînes de couleurs-----
-
-La condition nécessaire et suffisante pour qu'une "mauvaise" coloration se réduise vers une que ce soit "bonne" est la suivante. S'il existe une paire de couleurs (qui colorient les arêtes extérieurs) pour lequel sur n'importe quelle couplage au nombre des arêtes colorés avec ces couleurs, on peut trouver une modification qui fait marcher la coloration, on peut dire que la "mauvaise" coloration se réduit vers une bonne (le code correspondant à la nouvelle coloration des arêtes extérieurs obtenue grâce aux échanges entre les arêtes coloriés à ces deux couleurs).
-
----image de mauvaise coloration qui se réduit vers une bonne et image de la bonne aussi-----
-
-Il existe différentes types de "mauvaises" colorations, celles qui se réduisent vers une "bonne" coloration (on les appellera Type 1), celles qui se réduisent vers une "mauvaise" coloration du Type 1 ou de Type 2 (on appellera a ces dernières colorations "mauvaises de Type 2) et celles qui ne se réduisent pas. On fera donc, répéter ce processus de couplages en tant qu'il existe des colorations "mauvaises" qui se réduisent jusqu'à on ne trouve plus de colorations de Type 2.
-
-\subsection{Colorations étendues}
-
-Enfin, la dernière partie de la réductibilité, c'est la vérification. C'est à dire, on a déjà trouvé les colorations "bonnes" du graphe donné ainsi que les colorations de Type 1 et du Type 2 qui se réduisent vers les "bonnes" et qui desormaient "bonnes". Ensuite on cherchera toutes les colorations possibles (que les "bonnes") du graphe réduite et on regardera que toutes les colorations possibles du graphe réduite (la comparaison on la fait à partir des codes de coloration des arêtes sortants) correspondent aux "bonnes" colorations du graphe original. 
-
-Autrement dit, si l'ensemble des "bonnes" colorations du graphe réduit est un sous ensemble des "bonnes" colorations du graphe original, alors le graphe est réductible et sa réduction est celle-ci qu'on a défini. Il faut toujours remarque qu'un graphe il a plusieurs possibles réductions. 
 \subsection{Propriétés structurelles de $G$}
 
 Ensuite nous montrons, grâce à l'outil de réductibilité, des configurations avec leurs réductions qui vont prouver les propriétés qu'on observe ci dessous. Ces propriétés vont permettre que les règles de déchargement définis dans le chapitre précédent entraînent une contradiction, c-à-d, nous allons montrer les propriétés qui assurent que le graphe se décharge de manière positive.
