@@ -396,94 +396,171 @@ Ce théorème permet d'automatiser la vérification de réductibilité de config
 \end{frame}
 
 \section{Description de l'outil}
-\subsection{Notions du Programme}
+\subsection{Initialisation}
 \begin{frame}
-Soit $H$ configuration de $G$ et $\partial_G(H)$ t.q. $|\partial_G(H)|=r$. 
-
-Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$.
-
-\pause
-
-Soit $H$ configuration de $G$ numérotée. 
-
-Alors, le \emph{voisinage} de $e$ est 
-$$
-N(e) = \{e': \textrm{ numérotation de $e'$ est plus grande}\}
-$$
-\end{frame}
-
-\begin{frame}
-Soit $H$ configuration de $G$ numérotée. 
-
-Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack).
-
-\pause
-
--image-
-\end{frame}
-
-\begin{frame}
-Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
-
-\pause
-
-Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
-\end{frame}
-
-\begin{frame}
-Soit $H$ configuration du graphe $G$, $\partial_G(H)$  et $\beta$ coloration de $\partial_G(H)$. 
-
-Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$.
-
-$$
-k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,4,8 \}
-$$
-\end{frame}
-
-\begin{frame}
-Soit $H$ configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
-
-Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
-
-\pause
-
-Soit 
+C'est un programme qui prend,
 \begin{itemize}
-\item $H$ configuration de $G$\\
-\item $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ \\
-\item $k$ Codes de colorations des $\beta$. 
+\item Entrée:  Une configuration $H$ et sa réduction potentielle $H'$.
+\item Sortie:  Une réponse de OUI/NON à la question de réductibilité.
 \end{itemize}
+\end{frame}
+
+\subsection{Pré-calcul}
+\begin{frame}
+\begin{itemize}
+\item Génération de Couplages de $\mathcal{X}^{c,c'}_\varphi$ $\forall c,c$ et $\forall \varphi$.
+\item Variation entre deux codes adjacents (Plus Tard).
+\end{itemize}
+\end{frame}
+
+\subsection{Traitement}
+
+\begin{frame}
+Partant d'une configuration $H$ de $G$ et $H'$ sa réduction potentielle.
+\begin{itemize}
+\item On génère l'ensemble des colorations $\psi$ de $H$ t.q. $\psi|_{\partial_G(H)}=\beta$, c-à-d $\Phi_0$.
+\item Pour $i \in \mathbb{N}\cup \{0\}$ on génère l'ensemble $\Phi_{i+1}$ des colorations adjacentes aux colorations de $\cup_{j=0}^i\Phi_i$.
+\item L'ensemble totale des colorations qui s'étendent vers $H$ est $\Phi(H) = \bigcup_{i \in \mathbb{N}\cup\{0\}} \Phi_i(H)$.
+\item On génère l'ensemble $\Phi'_0$ des colorations $\psi'$ de $H'$ t.q. une coloration de $G'$ s'étend vers $H'$.
+\item Regardons si $\Phi'_0(H') \subseteq \Phi(H)$ 
+\end{itemize}
+\end{frame}
+
+\subsection{Implémentation}
+
+\begin{frame}
+\underbar{Lecture de $H$ et $H'$:}
+\begin{itemize}
+\item Lecture de configuration $H$ et sa réduction potentielle présentées sous forme d'une liste d'adjacence.
+\item Les deux seront stockées dans deux matrices différentes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\underbar{Coloration de $H$:}
+Nous commençons par numéroter les arêtes du graphe $H$, commençant par les arêtes sortantes et nous continuons vers l'intérieur.
+
+Nous colorions les arêtes de $H$ partant de la dernière arête vers l'extérieur à l'aide de la méthode de retour sur le trace (Backtrack).
+
+Nous n'allons stocker que la coloration $\beta=\psi|_{\partial_G(H)}$ sous forme de code suivant,
+$$
+k = \sum_{i=0}^{r-1} c(\beta(e)) \cdot 4^{e} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
+$$
+
+$\Phi_0(H)$ est un ensemble de $k$.
+\end{frame}
+
+\begin{frame}
+\underbar{Colorations voisines:}
+Soit $H$ une configuration, une coloration $\beta$ avec son code $k$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
+
+Alors $M$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$.
+Les arêtes du graphe résiduel sont l'ensemble $M$.
+\pause
+
 Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
 $$
 \begin{cases}
-k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si $e \in X$ renverse ses couleurs}\\
-k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si $(e,e')$-chaîne de Kempe renverse ses couleurs}
+k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si  }e \not\in \mathcal{M} \\
+k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si  }ee' \in \mathcal{M}
 \end{cases}
 $$
+
+
+Autrement dit,
+le premier cas correspond à $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=0$, 
+et le deuxième cas correspond à $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$.
 \end{frame}
 
 \begin{frame}
-Soit $H$ configuration de $G$ et $\Psi_0$.
-
- Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
- 
-\pause
-
-$$
-\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
-$$
-\end{frame}
-
-\begin{frame}
-\begin{theorem}
-Soit $H$ configuration de $G$ et $H'$ une configuration t.q. $\partial_G(H)=\partial_G(H')$. 
-
 Alors,
-\begin{center}
-$H'$ est une réduction de  $H$ $\Leftrightarrow$ $\Psi_0$  $\Psi'_0 \subseteq \Psi$.
-\end{center}
-\end{theorem}
+pour $k'$ quelconque qui ne s'étend pas,
+s'il existe une paire de couleurs $c$, $c'$ pour laquelle n'importe quel couplage des arêtes coloriées avec $c$ ou $c'$ il existe un code $k$ adjacent à $k'$, $k'$ s'étend.
 \end{frame}
+%Soit $H$ configuration de $G$ et $\partial_G(H)$ t.q. $|\partial_G(H)|=r$. 
+%
+%Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$.
+%
+%\pause
+%
+%Soit $H$ configuration de $G$ numérotée. 
+%
+%Alors, le \emph{voisinage} de $e$ est 
+%$$
+%N(e) = \{e': \textrm{ numérotation de $e'$ est plus grande}\}
+%$$
+%\end{frame}
+%
+%\begin{frame}
+%Soit $H$ configuration de $G$ numérotée. 
+%
+%Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack).
+%
+%\pause
+%
+%-image-
+%\end{frame}
+%
+%\begin{frame}
+%Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+%
+%\pause
+%
+%Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
+%\end{frame}
+%
+%\begin{frame}
+%Soit $H$ configuration du graphe $G$, $\partial_G(H)$  et $\beta$ coloration de $\partial_G(H)$. 
+%
+%Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$.
+%
+%
+%\end{frame}
+
+%\begin{frame}
+%Soit $H$ configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
+%
+%Alors $M$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
+%
+%\pause
+%
+%Soit 
+%\begin{itemize}
+%\item $H$ configuration de $G$\\
+%\item $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ \\
+%\item $k$ Codes de colorations des $\beta$. 
+%\end{itemize}
+%Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+%$$
+%\begin{cases}
+%k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si $e \in X$ renverse ses couleurs}\\
+%k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si $(e,e')$-chaîne de Kempe renverse ses couleurs}
+%\end{cases}
+%$$
+%\end{frame}
+
+%\begin{frame}
+%Soit $H$ configuration de $G$ et $\Psi_0$.
+%
+% Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+% 
+%\pause
+%
+%$$
+%\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+%$$
+%\end{frame}
+
+%\begin{frame}
+%\begin{theorem}
+%Soit $H$ configuration de $G$ et $H'$ une configuration t.q. $\partial_G(H)=\partial_G(H')$. 
+%
+%Alors,
+%\begin{center}
+%$H'$ est une réduction de  $H$ $\Leftrightarrow$ $\Psi_0$  $\Psi'_0 \subseteq \Psi$.
+%\end{center}
+%\end{theorem}
+%\end{frame}
 
 \section{Déchargement}
 \begin{frame}
@@ -543,66 +620,49 @@ Les règles de déchargement:
 \end{frame}
 
 \section{Résultats}
+
 \subsection{Propriétés Structurelles}
+\begin{frame}
+\begin{lemme}
+Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
+
+2 avec 2 carrés
+
+2 avec 1 carré et un pentagone
+
+\end{lemme}
+\end{frame}
 
 \begin{frame}
 \begin{lemme}
 Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
-\label{le:33pent}
+
+3-3-4-3
+
+3-3 avec 4 carrés
+
+3-3 avec 3 carrés et un pentagone
 \end{lemme}
 \end{frame}
 
-\begin{frame}
-\begin{lemme}
-Pour un pair de sommets $u$ et $v$ de degré $3$ adjacentes, la distance à un autre sommet de degré $3$ est au moins $2$.
-\label{de:3343}
-\end{lemme}
-\end{frame}
+%\begin{frame}
+%\begin{lemme}
+%Pour un pair de sommets $u$ et $v$ de degré $3$ adjacentes, la distance à un autre sommet de degré $3$ est au moins $2$.
+%\end{lemme}
+%\end{frame}
+
 
 \begin{frame}
 \begin{lemme}
-Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
-\label{le:2pent}
-\end{lemme}
-\end{frame}
+Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$ avec que des voisins de grand degré. Alors, il existe une face $f$ incidente à $v$ t.q. $d_G(f) \geq 5$
 
-\begin{frame}
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
-\label{le:3}
+3 avec 3 carrés 
+
 \end{lemme}
 \end{frame}
 
 \begin{frame}
 Ces deux derniers cas n'ont pas encore été prouvés et nous n'avons pas trouvé leurs réductions non plus.
-\end{frame}
-
-\subsection{Pair de sommets de degré 3}
-\begin{frame}
-4 Carrés:
-\end{frame}
-
-\begin{frame}
-3 Carrés et 1 Pentagone:
-\end{frame}
-
-\begin{frame}
-3-3-4-3:
-
-\end{frame}
-
-\subsection{Sommet de degré 2}
-\begin{frame}
-2 Carrés
-\end{frame}
-
-\begin{frame}
-1 Carré et 1 Pentagone
-\end{frame}
-
-\subsection{Sommet de degré 3}
-\begin{frame}
-3 Carrés
 \end{frame}
 
 \section{Conclusion}
