@@ -202,7 +202,7 @@ Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 4$. Alors, $\chi'
 Cette conjecture est le problème principal à traiter dans cet écrit. 
 %\subsection{Sujet du Problème et Conditions}
 
-\section{Réductibilité et déchargement}
+\section{Résultats Connus}
 \label{chap:easy}
 
 Nous allons refaire la démonstration de deux propositions voisines de la conjecture étudiée, afin de pouvoir illustrer sur ces deux exemples-ci non-triviaux les méthodes utilisées pour démontrer ce type d'énoncé. Nous introduisons d'abord quelques notions et notation techniques.
@@ -661,6 +661,93 @@ Théorème \ref{th:red} permet d'automatiser la vérification de réductibilité
 
 Dans le chapitre \ref{chap:Des}, nous donnons la description plus détaillée de l'implémentation de cette procédure.%Si une configuration $H$ se réduit vers $H'$, dans un graphe on peut remplacer $H$ par $H'$, obtenant un contre-exemple minimal de $G$. Comme on a fait dans le chapitre précédente (Chapitre \ref{chap:easy}) avec les deux conjectures qui ont introduit ce cas, c'est nécessaire travailler avec des contre-exemples minimaux. Ces propriétés vont entraîner une contradiction grâce à la méthode de déchargement qui sera présentée lors du chapitre suivante. Puis on verra dans la partie des résultats les configurations qu'on a pu réduire et on analysera plus en profondeur la distribution de la charge par tout le graphe.
 
+\section{Description de l'outil de réductibilité}
+\label{chap:Des}
+
+Ce chapitre sera consacré à décrire la fonctionnalité de l'outil de vérification de réductibilité que nous avons implémenté. Nous allons expliquer plus profondément qu'est ce que le programme fait.
+
+D'abord, c'est un programme qui prend en entrée une configuration $H$, que nous voulons réduire et une autre configuration $H'$, une réduction de $H$ potentielle, avec la même disposition des arêtes sortantes et il donne en sortie une réponse de "oui" ou "non". Ensuite nous allons présentés des aspects du programme pour une meilleure compréhension de son déroulement. Nous allons définir des concepts que nous avons dû pré-calculer, puis nous allons expliquer le traitement ou l'algorithme général du programme et finalement nous allons introduire des notions que nous avons utilisé lors de l'implémentation.
+
+\subsection{Pré-calcul}
+
+Il y a deux variables, ou plutôt deux ensembles que nous avons voulu calculer en avance car, générer ces types de calculs pour chaque itération était très coûteuse. D'une coté nous avons généré l'ensemble de tous les couplages possibles à $k$ sommets pour $k$ allant de 1 jusqu'à le nombre maximum des arêtes sortantes de une configuration (MAXRING). Les couplages sont fixes, c-à-d, l'ensemble de couplages ne change jamais, il change seulement le nombre d'arêtes pour lequel nous les générons, donc pour calculer les $\Phi_i$ générer tous ces couplages n'était pas efficace. 
+
+De l'autre coté, nous avons calculé une tableau de modifications. Sur cet aspect nous ne pouvons pas dire grande chose parce qu'il nécessite des autres concepts que nous allons définir au long de cette description. Il s'agit d'un tableau qui stocke les valeurs de la formule suivante,
+$$
+(-2\cdot m + k + l)4^i \textrm{  pour $m, k, l \in {0,1,2,3}$ et $i \in {1,2,...,17}$}.
+$$
+Donc, ce tableau aussi, nous l'avons calculé en avance afin de ne pas répéter les mêmes calcules pour chaque itération. La signification des variables utilisées dans cette formule nous les introduirons dans la partie de l'implémentation.
+
+\subsection{Traitement}
+
+
+%Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
+
+%Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
+
+\begin{definition}
+Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack). 
+\label{de:col}
+\end{definition}
+
+Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+
+Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
+
+\begin{definition}
+Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
+
+$$
+k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}
+$$
+\label{de:code}
+\end{definition}
+
+À partir du code de coloration nous pouvons également récupérer la coloration des arêtes sortantes $\beta$.
+
+\begin{definition}
+Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs quelconques $c$ et $c'$. Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$, $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ et les codes $k$ de colorations des $\beta$. Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+$$
+\begin{cases}
+k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
+k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
+\end{cases}
+$$
+{\color{blue} A revoir, je ne suis pas content}
+\end{definition}
+
+\begin{definition}
+Soit $H$ une configuration de $G$ et $\Psi_0$ l'ensemble des colorations qui s'étendent. Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+
+Généralement, l'ensemble de toutes les colorations étendues ou \emph{valides} de $G$ sont,
+$$
+\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+$$
+\end{definition}
+
+\begin{theorem}
+Soit $H$ une configuration de $G$ et $H'$ une configuration telle que $\partial_G(H)=\partial_G(H')$. Alors $H'$ est une réduction de  $H$ si et seulement si, $\Psi_0$ l'ensemble des colorations qui s'étendent directement à $G$, $\Psi'_0 \subseteq \Psi$.
+\end{theorem}
+
+
+
+
+%Cette première partie est pour expliquer comme est-ce qu'on défini les configurations pour pouvoir être lues. D'abord il  faut remarquer que on a défini les configurations par paires (configuration et sa possible réduction) où les deux configurations ont la même structure. Cette structure s'agit d'une première ligne avec juste le nom de la configuration (ou le numéro, pour reconnaître la structure), puis la prochaine ligne aura une chiffre qui détermine le nombre de sommets qui a la configuration, une deuxième chiffre concernant le nombre des arêtes extérieurs (ou sortants) et finalement une troisième chiffre qui sera un boolean avec un "0" si c'est la configuration et avec un "1" si c'est la réduction. Puis, à partir de la troisième ligne chaque ligne détermine le sommet courant, son degré, et les sommets voisins. Chaque configuration on la stockera dans une matrice d'adjacence.
+
+%La façon de définir les configurations suit une ordre pour que les parties suivantes puissent être conçu de la façon qui nous intéresse, c'est à dire, les premiers sommets ce seront les sommets des arêtes extérieurs ou sortants, ceux qui vont connecter la configuration avec le reste du graphe. Ces sommets auront degré 1 et leurs arêtes incidentes conformeront l'ensemble des arêtes extérieurs ou \emph{ring}.
+
 
 \section{Déchargement}
 \label{chap:Dec}
@@ -741,80 +828,13 @@ Pareil pour les faces de taille supérieur à 5, il va falloir trouver des confi
 
 %Finalement, pour un sommet de degré 3, $v$ on a cherché par le Lemme \ref{le:3} au moins un pentagone autour qui décharge ce sommet, mais pour l'instant on a pas pu montrer cette réduction, donc c'est la seule situation qui nous reste pour prouver que le graphe se décharge complètement avec une somme de charge totale positive, ce qui concernerait une contradiction et montrerait la conjecture.
 
-\section{Description de l'outil de réductibilité}
-\label{chap:Des}
-
-Ce chapitre sera consacré à introduire les méthodes et les notions utilisés pour le développement de l'outil que nous avons crée afin de vérifier la réductibilité des configurations. Suite aux besoins générées par les règles de déchargement définis dans le chapitre précédent, nous avons cherché à réduire des configurations déterminées.
-
-%Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
-
-%Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
-
-\begin{definition}
-Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
-\end{definition}
-
-\begin{definition}
-Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
-\end{definition}
-
-\begin{definition}
-Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack). 
-\label{de:col}
-\end{definition}
-
-Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
-
-Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
-
-\begin{definition}
-Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
-
-$$
-k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}
-$$
-\label{de:code}
-\end{definition}
-
-À partir du code de coloration nous pouvons également récupérer la coloration des arêtes sortantes $\beta$.
-
-\begin{definition}
-Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs quelconques $c$ et $c'$. Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
-\end{definition}
-
-\begin{definition}
-Soit $H$ une configuration de $G$, $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ et les codes $k$ de colorations des $\beta$. Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
-$$
-\begin{cases}
-k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
-k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
-\end{cases}
-$$
-{\color{blue} A revoir, je ne suis pas content}
-\end{definition}
-
-\begin{definition}
-Soit $H$ une configuration de $G$ et $\Psi_0$ l'ensemble des colorations qui s'étendent. Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
-
-Généralement, l'ensemble de toutes les colorations étendues ou \emph{valides} de $G$ sont,
-$$
-\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
-$$
-\end{definition}
-
-\begin{theorem}
-Soit $H$ une configuration de $G$ et $H'$ une configuration telle que $\partial_G(H)=\partial_G(H')$. Alors $H'$ est une réduction de  $H$ si et seulement si, $\Psi_0$ l'ensemble des colorations qui s'étendent directement à $G$, $\Psi'_0 \subseteq \Psi$.
-\end{theorem}
 
 
 
 
-%Cette première partie est pour expliquer comme est-ce qu'on défini les configurations pour pouvoir être lues. D'abord il  faut remarquer que on a défini les configurations par paires (configuration et sa possible réduction) où les deux configurations ont la même structure. Cette structure s'agit d'une première ligne avec juste le nom de la configuration (ou le numéro, pour reconnaître la structure), puis la prochaine ligne aura une chiffre qui détermine le nombre de sommets qui a la configuration, une deuxième chiffre concernant le nombre des arêtes extérieurs (ou sortants) et finalement une troisième chiffre qui sera un boolean avec un "0" si c'est la configuration et avec un "1" si c'est la réduction. Puis, à partir de la troisième ligne chaque ligne détermine le sommet courant, son degré, et les sommets voisins. Chaque configuration on la stockera dans une matrice d'adjacence.
-
-%La façon de définir les configurations suit une ordre pour que les parties suivantes puissent être conçu de la façon qui nous intéresse, c'est à dire, les premiers sommets ce seront les sommets des arêtes extérieurs ou sortants, ceux qui vont connecter la configuration avec le reste du graphe. Ces sommets auront degré 1 et leurs arêtes incidentes conformeront l'ensemble des arêtes extérieurs ou \emph{ring}.
 
 
-
+\subsection{Vérification des configurations réductibles connues}
 
 \subsection{Propriétés structurelles de $G$}
 
@@ -857,8 +877,6 @@ Dans ce cas-là non plus, nous n'avons  n'avons pas réussi à réduire le cas o
 \label{chap:res}
 
 Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil de réductibilité. D'abord nous avons vérifié sur des configurations réductibles déjà connues qui montrent les Lemmes \ref{le:23}-\ref{le:333}, puis nous avons testé l'outil pour des configurations plus complexes qui ont été déjà prouvées aussi (Lemme \ref{le:33pent} (premier cas) et Lemme \ref{de:3343}) et finalement nous présentons les nouvelles configurations trouvées ainsi que ses réductions correspondantes lesquelles ont aidé a prouver certaines propriétés structurelles (Lemme \ref{le:33pent} (deuxième cas) et Lemme \ref{le:2pent})  
-
-\subsection{Vérification des configurations réductibles connues}
 \subsection{Pair de sommets de degré 3}
 \subsection{Sommet de degré 2}
 \subsection{Sommet de degré 3}
@@ -867,7 +885,7 @@ Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil
 \label{chap:concl}
 Finalement nous allons faire quelques remarques autour du sujet en soi ainsi que autour du stage de recherche et leurs apports lors de ces 5 mois de stage.
 
-Tout d'abord, un peu avant le démarrage du stage j'ai travaillé sur les notions de base de la réductibilité et le déchargement comme une mise a niveau. Pour ce fait j'ai montré à la main les deux conjecturés que nous avons présenté dans le chapitre \ref{chap:easy} afin de maîtriser ces deux techniques. Au même temps, une lecture exhaustive des articles du Théorème de 4 couleurs {\color{blue}citation} et de la conjecture des graphes planaires de classe 1 pour $\Delta = 7$ \cite{SandersZhao} m'a permis de bien comprendre le coté technique de la réductibilité. 
+Tout d'abord, un peu avant le démarrage du stage j'ai travaillé sur les notions de base de la réductibilité et le déchargement comme une mise a niveau. Pour ce fait j'ai montré à la main les deux conjecturés que nous avons présenté dans le chapitre \ref{chap:easy} afin de maîtriser ces deux techniques. Au même temps, une lecture exhaustive des articles du Théorème de 4 couleurs \cite{T4C} et de la conjecture des graphes planaires de classe 1 pour $\Delta = 7$ \cite{SandersZhao} m'a permis de bien comprendre le coté technique de la réductibilité. 
 
 Une fois les aspects techniques et pratiques ont été compris, j'ai récupéré le code du programme qui traite la réductibilité du Théorème de 4 couleurs car nous nous sommes inspirés de ce programme pour développer le nôtre. Tout ce premier mois j'ai travaillé sur la compréhension du code, afin d'identifier les parties que nous pouvions utiliser, les parties à modifier et les parties à refaire. Bien que nous nous sommes inspirés de ce programme, nous n'avons utilisé que la fonction de lecture et la génération de colorations, lesquelles nous avons dû modifier. J'ai vu que l'inexistence de parité ainsi que des cas manquantes qui seraient présentes dans notre problème pouvaient créer des difficultés donc nous avons décidé refaire tout le reste du programme.
 
@@ -882,15 +900,15 @@ Pour conclure, ce stage m'a apporté la confiance, la force et l'envie de contin
 
 
 \begin{thebibliography}{99}
-\bibitem{ABH} R.~E.~L.~Aldred, S.~Bau, D.~A.~Holton, and B.~D.~McKay,	
-Nonhamiltonian 3-Connected Cubic Planar Graphs,
-SIAM J. Discrete Math. 13 (1) (2000), 25--32.
-\bibitem{br} G.~Brinkmann and A.~W.~M.~Dress, A Constructive Enumeration of Fullerenes, J. Algorithm. 23 (2) (1997), 345--358.
-\bibitem{erman} R.~Erman, F.~Kardo\v s, and J. Mi\v skuf, Long cycles in fullerene graphs, J. Math. Chem. 46 (4) (2009), 1103--1111.
-\bibitem{good} P.~R.~Goodey, A class of hamiltonian polytopes, (special issue dedicated to Paul Tur\'{a}n) J. Graph Theory 1 (1977) 181--185.
-\bibitem{good2} P.~R.~Goodey, Hamiltonian circuits in polytopes with even sided faces, Israel J. Math. 22 (1975) 52--56.
-\bibitem{JO} S.~Jendrol$\!$'~and P.~J.~Owens, {Longest cycles in generalized Buckminsterfullerene graphs}, J. Math. Chem. {18} (1995) 83--90.
-\bibitem{kral} D.~Kr\'al$\!$', O.~Pangr\'ac, J.-S.~Sereni, and R.~\v Skrekovski, Long cycles in fullerene graphs, J. Math. Chem. 45 (4) (2009), 1021--1031.
+%\bibitem{ABH} R.~E.~L.~Aldred, S.~Bau, D.~A.~Holton, and B.~D.~McKay,	
+%Nonhamiltonian 3-Connected Cubic Planar Graphs,
+%SIAM J. Discrete Math. 13 (1) (2000), 25--32.
+%\bibitem{br} G.~Brinkmann and A.~W.~M.~Dress, A Constructive Enumeration of Fullerenes, J. Algorithm. 23 (2) (1997), 345--358.
+%\bibitem{erman} R.~Erman, F.~Kardo\v s, and J. Mi\v skuf, Long cycles in fullerene graphs, J. Math. Chem. 46 (4) (2009), 1103--1111.
+%\bibitem{good} P.~R.~Goodey, A class of hamiltonian polytopes, (special issue dedicated to Paul Tur\'{a}n) J. Graph Theory 1 (1977) 181--185.
+%\bibitem{good2} P.~R.~Goodey, Hamiltonian circuits in polytopes with even sided faces, Israel J. Math. 22 (1975) 52--56.
+%\bibitem{JO} S.~Jendrol$\!$'~and P.~J.~Owens, {Longest cycles in generalized Buckminsterfullerene graphs}, J. Math. Chem. {18} (1995) 83--90.
+%\bibitem{kral} D.~Kr\'al$\!$', O.~Pangr\'ac, J.-S.~Sereni, and R.~\v Skrekovski, Long cycles in fullerene graphs, J. Math. Chem. 45 (4) (2009), 1021--1031.
 
 
 
