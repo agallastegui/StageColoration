@@ -1,0 +1,54 @@
+%!PS
+%%BoundingBox: -41 -35 41 14 
+%%HiResBoundingBox: -40.81607 -34.44089 40.81607 13.45395 
+%%Creator: MetaPost 1.803
+%%CreationDate: 2016.06.08:1639
+%%Pages: 1
+%%BeginProlog
+%%EndProlog
+%%Page: 1 1
+ 0 0 0 setrgbcolor 0 0.8504 dtransform truncate idtransform setlinewidth pop
+ [] 0 setdash 1 setlinecap 1 setlinejoin 10 setmiterlimit
+newpath -29.45853 -34.01569 moveto
+-29.45853 -17.00784 lineto
+-40.39087 -3.9791 lineto stroke
+newpath -14.72926 -25.51176 moveto
+-14.72926 -8.50392 lineto
+-25.6616 4.52483 lineto stroke
+newpath -29.45853 -17.00784 moveto
+0 0 lineto
+10.93234 13.02875 lineto stroke
+gsave newpath 29.45853 -34.01569 moveto
+29.45853 -17.00784 lineto
+40.39087 -3.9791 lineto
+-1 1 scale stroke grestore
+gsave newpath 14.72926 -25.51176 moveto
+14.72926 -8.50392 lineto
+25.6616 4.52483 lineto
+-1 1 scale stroke grestore
+gsave newpath 29.45853 -17.00784 moveto
+0 0 lineto
+-10.93234 13.02875 lineto
+-1 1 scale stroke grestore
+ 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 0 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 0 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 14.72926 -8.50392 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 14.72926 -8.50392 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 29.45853 -17.00784 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 29.45853 -17.00784 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath -14.72926 -8.50392 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath -14.72926 -8.50392 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath -29.45853 -17.00784 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath -29.45853 -17.00784 moveto 0 0 rlineto stroke
+showpage
+%%EOF

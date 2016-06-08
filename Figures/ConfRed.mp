@@ -1,0 +1,285 @@
+%prologues:=1;
+r:=6pt;
+pickup pencircle scaled r;
+draw (0,0);
+pickup pencircle scaled (r-.6mm);
+undraw (0,0);
+picture v;
+v:=currentpicture;
+
+u:=6mm;
+
+beginfig(1)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+pickup pencircle scaled .3mm;
+draw z2--z1;
+draw z3--z1--z4;
+draw v;
+draw v shifted z1;
+endfig;
+beginfig(101)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+pickup pencircle scaled .3mm;
+draw z2--z0;
+draw z3--z1--z4;
+draw v;
+draw v shifted z1;
+endfig;
+
+beginfig(2)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z6=2z0;
+z5=z2 rotatedabout(z0,90);
+z7=2z2;
+pickup pencircle scaled .3mm;
+draw z7--z1;
+draw z3--z1--z4;
+draw z5--z6;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+endfig;
+beginfig(102)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z6=2z0;
+z5=z2 rotatedabout(z0,90);
+z7=2z2;
+pickup pencircle scaled .3mm;
+draw z7--z2;
+draw z0--z1;
+draw z3--z1--z4;
+draw z5--z6;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+endfig;
+
+beginfig(3)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z3=z4+z6=2z0;
+z7=z2 rotatedabout(z0,-90);
+pickup pencircle scaled .3mm;
+draw z7--z0;
+draw z3--z1--z4;
+draw z5--z2--z6;
+draw z2--z1;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+endfig;
+beginfig(103)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z3=z4+z6=2z0;
+z7=z2 rotatedabout(z0,-90);
+pickup pencircle scaled .3mm;
+draw z7--z0;
+draw z3--z1--z4;
+draw z5--z2--z6;
+draw z0--z1;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+endfig;
+
+beginfig(4)
+z0=(0,0);
+z1=(2u,0) rotated (360/16);
+for i:=1 upto 7: z[i+1]=z[i] rotatedabout(z0,45); endfor;
+4z9=z8+z14+z10+z1;
+5z10=z15+z11+2z2+z9;
+5z11=z12+2z3+z10+z16;
+4z12=z5+z4+z11+z13;
+5z13=2z6+z12+z16+z14;
+5z14=z13+z15+z9+2z7;
+7z15=z16+3z10+3z14;
+7z16=3z13+3z11+z15;
+pickup pencircle scaled .3mm;
+draw z1--z9--z14--z13--z12--z4;
+draw z5--z12--z11--z10--z9--z8;
+draw z2--z10--z15--z16--z13--z6;
+draw z7--z14--z15;
+draw z3--z11--z16;
+for i:=9 upto 16: draw v shifted z[i]; endfor;
+endfig;
+beginfig(104)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z6=2z0;
+z5=z2 rotatedabout(z0,90);
+z7=2z2;
+pickup pencircle scaled .3mm;
+draw z7--z1;
+draw z3--z1--z4;
+draw z5--z6;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+draw currentpicture rotatedabout(1/2[z0,z2],180);
+draw v shifted z1;
+endfig;
+
+beginfig(5)
+z0=(0,0);
+z1=(2u,0);
+for i:=1 upto 9: z[i+1]=z[i] rotatedabout(z0,36); endfor;
+4z11=z12+z1+z10+z17;
+5z12=z13+2z2+z11+z18;
+4z13=z4+z3+z12+z14;
+5z14=2z5+z13+z19+z15;
+4z15=z6+z14+z16+z7;
+5z16=z15+z19+z17+2z8;
+5z17=z16+z18+z11+2z9;
+3z18=z19+z12+z17;
+3z19=z14+z18+z16;
+pickup pencircle scaled .3mm;
+draw z1--z11--z17--z16--z15--z6;
+draw z7--z15--z14--z13--z3;
+draw z4--z13--z12--z11--z10;
+draw z2--z12--z18--z19--z16--z8;
+draw z9--z17--z18;
+draw z5--z14--z19;
+for i:=11 upto 19: draw v shifted z[i]; endfor;
+endfig;
+
+beginfig(105)
+z0=(0,0);
+z1=(u,0) rotated -30;
+z2+z0=2z1;
+z3=(-u,0) rotated 30;
+z4+z0=2z3;
+z5-z2=z6-z1=z7-z3=z8-z4=(0,-u);
+z12=z1 rotated 80;
+z11=z3 rotated -80;
+z9-z4=z10-z3=z11-z0;
+z12-z0=z13-z1=z14-z2;
+pickup pencircle scaled .3mm;
+draw z8--z4--z9;
+draw z7--z3--z10;
+draw z4--z0--z12;
+draw currentpicture reflectedabout(z0,1/2[z1,z3]);
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+draw v shifted z3;
+draw v shifted z4;
+endfig;
+
+beginfig(6)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z6=2z0;
+z5=z2 rotatedabout(z0,90);
+z7=2z2;
+pickup pencircle scaled .3mm;
+draw z7--z1;
+draw z3--z1--z4;
+draw z5--z6;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+draw currentpicture rotatedabout(1/2[z0,z2],180);
+undraw (z0--z6) rotatedabout(1/2[z0,z2],180);
+draw v shifted z1;
+draw v shifted z2;
+endfig;
+beginfig(106)
+z0=(0,0);
+z1=(u,0);
+z2+z1=2z0;
+z3=z0 rotatedabout(z1,120);
+z4=z0 rotatedabout(z1,-120);
+z5+z6=2z0;
+z5=z2 rotatedabout(z0,90);
+z7=2z2;
+pickup pencircle scaled .3mm;
+draw z7--z1;
+draw z3--z1--z4;
+draw z5--z6;
+draw v;
+draw v shifted z1;
+draw v shifted z2;
+draw currentpicture rotatedabout(1/2[z0,z2],180);
+undraw (z1--z0--z6) rotatedabout(1/2[z0,z2],180);
+draw v shifted z1;
+draw v shifted z2;
+draw v shifted z7;
+endfig;
+
+beginfig(7)
+z0=(0,0);
+z1=(-2u,0) rotated (360/20);
+for i:=1 upto 9: z[i+1]=z[i] rotatedabout(z0,36); endfor;
+4z11=z12+z1+z2+z17;
+5.5z12=z13+2z3+1.5z11+z18;
+5z13=2z4+z19+z12+z14;
+4z14=z5+z13+z6+z15;
+5z15=z19+z14+z16+2z7;
+5.5z16=z15+z18+1.5z17+2z8;
+4z17=z16+z10+z11+z9;
+7z18=z19+3z12+3z16;
+3z19=z13+z18+z15;
+pickup pencircle scaled .3mm;
+draw z1--z11--z17--z16--z15--z14--z6;
+draw z5--z14--z13--z12--z11--z2;
+draw z3--z12--z18--z19--z15--z7;
+draw z8--z16--z18;
+draw z4--z13--z19;
+draw z9--z17--z10;
+for i:=11 upto 19: draw v shifted z[i]; endfor;
+endfig;
+
+beginfig(107)
+z0=(0,0);
+z1=(-2u,0) rotated (360/20);
+for i:=1 upto 9: z[i+1]=z[i] rotatedabout(z0,36); endfor;
+4z11=z12+z1+z2+z17;
+5.5z12=z13+2z3+1.5z11+z18;
+5z13=2z4+z19+z12+z14;
+4z14=z5+z13+z6+z15;
+5z15=z19+z14+z16+2z7;
+5.5z16=z15+z18+1.5z17+2z8;
+4z17=z16+z10+z11+z9;
+7z18=z19+3z12+3z16;
+3z19=z13+z18+z15;
+pickup pencircle scaled .3mm;
+draw z1--z11--z17--z16--z15--z14--z6;
+draw z5--z14--z13--z12--z11--z2;
+draw z3--z12--z16--z8;
+draw z7--z15;
+draw z4--z13;
+draw z9--z17--z10;
+for i:=11 upto 17: draw v shifted z[i]; endfor;
+endfig;
+
+end.
+

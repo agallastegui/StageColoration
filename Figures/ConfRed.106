@@ -1,0 +1,79 @@
+%!PS
+%%BoundingBox: -43 -18 26 18 
+%%HiResBoundingBox: -42.94481 -17.43304 25.93697 17.43304 
+%%Creator: MetaPost 1.803
+%%CreationDate: 2016.06.08:1639
+%%Pages: 1
+%%BeginProlog
+%%EndProlog
+%%Page: 1 1
+ 0 0 0 setrgbcolor 0 0.8504 dtransform truncate idtransform setlinewidth pop
+ [] 0 setdash 1 setlinecap 1 setlinejoin 10 setmiterlimit
+newpath -34.01569 0 moveto
+17.00784 0 lineto stroke
+newpath 25.51176 -14.72926 moveto
+17.00784 0 lineto
+25.51176 14.72926 lineto stroke
+ 0.8504 0 dtransform exch truncate exch idtransform pop setlinewidth
+newpath 0 -17.00784 moveto
+0 17.00784 lineto stroke
+ 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 0 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 0 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 17.00784 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 17.00784 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath -17.00784 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath -17.00784 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 0.8504 dtransform truncate idtransform setlinewidth pop
+gsave newpath 17.00784 0 moveto
+-34.01569 0 lineto
+-1 -1 scale stroke grestore
+gsave newpath -42.5196 14.72926 moveto
+-34.01569 0 lineto
+-42.5196 -14.72926 lineto
+-1 -1 scale stroke grestore
+ 0.8504 0 dtransform exch truncate exch idtransform pop setlinewidth
+gsave newpath -17.00784 17.00784 moveto
+-17.00784 -17.00784 lineto
+-1 -1 scale stroke grestore
+ 0 5.97757 dtransform truncate idtransform setlinewidth pop
+gsave newpath -17.00784 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+gsave newpath -17.00784 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+gsave newpath -34.01569 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+gsave newpath -34.01569 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+gsave newpath 0 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+gsave newpath 0 0 moveto 0 0 rlineto
+-1 -1 scale stroke grestore
+ 0 0.8504 dtransform truncate idtransform setlinewidth pop
+newpath -34.01569 0 moveto
+-17.00784 0 lineto
+-17.00784 -17.00784 lineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath 17.00784 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath 17.00784 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath -17.00784 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath -17.00784 0 moveto 0 0 rlineto stroke
+ 0 0 0 setrgbcolor 0 5.97757 dtransform truncate idtransform setlinewidth pop
+newpath -34.01569 0 moveto 0 0 rlineto stroke
+ 1 1 1 setrgbcolor 0 4.27676 dtransform truncate idtransform setlinewidth pop
+newpath -34.01569 0 moveto 0 0 rlineto stroke
+showpage
+%%EOF
