@@ -680,73 +680,92 @@ Donc, ce tableau aussi, nous l'avons calculé en avance afin de ne pas répéter
 
 \subsection{Traitement}
 
+Dans ce partie nous exhibons l'algorithme du programme, une idée générale de ce que le programme fait. Nous allons observer que nous nous appuyons sur les bases de la réductibilité que nous venons d'étudier dans le chapitre \ref{chap:red}. 
 
-%Dans ce chapitre on va présenter les méthodes qu'on a implémenté pour résoudre ce problème. D'abord, on va expliquer la méthode de réductibilité, un outil développé afin de automatiser la vérification de la réductibilité des configurations pertinentes. On verra après les configurations qu'on a défini qui pourraient nous empêcher de colorier la configuration ou le graphe avec 4 couleurs. Il faut remarquer que c'est nous qui ont défini les configurations et ses possibles réductions. Plus tard on montrera les différentes configurations et leur réductions, celles qui ont marché et quelques unes qui n'ont pas marché. 
+Commençons prenant en entrée $H$ et $H'$, une paire des configurations avec le même ensemble des arêtes sortantes. Nous allons vérifier si $H$ se réduit vers $H'$. Nous allons générer d'abord, toutes les colorations $\psi$ de $H$ qui s'étendent ne gardant que la coloration des arêtes sortantes, c-à-d nous gardons $\beta = \psi|_{\partial_G(H)}$. Cet ensemble des colorations sera $\Phi_0$. Puis, le prochain pas (suivant les notions théoriques de la réductibilité) sera générer les colorations adjacentes aux colorations qui s'étendent déjà tant qu'ils existent des nouvelles colorations adjacentes. C-à-d à chaque itération nous allons trouver des nouvelles colorations qui s'étendent vers des colorations qui s'étendent directement (celles qui appartiennent à $\Phi_0$)ou vers des colorations adjacentes aux colorations étendues (colorations qui se sont étendues dans une itération précédente). On répète ces processus tant qu'il y a des colorations qui s'étendent. Pour chaque itération, l'ensemble des colorations étendues est $\Phi_i}$. L'ensemble de toutes les colorations étendues de $H$ est noté par $\Phi$.
 
-%Depuis, on passera à l'aide des réductions, à définir les règles qui vont permet de décharger le graphe, et de cette façon de prouver que aucune configuration contredit la hypothèse de la coloration. On passe, donc au commentaire du code qu'on a conçu inspiré par le théorème de 4 couleurs.
+Une coloration $\beta$ des arêtes sortantes de $H$ s'étend s'il existe une paire de couleurs, pour laquelle n'importe quel couplage des arêtes sortantes coloriés avec ces deux couleurs il existe une coloration $\beta$ (qui s'étend) adjacente à $\beta'$.
 
-\begin{definition}
-Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
-\end{definition}
+Une fois nous avons généré toutes les colorations étendes de $H$, nous prenons $H'$ l'autre configuration et nous générons toutes les colorations $\psi'$ de $H'$ qui s'étendent directement obtenant l'ensemble $\Phi'_0$.
 
-\begin{definition}
-Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
-\end{definition}
+Finalement si $\Phi'_0$ est inclus dans $Phi$ ($\Phi'_0(H')\subseteq \Phi(H)$), alors $H$ se réduit vers $H'$ et $H$ sera réductible.
 
-\begin{definition}
-Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack). 
-\label{de:col}
-\end{definition}
+\subsection{Implémentation}
 
-Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+Finalement lors de l'implémentation nous allons décrire comme ce programme a été conçu. Nous avons déjà mentionné que nous nous sommes inspirés du Théorème de 4 couleurs, alors nous avons pris aussi le programme que ils ont utilisé pour montrer la réductibilité dans leur cas et nous avons regardé les parties que nous pouvions utiliser. Vu que dans le Théorème de 4 couleurs ils regardent des configurations cubiques et triangulations, nous n'avons pas pu utiliser grande chose. Ensuite nous parlons plus en détail des aspects d'implémentation à remarquer dans notre programme.
 
-Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
-
-\begin{definition}
-Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
-
+Nous avons dit que le programme prend deux configurations en entrée. Ces configurations sont présentées sous forme d'une liste d'adjacence. Nous lisons les configurations et puis les deux configurations sont stockées dans deux matrices différentes. Puis le programme crée une étiquetage des arêtes de la configuration commençant par les arêtes sortantes et puis il continue vers l'intérieur du graphe. Ensuite pour générer les colorations de $H$, le programme utilise une méthode de retour sur le trace ou Backtrack, et il stocke les colorations de $H$ sous forme de code, gardant que la coloration des arêtes sortantes. Ce code a été calculé de la manière suivante,
 $$
-k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}
+k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
 $$
-\label{de:code}
-\end{definition}
 
-À partir du code de coloration nous pouvons également récupérer la coloration des arêtes sortantes $\beta$.
+Une fois nous avons généré toutes ces colorations, passons à la partie des colorations voisines ou adjacentes. C'est dans ce parti où le programme utilise les couplages pré-calculés. l'ensemble de tous les couplages $M$ à $k$ (entier) sommets est $\mathcal{M}$. le programme se sert des couplages pour vérifier la condition d'adjacence de la réductibilité, c-à-d un couplage $M$ appliqué à deux arêtes coloriées avec deux couleurs, représente une arête du graph résiduel.
 
-\begin{definition}
-Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs quelconques $c$ et $c'$. Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
-\end{definition}
-
-\begin{definition}
-Soit $H$ une configuration de $G$, $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ et les codes $k$ de colorations des $\beta$. Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+Finalement, pour savoir si une coloration $\beta$ est adjacente d'une autre coloration $\beta'$ il suffit trouver une modification de $\beta$ d'une paire de couleurs, le programme vérifie la formule suivante,
 $$
 \begin{cases}
 k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
 k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
 \end{cases}
 $$
-{\color{blue} A revoir, je ne suis pas content}
-\end{definition}
 
-\begin{definition}
-Soit $H$ une configuration de $G$ et $\Psi_0$ l'ensemble des colorations qui s'étendent. Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+où $k$ et $k'$ sont les codes correspondantes aux colorations $\beta$ et $\beta'$ respectivement.
+%\begin{definition}
+%Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
+%\end{definition}
+%
+%\begin{definition}
+%Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
+%\end{definition}
+%
+%\begin{definition}
+%Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack). 
+%\label{de:col}
+%\end{definition}
+%
+%Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+%
+%Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
+%
+%\begin{definition}
+%Soit $H$ une configuration du graphe $G$, $\partial_G(H)$ l'ensemble des arêtes sortantes et $\beta$ une coloration de $\partial_G(H)$. Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$ prenant les arêtes du ring et leur donnant une valeur selon leur couleur et leur position.
+%
+%$$
+%k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}
+%$$
+%\label{de:code}
+%\end{definition}
+%
+%À partir du code de coloration nous pouvons également récupérer la coloration des arêtes sortantes $\beta$.
+%
+%\begin{definition}
+%Soit $H$ une configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs quelconques $c$ et $c'$. Alors $X$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
+%\end{definition}
+%
+%\begin{definition}
+%Soit $H$ une configuration de $G$, $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ et les codes $k$ de colorations des $\beta$. Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+%$$
+%\begin{cases}
+%k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
+%k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
+%\end{cases}
+%$$
+%{\color{blue} A revoir, je ne suis pas content}
+%\end{definition}
+%
+%\begin{definition}
+%Soit $H$ une configuration de $G$ et $\Psi_0$ l'ensemble des colorations qui s'étendent. Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+%
+%Généralement, l'ensemble de toutes les colorations étendues ou \emph{valides} de $G$ sont,
+%$$
+%\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+%$$
+%\end{definition}
+%
+%\begin{theorem}
+%Soit $H$ une configuration de $G$ et $H'$ une configuration telle que $\partial_G(H)=\partial_G(H')$. Alors $H'$ est une réduction de  $H$ si et seulement si, $\Psi_0$ l'ensemble des colorations qui s'étendent directement à $G$, $\Psi'_0 \subseteq \Psi$.
+%\end{theorem}
 
-Généralement, l'ensemble de toutes les colorations étendues ou \emph{valides} de $G$ sont,
-$$
-\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
-$$
-\end{definition}
-
-\begin{theorem}
-Soit $H$ une configuration de $G$ et $H'$ une configuration telle que $\partial_G(H)=\partial_G(H')$. Alors $H'$ est une réduction de  $H$ si et seulement si, $\Psi_0$ l'ensemble des colorations qui s'étendent directement à $G$, $\Psi'_0 \subseteq \Psi$.
-\end{theorem}
-
-
-
-
-%Cette première partie est pour expliquer comme est-ce qu'on défini les configurations pour pouvoir être lues. D'abord il  faut remarquer que on a défini les configurations par paires (configuration et sa possible réduction) où les deux configurations ont la même structure. Cette structure s'agit d'une première ligne avec juste le nom de la configuration (ou le numéro, pour reconnaître la structure), puis la prochaine ligne aura une chiffre qui détermine le nombre de sommets qui a la configuration, une deuxième chiffre concernant le nombre des arêtes extérieurs (ou sortants) et finalement une troisième chiffre qui sera un boolean avec un "0" si c'est la configuration et avec un "1" si c'est la réduction. Puis, à partir de la troisième ligne chaque ligne détermine le sommet courant, son degré, et les sommets voisins. Chaque configuration on la stockera dans une matrice d'adjacence.
-
-%La façon de définir les configurations suit une ordre pour que les parties suivantes puissent être conçu de la façon qui nous intéresse, c'est à dire, les premiers sommets ce seront les sommets des arêtes extérieurs ou sortants, ceux qui vont connecter la configuration avec le reste du graphe. Ces sommets auront degré 1 et leurs arêtes incidentes conformeront l'ensemble des arêtes extérieurs ou \emph{ring}.
 
 
 \section{Déchargement}
@@ -795,23 +814,28 @@ Nous proposons la règle de déchargement provisionnelle suivante :
 
 Dans la suite, il faut montrer que tout élément de graphe (sommet ou face) dont la charge reste strictement négative après la redistribution fait partie d'une configuration réductible.
 
-Dans le chapitre \ref{chap:easy} nous avons déjà montré quelques configurations réductibles qui s'appliquent ici aussi. Selon Lemmes \ref{le:14}-\ref{le:333} nous savons déjà qu'il n'y a aucun sommet de degré 1, qu'un sommet de degré 2 n'a que les voisins de degré 4, que pour $v$ ayant un voisin de degré deux, les autres voisins de $v$ sont de degré 4, et qu'un sommet de degré 3 a au moins deux voisins de degré 4.
-
-Soit $v$ un sommet de degré 2. Afin que sa charge devienne positive, il est nécessaire que toutes les deux faces incidentes à $v$ soient de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 2 incident à une face de taille 4.
-
-Soit $v$ un sommet de degré 3. Afin que sa charge devienne positive, il est nécessaire qu'il soit incident à au moins une face de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 3 incident à que des faces de taille 4.
-
-Les sommets de degré 4 et les faces de taille 4 ne participent pas au déchargement, leur charge reste nulle.
-
-Soit $f$ une face de taille 5. Si $f$ est incidente à un sommet de degré 2, selon Lemme \ref{le:243} tous les autres sommets incidents à $f$ sont de degré 4, donc la charge de $f$ est $1-1=0$. Il reste à éliminer les cas où $f$ est incidente à plusieurs sommets de degré 3.
-
-Pareil pour les faces de taille supérieur à 5, il va falloir trouver des configurations réductibles.
+%
+%Soit $v$ un sommet de degré 2. Afin que sa charge devienne positive, il est nécessaire que toutes les deux faces incidentes à $v$ soient de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 2 incident à une face de taille 4.
+%
+%Soit $v$ un sommet de degré 3. Afin que sa charge devienne positive, il est nécessaire qu'il soit incident à au moins une face de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 3 incident à que des faces de taille 4.
+%
+%Les sommets de degré 4 et les faces de taille 4 ne participent pas au déchargement, leur charge reste nulle.
+%
+%Soit $f$ une face de taille 5. Si $f$ est incidente à un sommet de degré 2, selon Lemme \ref{le:243} tous les autres sommets incidents à $f$ sont de degré 4, donc la charge de $f$ est $1-1=0$. Il reste à éliminer les cas où $f$ est incidente à plusieurs sommets de degré 3.
+%
+%Pareil pour les faces de taille supérieur à 5, il va falloir trouver des configurations réductibles.
 
 %Il est essentiel de trouver aussi des configurations réductible contenant les sommets avec charge strictement négative (sommets de degré 2 et 3) ainsi que les faces sans charge strictement positive (des carrés). Il va falloir trouver également les configurations permettant d'éliminer le cas où une face de taille $k$ est incident à $\ell$ sommets de degré 2 ou 3, où $\ell \ge k-4$.
 
-À partir de ce point, regardons quelles configurations seraient vont permettre que le graphe se décharge correctement. 
+À partir de ce point, regardons quelles configurations pourraient nous permettre de réduire les configurations qui ne se déchargent pas de façon positive.
 
+Pour un sommet de degré 2, par exemple par la règle défini dessus, nous devrions trouver des configurations réductibles pour les cas où le sommet de degré 2 il a deux faces de taille 4 autour de lui et le cas où ce même sommet-ci a une face de taille 4 et une autre de taille 5 pour que la configuration puisse se décharger. 
 
+Puis pour un sommet de degré 3, d'abord il faudrait considérer les cas où le sommet a comme voisin un autre sommet de degré 3 et le cas où le sommet de degré 3 il est seul. Pour le premier cas il suffirait de trouver des réductions pour un cas où le pair de sommets de degré 3 a autour de lui 4 carrés et un autre cas où il y a une face de taille 5 et des autres faces de taille 4. Pour le sommet de degré 3 (seul) il faudrait trouver une réduction pour la configuration qui a un sommet de degré 3 avec que des faces de taille 4 autour de lui.
+
+Finalement, un autre objective serait de trouver une réduction pour le cas où nous avons une face de grande taille avec beaucoup de sommets de petit degré incidentes. 
+
+Dans le chapitre suivant nous allons montrer les réductions que nous avons réussi à trouver.
 %D'ailleurs, soit $v$ un sommet de degré 3. Selon le Lemme \ref{le:333} $v$ ne peut avoir que un seul voisin de degré 3, alors considérons les deux cas. D'abord considérons l'existence d'un sommet voisin $u$ de degré 3. Pour que la charge totale de l'environnement de l'arête $e=uv$ devient positive (par la règle (R2)) après la distribution de charge c'est nécessaire qu'il ait deux faces autour de $e$ de taille au moins 5 ou dans le cas échéant, une face de taille au moins 6. C'est à dire, c'est nécessaire trouver une réduction pour une configuration avec 3 carrés et un pentagone autour de $e$. 
 
 %Dans l'autre cas, c-à-d, si $v$ n'a que des voisins de degré 4, la condition pour que la configuration ait une charge total positive est, selon (R2), qu'une des faces autour de $v$ ait une taille au moins 5.
@@ -832,46 +856,40 @@ Pareil pour les faces de taille supérieur à 5, il va falloir trouver des confi
 
 
 
-
-
-\subsection{Vérification des configurations réductibles connues}
-
-\subsection{Propriétés structurelles de $G$}
-
-Ensuite nous montrons, grâce à l'outil de réductibilité, des configurations avec leurs réductions qui vont prouver les propriétés qu'on observe ci dessous. Ces propriétés vont permettre que les règles de déchargement définis dans le chapitre précédent entraînent une contradiction, c-à-d, nous allons montrer les propriétés qui assurent que le graphe se décharge de manière positive.
-
-D'abord, regardons les propriétés qui se donnaient dans la conjecture précédente ($\Delta(G) \leq 4$, $g(G) \geq 5$, $\chi'(G) =4$) car dans ce cas là aussi elles sont présentes. Ces configurations des Lemmes \ref{le:14}-\ref{le:243}, nous les avons testé pour vérifier que le programme était correct. 
-
-Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
-\label{le:33pent}
-\end{lemme}
-
-Pour prouver ce lemme nous avons vérifié que la configuration avec un pair de sommets $u$, $v$ avec 4 carrés autour de ce pair-ci était réductible (il existait déjà cette réduction). Puis nous avons trouvé une réduction pour ce pair de sommets avec 3 carrés et un pentagone autour, ce qui nous a permi prouver le lemme.
-
-\begin{definition}
-Pour un pair de sommets $u$ et $v$ de degré $3$ adjacentes, la distance à un autre sommet de degré $3$ est au moins $2$.
-\label{de:3343}
-\end{definition}
-
-Pour prouver cette propriété nos avons vérifié une réduction pour une configuration $H$ "$3-3-4-3$" qui avait déjà été trouvée à la main. 
-
-
-\begin{lemme}
-Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
-\label{le:2pent}
-\end{lemme}
-
-Dans ce cas là nous avons essayé d'utiliser la même procédure que pour le Lemme \ref{le:33pent}, c-à-dire, nous avons trouvé une réduction pour un sommet $v$ de degré 2 avec deux carrés autour de lui, et pareil pour $v$ avec un carré et un pentagone. Malheureusement nous n'avons pas encore trouvé cette dernière réduction.
-
-\begin{lemme}
-Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
-\label{le:3}
-\end{lemme}
-
-Dans ce cas-là non plus, nous n'avons  n'avons pas réussi à réduire le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.
+%Ensuite nous montrons, grâce à l'outil de réductibilité, des configurations avec leurs réductions qui vont prouver les propriétés qu'on observe ci dessous. Ces propriétés vont permettre que les règles de déchargement définis dans le chapitre précédent entraînent une contradiction, c-à-d, nous allons montrer les propriétés qui assurent que le graphe se décharge de manière positive.
+%
+%D'abord, regardons les propriétés qui se donnaient dans la conjecture précédente ($\Delta(G) \leq 4$, $g(G) \geq 5$, $\chi'(G) =4$) car dans ce cas là aussi elles sont présentes. Ces configurations des Lemmes \ref{le:14}-\ref{le:243}, nous les avons testé pour vérifier que le programme était correct. 
+%
+%Tous les propriétés qu'on présente ensuite (les propriétés précédentes aussi) on les a prouvé à l'aide de l'outil de vérification des réductions qu'on a développé lors de ce {\color{blue}travail??}. Les configurations avec leurs réductions seront montrées dans le chapitre des résultats.
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $u$ et $v$ deux sommets voisins tels que $d_G(u)=d_G(v) = 3$. Alors parmi les 4 faces autour de ce paire de sommets il y a au moins deux pentagones, et tous les sommets autour des faces sauf $v$ et $u$ ont degré 4.
+%\label{le:33pent}
+%\end{lemme}
+%
+%Pour prouver ce lemme nous avons vérifié que la configuration avec un pair de sommets $u$, $v$ avec 4 carrés autour de ce pair-ci était réductible (il existait déjà cette réduction). Puis nous avons trouvé une réduction pour ce pair de sommets avec 3 carrés et un pentagone autour, ce qui nous a permi prouver le lemme.
+%
+%\begin{definition}
+%Pour un pair de sommets $u$ et $v$ de degré $3$ adjacentes, la distance à un autre sommet de degré $3$ est au moins $2$.
+%\label{de:3343}
+%\end{definition}
+%
+%Pour prouver cette propriété nos avons vérifié une réduction pour une configuration $H$ "$3-3-4-3$" qui avait déjà été trouvée à la main. 
+%
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple et $v$ un sommet de $G$ tel que $d_G(v) = 2$. Alors, il existe autour de $v$ deux pentagones ou un hexagone et tous les sommets autour des faces sont de degré 4.
+%\label{le:2pent}
+%\end{lemme}
+%
+%Dans ce cas là nous avons essayé d'utiliser la même procédure que pour le Lemme \ref{le:33pent}, c-à-dire, nous avons trouvé une réduction pour un sommet $v$ de degré 2 avec deux carrés autour de lui, et pareil pour $v$ avec un carré et un pentagone. Malheureusement nous n'avons pas encore trouvé cette dernière réduction.
+%
+%\begin{lemme}
+%Soit $G$ un contre-exemple minimal et $v \in V(G)$ tel que $d_G(v) = 3$.
+%\label{le:3}
+%\end{lemme}
+%
+%Dans ce cas-là non plus, nous n'avons  n'avons pas réussi à réduire le cas où le sommet $v$ a 3 carrés autour de lui, mais on croit forcement en la vérité de ce lemme.
 
 \section{Résultats}
 \label{chap:res}
