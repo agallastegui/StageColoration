@@ -281,5 +281,40 @@ draw z9--z17--z10;
 for i:=11 upto 17: draw v shifted z[i]; endfor;
 endfig;
 
+beginfig(8)
+z0=(0,0);
+z1=(-u,0);
+z2=(0,u);
+z3=(u,0);
+z4=(0,-u);
+z5=(-2u,0);
+z6=(-u,2u);
+z7=(u,2u);
+z8=(2u,0);
+z9=(u,-2u);
+z10=(-u,-2u);
+pickup pencircle scaled .3mm;
+draw z5--z1--z2--z6;
+draw z7--z2--z3--z8;
+draw z9--z4--z3--z0--z1--z4--z10;
+for i:=0 upto 4: draw v shifted z[i]; endfor;
+endfig;
+beginfig(108)
+z0=(0,0);
+z1=(-u,0);
+z2=(u,0);
+z3=(-u,-u);
+z4=(-2u,0);
+z5=(-u,u);
+z6=(u,u);
+z7=(2u,0);
+z8=(u,-u);
+pickup pencircle scaled .3mm;
+draw z4--z1--z0--z2--z7;
+draw z3--z1--z5;
+draw z8--z2--z6;
+for i:=0 upto 2: draw v shifted z[i]; endfor;
+endfig;
 end.
+
 
