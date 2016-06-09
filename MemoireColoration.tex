@@ -53,13 +53,12 @@ Le problème étudié est un problème de coloration des graphes. Plus particuli
 Lé mémoire est structuré de la façon suivante :
 Dans le chapitre \ref{chap:pres}, nous présentons les définitions, les théorèmes et les exemples pour bien se placer dans le domaine. Nous illustrons sur deux exemples d'une complexité non-triviale les deux méthodes principales utilisées aussi dans la preuve du Théorème de quatre couleurs : la réductibilité de configurations et la méthode de déchargement. Le concept de réductibilité est décrit plus détaillé, par ce que c'est pour avancer dans cette démarche qu'on a développer un programme.
 
-Le chapitre \ref{chap:easy} contient ...
+Le chapitre \ref{chap:easy} contient les preuves des propositions voisines de la conjecture traité dans cet écrit. Nous avons prouvé la proposition 5-4-5 et 4-5-4, afin de introduire l'idée générale des méthodes que nous allons utiliser après.  
 
-Le chapitre \ref{chap:meth} est dédié à la description du programme permettant de vérifier la réductibilité de configurations. ... 
+Le chapitre \ref{chap:red} est dédié aux aspects théoriques de la réductibilité, la partie fondamental de ce travail sur laquelle nous avons travaillé la plupart de temps. Ensuite dans le chapitre \ref{chap:Des} nous décrivons les aspects pratiques et surtout, comment nous avons développé le programme qui vérifie la réductibilité.
 
+Suivant la méthode utilisé dans le Théorème de quatre couleurs et dans les propositions que nous avons montré dans un chapitre précédent nous avons défini des règles de déchargement pour prouver la conjecture. Et finalement, nous nous sommes appuies sur ces règles pour définir des objectives, c-à-d des configurations dont nous allons chercher une réduction, donc dans le chapitre \ref{chap:res} nous montrons les résultats obtenus.
 
-etc. 
-à compléter une fois le mémoire tout rempli.
 %Une fois tous les aspects de base de la théorie de graphes soient bien expliqués, il faudra mentionner aussi le théorème de 4 couleurs, un ancien problème très connus qui se soutient en la réductibilité aussi et duquel on s'est inspiré pour aborder notre problème. On va analyser la façon de traiter les graphes et la technique de réduction de ce problème pour essayer de trouver une moyenne de réduire nos graphes.
 
 %Ensuite on passe donc, à décrire les aspects techniques mentionnés ainsi que les différentes méthodes qui seront utilisées.
@@ -995,21 +994,21 @@ Pour un sommet de degré 2, nous avons remarqué deux cas. Un cas où le sommet 
 \label{fig:2CC}
 \end{figure}
 
+Il faut remarquer que pour que cette réduction soit valide, il est nécessaire la présence de deux pentagones autour de cette configuration, afin que la contraction de l'arête reliant deux arêtes sortantes ne crée pas un triangle. Alors, autour de la configuration défini par un sommet de degré 2 avec 2 carrés autour de lui, il faut qu'il ait autour de cette configuration deux pentagones et c'est nécessaire que la disposition de ces deux pentagones soit symétrique par rapport au sommet central. 
 %\subsection{Sommet de degré 3}
 
 \section{Conclusion}
 \label{chap:concl}
-Finalement nous allons faire quelques remarques autour du sujet en soi ainsi que autour du stage de recherche et leurs apports lors de ces 5 mois de stage.
+Pour conclure, nous allons faire un petit résume récapitulatif du travail fait lors de ces 5 mois de stage et nous ferons des remarques les apportes obtenus. À la fin de de ce stage nous avons voulu prendre un peu de recule et réfléchir sur les objectifs que nous avions au début du stage et ce que nous avons réussi. 
 
-Tout d'abord, un peu avant le démarrage du stage j'ai travaillé sur les notions de base de la réductibilité et le déchargement comme une mise a niveau. Pour ce fait j'ai montré à la main les deux conjecturés que nous avons présenté dans le chapitre \ref{chap:easy} afin de maîtriser ces deux techniques. Au même temps, une lecture exhaustive des articles du Théorème de 4 couleurs \cite{T4C} et de la conjecture des graphes planaires de classe 1 pour $\Delta = 7$ \cite{SandersZhao} m'a permis de bien comprendre le coté technique de la réductibilité. 
+D'une coté, nous avons développé un outil capable de vérifier la réductibilité de n'importe quelle paire de configurations. Puis nous avons réussi à trouver des nouvelles configurations réductibles qui contribuent énormément à prouver cette conjecture ouverte depuis des décennies. Parmi plus de 50 paires de configurations testées nous avons réussi à prouver qu'est-ce qui se passe autour des sommets de petit degré.
 
-Une fois les aspects techniques et pratiques ont été compris, j'ai récupéré le code du programme qui traite la réductibilité du Théorème de 4 couleurs car nous nous sommes inspirés de ce programme pour développer le nôtre. Tout ce premier mois j'ai travaillé sur la compréhension du code, afin d'identifier les parties que nous pouvions utiliser, les parties à modifier et les parties à refaire. Bien que nous nous sommes inspirés de ce programme, nous n'avons utilisé que la fonction de lecture et la génération de colorations, lesquelles nous avons dû modifier. J'ai vu que l'inexistence de parité ainsi que des cas manquantes qui seraient présentes dans notre problème pouvaient créer des difficultés donc nous avons décidé refaire tout le reste du programme.
+De l'autre coté, c'est vrai que le travail n'est pas fini. Il y a encore des configurations dont nous n'avons pas pu trouver ses réductions. Nous n'avons pas trouvé la réduction pour un sommet de degré 2 avec un pentagone autour de lui et nous ne avons pas encore étudie les faces de grande taille avec des sommets de petit degré autour. Même la règle de déchargement définie est encore une version préliminaire, mais qui a bien répondu aux problèmes que nous avons posé. Pourtant, le stage n'est pas fini et nous sommes persuadés de que nous sommes sur la bonne route pour prouver ce qui nous manque et pouvoir compléter la preuve. Il reste encore du travail et même si le stage sera bientôt fini nous ne lâcherons pas cet idée que nous avons suivi.
 
-J'ai utilisé la plupart de temps à développer l'outil et à la recherche des nouvelles configurations qui montrent les propriétés structurelles qui pouvaient nous intéresser. Finalement, le dernier mois et demi du stage je l'ai consacré à la technique de déchargement et a la recherche des deux derniers cas que nous n'avons pas été capables de trouver.
+Par rapport à la suite, comme nous avons déjà dit, il reste encore du travail et le pas suivant ce serait le développement d'autre outil qui permet de vérifier que les réductions trouvés ne violent pas des contraintes de connexité, qui ne forment pas des triangles etc.   
+ 
 
-Pourtant, malgré ces deux derniers cas que nous n'avons pas trouvé je considère que nous avons contribue à la démonstration d'une conjecture qui n'a pas été prouve depuis qu'elle a été conçu et nous avons trouvé des nouvelles configurations qui montrent des propriétés structurelles cruciales. Je crois que c'est possible trouver ces deux dernières réductions et même si le stage fini ici, nous allons continuer jusqu'au but. 
-
-Au niveau personnel, ce stage a été un défi, une expérience très enrichissante qui m'a permis d'une coté améliorer les compétences acquises lors de ma formation,et d'une autre coté apprendre des nouvelles techniques ainsi que des outils nécessaires pour le travail de recherche. Je dois remarquer la présence constante et le soutien de mon encadrant Monsieur Kardo\v s, qui m'a appris des aspects surtout liés à ce qui concerne être un chercheur et qui m'a aidé durant l'écriture de l'article, vu qu'il s'agit d'un article scientifique qui demande de la neutralité et de l'objectivité. Ce a été, a mon avis au même temps que la compréhension des aspects techniques les parties qui m'ont semblé les plus difficiles.
+Au niveau personnel, ce stage a été un défi, une expérience très enrichissante qui m'a permis d'une coté, améliorer mes compétences acquises lors de ma formation et d'une autre coté, apprendre des nouvelles techniques ainsi que des outils nécessaires pour le travail de recherche. A mon avis le sujet en soi et les concepts théoriques concernant la méthodologie utilisé pour la preuve du Théorème de 4 couleurs ont été le plus grand obstacle de ce travail.Puis je dois remarquer la présence constante et le soutien de mon encadrant Monsieur Kardo\v s, qui m'a transmis des aspects surtout liés à ce qui concerne être un chercheur et qui m'a aidé durant l'écriture de l'article, afin de le donner de la neutralité et de l'objectivité. Ce a été, a mon avis au même temps que la compréhension des aspects techniques les parties qui m'ont semblé les plus difficiles.
 
 Pour conclure, ce stage m'a apporté la confiance, la force et l'envie de continuer ma formation avec une thèse. Bien que ce soit vrai que je hésitait à continuer, ce stage m'a donné une piste du type de travail que je souhaiterait effectuer dans les prochains ans.
 
