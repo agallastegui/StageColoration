@@ -682,7 +682,7 @@ Donc, ce tableau aussi, nous l'avons calculé en avance afin de ne pas répéter
 
 Dans ce partie nous exhibons l'algorithme du programme, une idée générale de ce que le programme fait. Nous allons observer que nous nous appuyons sur les bases de la réductibilité que nous venons d'étudier dans le chapitre \ref{chap:red}. 
 
-Commençons prenant en entrée $H$ et $H'$, une paire des configurations avec le même ensemble des arêtes sortantes. Nous allons vérifier si $H$ se réduit vers $H'$. Nous allons générer d'abord, toutes les colorations $\psi$ de $H$ qui s'étendent ne gardant que la coloration des arêtes sortantes, c-à-d nous gardons $\beta = \psi|_{\partial_G(H)}$. Cet ensemble des colorations sera $\Phi_0$. Puis, le prochain pas (suivant les notions théoriques de la réductibilité) sera générer les colorations adjacentes aux colorations qui s'étendent déjà tant qu'ils existent des nouvelles colorations adjacentes. C-à-d à chaque itération nous allons trouver des nouvelles colorations qui s'étendent vers des colorations qui s'étendent directement (celles qui appartiennent à $\Phi_0$)ou vers des colorations adjacentes aux colorations étendues (colorations qui se sont étendues dans une itération précédente). On répète ces processus tant qu'il y a des colorations qui s'étendent. Pour chaque itération, l'ensemble des colorations étendues est $\Phi_i}$. L'ensemble de toutes les colorations étendues de $H$ est noté par $\Phi$.
+Commençons prenant en entrée $H$ et $H'$, une paire des configurations avec le même ensemble des arêtes sortantes. Nous allons vérifier si $H$ se réduit vers $H'$. Nous allons générer d'abord, toutes les colorations $\psi$ de $H$ qui s'étendent ne gardant que la coloration des arêtes sortantes, c-à-d nous gardons $\beta = \psi|_{\partial_G(H)}$. Cet ensemble des colorations sera $\Phi_0$. Puis, le prochain pas (suivant les notions théoriques de la réductibilité) sera générer les colorations adjacentes aux colorations qui s'étendent déjà tant qu'ils existent des nouvelles colorations adjacentes. C-à-d à chaque itération nous allons trouver des nouvelles colorations qui s'étendent vers des colorations qui s'étendent directement (celles qui appartiennent à $\Phi_0$)ou vers des colorations adjacentes aux colorations étendues (colorations qui se sont étendues dans une itération précédente). On répète ces processus tant qu'il y a des colorations qui s'étendent. Pour chaque itération, l'ensemble des colorations étendues est $\Phi_i$. L'ensemble de toutes les colorations étendues de $H$ est noté par $\Phi$.
 
 Une coloration $\beta$ des arêtes sortantes de $H$ s'étend s'il existe une paire de couleurs, pour laquelle n'importe quel couplage des arêtes sortantes coloriés avec ces deux couleurs il existe une coloration $\beta$ (qui s'étend) adjacente à $\beta'$.
 
@@ -896,6 +896,54 @@ Dans le chapitre suivant nous allons montrer les réductions que nous avons réu
 
 Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil de réductibilité. D'abord nous avons vérifié sur des configurations réductibles déjà connues qui montrent les Lemmes \ref{le:23}-\ref{le:333}, puis nous avons testé l'outil pour des configurations plus complexes qui ont été déjà prouvées aussi (Lemme \ref{le:33pent} (premier cas) et Lemme \ref{de:3343}) et finalement nous présentons les nouvelles configurations trouvées ainsi que ses réductions correspondantes lesquelles ont aidé a prouver certaines propriétés structurelles (Lemme \ref{le:33pent} (deuxième cas) et Lemme \ref{le:2pent})  
 \subsection{Pair de sommets de degré 3}
+Pour un pair de sommets de degré 3, nous devons différencier 3 cas. Les premiers deux cas correspondent à des configurations qui avaient déjà été prouvées à la main et nous les avons vérifié sur machine.
+
+\underbar{3-3-4-3:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.6}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.106}
+}
+\caption{La configuration 3-3-4-3 (gauche) et sa réduction (droite).}
+\label{fig:3343}
+\end{figure}
+
+\underbar{3-3 avec 4 carrés autour:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.4}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.104}
+}
+\caption{La configuration 3-3 avec 4 carrés autour de ce pair (gauche) et sa réduction (droite).}
+\label{fig:33C}
+\end{figure}
+
+Le troisième cas il s'agit de deux configurations dont deux des nouvelles réductions que nous avons trouvé, le pair de sommets de degré 3 avec un pentagone autour, soit en haut, soit de coté.
+\underbar{3-3 1 pentagone en haut:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.5}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.105}
+}
+\caption{La configuration 3-3 avec un pentagone en haut (gauche) et sa réduction (droite).}
+\label{fig:33PH}
+\end{figure}
+
+\underbar{3-3 1 pentagone de coté:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.7}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.107}
+}
+\caption{La configuration 3-3 avec un pentagone de coté (gauche) et sa réduction (droite).}
+\label{fig:33PC}
+\end{figure}
+
+
 \subsection{Sommet de degré 2}
 \subsection{Sommet de degré 3}
 
