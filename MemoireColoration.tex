@@ -97,9 +97,20 @@ Soit $G=(V(G),E(G))$ un graphe simple. Alors un \emph{couplage} $M$ est un ensem
 
 Un \emph{couplage maximum} est un couplage contenant le plus grande nombre possible d'arêtes.
 
-Un \emph{couplage maximal} est un couplage du graphe tel que toute arête du graphe possède au moins un des sommets incidentes à elle qui est au même temps incidente à une arête du couplage. c-à-d $M$ est un couplage auquel ajoutant n'importe quelle arête $e \in E(G)$, $M \cup e$ n'est plus un couplage.
+Un \emph{couplage maximal} est un couplage du graphe tel que toute arête du graphe possède au moins un des sommets incidentes à elle qui est au même temps incidente à une arête du couplage. c-à-d $M$ est un couplage auquel ajoutant n'importe quelle arête $e \in E(G)$, $M \cup \{e\}$ n'est plus un couplage.
 
 Un \emph{couplage parfait} est un couplage du graphe tel que tout sommet du graphe est incident à une seule arête du couplage.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Couplage.1}
+\hfil
+\includegraphics[scale=1]{./Figures/Couplage.2}
+}
+\caption{Un exemple d'un couplage maximal (gauche) et un couplage maximum que dans ce cas là c'est aussi un couplage parfait (droite)}
+\label{fig:Coup}
+\end{figure}
+
 \end{definition}
 
 \begin{definition}
@@ -164,6 +175,7 @@ Un graphe $G$ est dit \emph{$k$-coloriable} si on peut le colorier à $k$ couleu
 Le \emph{nombre chromatique} $\chi(G)$ d'un graphe $G$, est le plus petit entier $k$ tel que $G$ est $k$-coloriable. Si $\chi(G) = k$, alors on dit que le graphe G est \emph{$k$-chromatique}. Cela signifie donc que $G$ est $k$-coloriable mais  pas $(k-1)$-coloriable.
 \end{definition}
 
+
 %\begin{exemple}
 %.... graphe et colorations
 %\end{exemple}
@@ -181,6 +193,16 @@ Une \emph{coloration d'arêtes} d'un graphe $G$ est une application $\varphi: E(
 
 L'\emph{indice chromatique} $\chi'(G)$ d'un graphe $G$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
 \end{definition}
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Coloration.1}
+\hfil
+\includegraphics[scale=1]{./Figures/Coloration.2}
+}
+\caption{Un exemple d'une coloration propre d'un graphe $G$ avec $\chi(G)=3$ (gauche) et un exemple d'une coloration d'arêtes d'un graphe $G$ avec $\chi'(G)=3$.}
+\label{fig:ex}
+\end{figure}
 
 \begin{theorem}[Vizing]
 Soit $G$ un graphe planaire. Alors, $\chi'(G) = \Delta(G)$ ou $\chi'(G) = \Delta(G) + 1$.
@@ -315,9 +337,9 @@ Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de deg
 
 
 Preuve.
-Supposons que cette condition n'est pas vrai, i.e., que $v$ ait trois voisins de degré 3, disons $u_1$, $u_2$ et $u_3$. Soit $u_4$ et $u_5$ les autres voisins de $v$. Soit $e_i = u_iv$ pour tout $i \in \{1,2,3,4,5\}$. Soit $\{e_i, e_{i1}, e_{i2}\}$ l'ensemble des arêtes incidentes à $u_i$ pour $i \in {1,2,3}$. Considérons une $5$-arête-coloration $\varphi$ de $G' = G \setminus e_1$. On peut supposer que $\varphi(e_2)=2$, $\varphi(e_3)=3$, $\varphi(e_4)=4$ et $\varphi(e_5)=5$, et que $\varphi(e_{11}) = 1$. 
+Supposons que cette condition n'est pas vrai, i.e., que $v$ ait trois voisins de degré 3, disons $u_1$, $u_2$ et $u_3$. Soit $u_4$ et $u_5$ les autres voisins de $v$. Soit $e_i = u_iv$ pour tout $i \in \{1,2,3,4,5\}$. Soit $\{e_i, e_{i1}, e_{i2}\}$ l'ensemble des arêtes incidentes à $u_i$ pour $i \in \{1,2,3\}$. Considérons une $5$-arête-coloration $\varphi$ de $G' = G \setminus e_1$. On peut supposer que $\varphi(e_2)=2$, $\varphi(e_3)=3$, $\varphi(e_4)=4$ et $\varphi(e_5)=5$, et que $\varphi(e_{11}) = 1$. 
 
-On peut même supposer que $\varphi(e_{32}) \in \{3,5\}$.
+On peut même supposer que $\varphi(e_{12}) \in \{3,5\}$.
 Donc, pour $i \in \{2,4\}$, la $(1,i)$-chaîne de Kempe relie $e_{11}$ à $e_i$, ce qui provoque que $u_2$ est incident à une arête coloriée 1, disons $e_{21}$. 
 
 Si $\varphi(e_{22}) \ne 4$, alors la $(1,4)$-chaîne de Kempe de $e_{21}$ est bien différente de celle reliant $e_{11}$ et $e_4$. En alternant les couleurs de la $(1,4)$-chaîne de Kempe de $e_{21}$, on trouverait une coloration $\varphi'$ avec $\varphi'(e_{21})=4$, ce qui permettrait de recolorier $\varphi'(e_2) = 1$ laissant disponible la couleur $2$ pour l'arête $e_1$. On obtiendrait donc une coloration de $G$, ce qui est absurde. 
@@ -325,7 +347,7 @@ Si $\varphi(e_{22}) \ne 4$, alors la $(1,4)$-chaîne de Kempe de $e_{21}$ est bi
 Par conséquence, $\varphi(e_{22}) = 4$. Colorions $\varphi(e_1)=2$, recolorions $\varphi(e_2)=3$ et enlevons la couleurs de $e_3$.
 On peut supposer que $\varphi_{31}=1$, sinon, la couleur $1$ serait libre pour l'arête $e_3$.
 
-En considérant les $(1,2)$-chaînes de Kempe, on peut déduire que $\varphi(e_{32})=2$. Or, dans ce cas-là, la $(1,4)$-chaîne de Kempe de $e_{31}$ est bien différente de celle reliant $e_{11}$ et $e_4$, que cette dernière passe par $u_2$ ou pas. On peut donc transformer $\varphi$ en une autre coloration avec $\varphi(e_{31}=4)$ et colorier $e_3$ de la couleur 1, ce qui est absurde.
+En considérant les $(1,2)$-chaînes de Kempe, on peut déduire que $\varphi(e_{32})=2$. Or, dans ce cas-là, la $(1,4)$-chaîne de Kempe de $e_{31}$ est bien différente de celle reliant $e_{11}$ et $e_4$, que cette dernière passe par $u_2$ ou pas. On peut donc transformer $\varphi$ en une autre coloration avec $\varphi(e_{31})=4$ et colorier $e_3$ de la couleur 1, ce qui est absurde.
 \ep
 
 
@@ -436,7 +458,7 @@ Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degr
 Preuve.
 Supposons qu'il existe $u_1$, $u_2 \in N(v)$ tel que $d(u_1) = d(u_2) = 3$. Soient $e_1 = u_1v$, $e_2 = u_2v$ et $e_3$ les arêtes incidentes à $v$. Notons $e_{ij}$ les arêtes incidentes à $u_i$ différentes de $e_i$, pour $i \in \{1,2\}$, $j \in \{1,2\}$. Considérons une $4$-arête-coloration de $G' = G \setminus e_1$ qui ne soit pas une coloration de $G$. Alors, on peut supposer que  $\varphi(e_2)=1$, $\varphi(e_3)=2$,$\varphi(e_{11})=3$ et $\varphi(e_{12})=4$. De plus, il existe forcément des $(i,j)$-chaînes de Kempe pour $i \in {1,2}$ et $j \in {3,4}$ (sinon il serait facile de trouver une $4$-arête-coloration de $G$) reliant les arêtes incidentes à $v$ avec les arêtes incidentes à $u_1$ dans $G'$. On peut donc supposer que $\varphi(e_{21})=3$ et $\varphi(e_{22})=4$.
 
-Observons maintenant que la $(2,4)$-chaîne de Kempe reliant $e_{12}$ et $e_2$ est bien différente de la $(2,4)$-chaîne de Kempe de $e_{22}$. Alors on peut trouver, en renversant les couleurs de cette dernière chaîne, une coloration de $G'$ telle que $\varphi(e_{22}) = 2$, ce qui permet de poser $\varphi(e_2) = 4$ tout en laissant la possibilité de colorier $e_1$ avec la couleur 2. On obtient donc une $4$-arête-coloration de $G$ ce qui provoque une contradiction.
+Observons maintenant que la $(2,4)$-chaîne de Kempe reliant $e_{12}$ et $e_2$ est bien différente de la $(2,4)$-chaîne de Kempe de $e_{22}$. Alors on trouve, en renversant les couleurs de cette dernière chaîne, une coloration de $G'$ telle que $\varphi(e_{22}) = 2$, ce qui permet de poser $\varphi(e_2) = 4$ tout en laissant la possibilité de colorier $e_1$ avec la couleur 2. On obtient donc une $4$-arête-coloration de $G$ ce qui provoque une contradiction.
 \ep
 
 
@@ -477,6 +499,7 @@ $$
 
 D'ailleurs, la charge initiale de toutes les faces est positive puisque $g(G) \geq 5$.
 
+
 Alors, les règles qui vont distribuer la charge des sommets sont les suivantes :
 
 \begin{enumerate}
@@ -485,15 +508,15 @@ Alors, les règles qui vont distribuer la charge des sommets sont les suivantes 
 \end{enumerate}
 Dans ce cas là aussi, la somme totale de la charge reste invariante et la charge de toutes les faces reste positive.
 
-On va vérifier que pour tout sommet de $G$ la charge finale est positive, ce qui donnera la contradiction. On a déjà montré l'inexistence des sommets de degré 1 dans ces configurations grâce au Lemme \ref{le:14}. Puis, selon Lemme \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4, donc par (R1) la charge finale d'un sommet de degré 2 reste nulle.
+Nous allons vérifier, comme dans la proposition précédente, que pour tout sommet de $G$ la charge finale est positive, ce qui donnera la contradiction. Nous avons déjà montré l'inexistence des sommets de degré 1 dans ces configurations grâce au Lemme \ref{le:14}. Puis, selon Lemme \ref{le:23}, tout sommet de degré 2 n'a que des voisins de degré 4, donc par (R1) la charge finale d'un sommet de degré 2 devient nulle.
 
 Ensuite, soit $v$ un sommet de degré $3$. Selon Lemme \ref{le:333}, le sommet $v$ a au moins deux voisins de degré $4$. Par (R2) on sait que $v$ reçoit 1/4 d'unité de charge négative de chacun de ses deux voisins de degré $4$. Sa charge est donc d'au moins $-1/2+2\cdot 1/4 = 0$.
 
 %Finalement, ces sommets adjacentes aux sommets de degré deux on sait qu'ils ne reçoivent plus de charge de ses autres voisins car selon  Lemme \ref{le:243}, tout sommet adjacent d'un sommet de degré 2 n'a que des voisins de degré 4 (sauf le voisin de degré 2). Alors, d'après (R1) l'endroit autour d'un sommet de degré 2 reste avec une charge finale positive.
 
-Finalement, soit $v$ un sommet de degré 4. Si $v$ a un voisin de degré 2, selon le Lemme \ref{le:243} tous ses autres voisins sont de degré 4, alors, sa charge est de $1-1=0$. Si $v$ a des voisins de degré 3, on sait qu'il ne peut avoir que 4 voisins de degré 3, donc il peut donner au maximum $4 \cdot 1/4=1$ de charge à ces voisins. Alors la charge finale de $v$ est au moins $1 - 4\cdot 1/4 = 0$. Dans tous les cas on obtient une somme de la charge totale positive.
+Finalement, soit $v$ un sommet de degré 4. Si $v$ a un voisin de degré 2, selon le Lemme \ref{le:243} tous ses autres voisins sont de degré 4, alors, sa charge est de $1-1=0$. Si $v$ a des voisins de degré 3, on sait qu'il ne peut avoir que 4 voisins de degré 3, donc il peut donner au maximum $4 \cdot 1/4=1$ de charge à ces voisins. Alors la charge finale de $v$ est au moins $1 - 4\cdot 1/4 = 0$.
 
-Alors, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $5$-arête-coloriable.
+Dans tous les cas, après la redistribution de charge on obtient un graphe chargé non-négativement, ce qui est absurde. On confirme alors l'hypothèse de base, celle qui dit que le graphe est $4$-arête-coloriable.
 \ep 
 
 
@@ -502,9 +525,11 @@ Alors, après la redistribution de charge on obtient un graphe chargé non-néga
 Le Théorème de 4 couleurs est un des théorèmes le plus connu dans le domaine de la coloration des graphes et même de la théorie des graphes. Le théorème dit que n'importe quel graphe planaire est coloriable avec 4 couleurs. C'est une conjecture proposé par Gurthrie en 1852 et qui a été prouvé par Appel et Haken \cite{A&H} en 1976. Malheureusement, la preuve de Appel et Haken n'a pas été complètement accepté car il y avait une partie faite sur machine difficile à vérifier et une autre partie dont l'explication n'était pas tout à fait précise.
 
 C'est pour ce fait-ci qu'il y a eu plusieurs personnes qui ont tenté de démontrer ce théorème, et c'est Robertson, Sanders, Seymour et Thomas \cite{T4C} qui l'ont ré-prouvé en 1995. En fait, dans cette nouvelle preuve ils se sont inspirés largement de la preuve de Appel et Haken, cependant, ils ont simplifié d'une manière significative la procédure de déchargement, et leur programme de vérification de réductibilité automatisée est plus robuste et indépendant du déchargement.
-%t ils ont utilisé une méthode de réduction pour trouver des contra-exemples minimales pour toutes les configurations pour lequel si on trouve une configuration qui est \emph{réductible} on ne regarde pas cette configuration parce qu'on regarde sa \emph{réduction} ou partie plus petite. Puis il faut montrer que aucun des contre-exemples contredit l'hypothèse. Pour ce fait ils ont utilisé la méthode de déchargement. 
 
-\begin{theorem}[Appel, Haken]
+
+\begin{theorem}[Robertson, Sanders, Seymour, Thomas]
+
+
 Soit $G$ un graphe planaire. Alors $G$ est 4-coloriable.
 \label{th:4CT}
 \end{theorem}
@@ -586,10 +611,10 @@ $$
 $$
 de plus, on a \\
 $|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ si et seulement si $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=0$, et \\
-$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ si et seulement si $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=2$ si et seulement si $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
 \end{proposition}
 
-Preuve. Il est facile à observer que la modification de couleurs de la $(c,c')$-chaîne de Kempe de $e$ comporte un changement de couleur de $e$. Cela peut entraîne un changement de couleur d'une autre arête $e'$  de $\partial_G(H)$ si et seulement si cette chaîne-ci contient cette arête-là. \ep
+Preuve. Il est facile à observer que la modification de couleurs de la $(c,c')$-chaîne de Kempe de $e$ comporte un changement de couleur de $e$. Cela peut entraîner un changement de couleur d'une autre arête $e'$  de $\partial_G(H)$ si et seulement si cette chaîne-ci contient cette arête-là. \ep
 
 %À l'aide de ces notions auxiliaires, nous pouvons définir l'ensemble de colorations de $\partial_G(H)$ telles que s'il existe une coloration de $G\setminus H$, alors il existe une coloration de $G$.
 
@@ -606,36 +631,36 @@ Nous notons $N^X_{c,c'}(\beta)$ l'ensemble de colorations adjacentes à $\beta$ 
 \end{definition}
 
 \begin{definition}
-Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $H$ s'il existe une coloration $\psi$ de $H^*$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Psi_0$ l'ensemble des colorations de $\partial_G(H)$ qui s'étendent vers $H$, i.e.,
+Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. Alors, $\beta$ \emph{s'étend} vers $H$ s'il existe une coloration $\psi$ de $H^*$ telle que $\psi|_{\partial_G(H)} = \beta$. Notons $\Phi_0$ l'ensemble des colorations de $\partial_G(H)$ qui s'étendent vers $H$, i.e.,
 $$
-\Psi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{ une coloration telle que } \psi|_{\partial_G(H)} = \beta\}.
+\Phi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{ une coloration telle que } \psi|_{\partial_G(H)} = \beta\}.
 $$
 Ensuite, pour $i\in\mathbb{N}$, soit
 $$
-\Psi_{i+1} = 
+\Phi_{i+1} = 
 \{ 
 \beta : 
-\beta\in \Psi_i
+\beta\in \Phi_i
 \textrm{ ou }
 \exists c,c'\in \{1,2,3,4\},\, 
 \forall X\textrm{ couplage planaire de $\partial_G(H)$, }
-N^X_{c,c'}(\beta) \cap \Psi_i \neq \emptyset 
+N^X_{c,c'}(\beta) \cap \Phi_i \neq \emptyset 
 \},
 $$
 c-à-d, l'ensemble des colorations $\beta$ telles que pour une paire de couleurs $c,c'$, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe une coloration adjacente à $\beta$ déjà dans $\Psi_{i}$. Finalement, soit
 $$
-\Psi(H)=\bigcup_{i\in \mathbb{N}} \Psi_i(H).
+\Phi(H)=\bigcup_{i\in \mathbb{N}} \Phi_i(H).
 $$
 \end{definition}
 
 \begin{theorem}
 Soit $H$ une configuration de $G$, soit $H'$ une autre configuration telle que $\partial(H)=\partial(H')$. Soit $G'$ le graphe obtenu à partir de $G$ en remplaçant $H$ par $H'$.
-Si $\Psi_0(H')\subseteq \Psi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
+Si $\Phi_0(H')\subseteq \Phi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
 \label{th:red}
 \end{theorem}
 
-Preuve. Soit $\varphi'$ une coloration de $G'$, soit $\beta'=\varphi'|\partial_H(G)$. Comme $\varphi$ est une coloration de $G'$, $\beta'$ est une coloration de $\partial_G(H')$ qui s'étend vers $H'$, d'où $\beta'\in \Psi_0(H')$.
-Alors, il existe $i\in \mathbb{N}$ tel que $\beta' \in \Psi_{i}(H)$.
+Preuve. Soit $\varphi'$ une coloration de $G'$, soit $\beta'=\varphi'|\partial_H(G)$. Comme $\varphi$ est une coloration de $G'$, $\beta'$ est une coloration de $\partial_G(H')$ qui s'étend vers $H'$, d'où $\beta'\in \Phi_0(H')$.
+Alors, il existe $i\in \mathbb{N}$ tel que $\beta' \in \Phi_{i}(H)$.
 Nous démontrons l'existence d'une coloration $\varphi$ de $G$ par récurrence par rapport à $i$.
 
 Si $i=0$, alors $\beta'$ s'étend vers $H$, c-à-d, il existe une coloration $\psi$ de $H^*$ telle que $\psi|\partial_G(H)=\beta'$. On définit
@@ -649,12 +674,12 @@ $$
 
 Il est évident que c'est une 4-arête-coloration de $G$
 
-Supposons que $\beta' \in \Psi_{i+1}(H)\setminus \Psi_i(H)$ pour un $i\in \mathbb{N}$. Alors, il existe deux couleurs $c,c'$ telles que, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe $\beta''\in \Psi_i(H)$ adjacente à $\beta'$. Considérons maintenant le couplage planaire $\mathcal{X}_{\varphi'}^{c,c'}$. La coloration $\beta''$ adjacente à $\beta'$ correspondante est une restriction d'une coloration de $G'$ adjacente à $\varphi'$, disons $\varphi''$. Puisque $\beta''\in \Psi_i(H)$, par l'hypothèse de récurrence, pour $\varphi''$ il existe une 4-arête-coloration $\varphi$ de $G$.
+Supposons que $\beta' \in \Phi_{i+1}(H)\setminus \Phi_i(H)$ pour un $i\in \mathbb{N}$. Alors, il existe deux couleurs $c,c'$ telles que, quelque soit un couplage planaire $X$ de $\partial_G(H)$, il existe $\beta''\in \Phi_i(H)$ adjacente à $\beta'$. Considérons maintenant le couplage planaire $\mathcal{X}_{\varphi'}^{c,c'}$. La coloration $\beta''$ adjacente à $\beta'$ correspondante est une restriction d'une coloration de $G'$ adjacente à $\varphi'$, disons $\varphi''$. Puisque $\beta''\in \Phi_i(H)$, par l'hypothèse de récurrence, pour $\varphi''$ il existe une 4-arête-coloration $\varphi$ de $G$.
 
 Autrement dit, il suffit de modifier la coloration $\varphi'$ le long des chaînes de Kempe un nombre fini de fois afin d'obtenir une coloration qui s'étend directement vers $H$. \ep
 
 \begin{definition}
-Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La configuration $H$ \emph{se réduit} vers $H'$ si $\Psi_0(H')\subseteq \Psi(H)$. La configuration $H$ est \emph{réductible} s'il existe une configuration $H'$ vers la quelle elle se réduit.
+Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La configuration $H$ \emph{se réduit} vers $H'$ si $\Phi_0(H')\subseteq \Phi(H)$. La configuration $H$ est \emph{réductible} s'il existe une configuration $H'$ vers la quelle elle se réduit.
 \end{definition}
 
 Théorème \ref{th:red} permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
@@ -664,13 +689,13 @@ Dans le chapitre \ref{chap:Des}, nous donnons la description plus détaillée de
 \section{Description de l'outil de réductibilité}
 \label{chap:Des}
 
-Ce chapitre sera consacré à décrire la fonctionnalité de l'outil de vérification de réductibilité que nous avons implémenté. Nous allons expliquer plus profondément qu'est ce que le programme fait.
+Ce chapitre sera consacré à décrire la fonctionnalité de l'outil de vérification de la réductibilité que nous avons implémenté. Nous allons expliquer plus profondément qu'est-ce que le programme fait.
 
-D'abord, c'est un programme qui prend en entrée une configuration $H$, que nous voulons réduire et une autre configuration $H'$, une réduction de $H$ potentielle, avec la même disposition des arêtes sortantes et il donne en sortie une réponse de "oui" ou "non". Ensuite nous allons présentés des aspects du programme pour une meilleure compréhension de son déroulement. Nous allons définir des concepts que nous avons dû pré-calculer, puis nous allons expliquer le traitement ou l'algorithme général du programme et finalement nous allons introduire des notions que nous avons utilisé lors de l'implémentation.
+D'abord, c'est un programme qui prend en entrée une configuration $H$, que nous voulons réduire et une autre configuration $H'$, une réduction de $H$ potentielle, avec la même disposition des arêtes sortantes et il donne en sortie une réponse de "oui" ou "non". Ensuite nous allons présenter des aspects du programme pour une meilleure compréhension de son déroulement. Nous allons définir des concepts que nous avons dû pré-calculer, puis nous expliquerons le traitement ou l'algorithme général du programme et finalement nous allons introduire des notions que nous avons utilisé lors de l'implémentation.
 
 \subsection{Pré-calcul}
 
-Il y a deux variables, ou plutôt deux ensembles que nous avons voulu calculer en avance car, générer ces types de calculs pour chaque itération était très coûteuse. D'une coté nous avons généré l'ensemble de tous les couplages possibles à $k$ sommets pour $k$ allant de 1 jusqu'à le nombre maximum des arêtes sortantes de une configuration (MAXRING). Les couplages sont fixes, c-à-d, l'ensemble de couplages ne change jamais, il change seulement le nombre d'arêtes pour lequel nous les générons, donc pour calculer les $\Phi_i$ générer tous ces couplages n'était pas efficace. 
+Il y a deux variables, ou plutôt deux ensembles que nous avons voulu calculer en avance, car générer ces types de calculs pour chaque itération était très coûteuse. D'une coté nous avons généré l'ensemble de tous les couplages possibles à $k$ sommets pour $k$ allant de 1 jusqu'à le nombre maximum des arêtes sortantes de une configuration (MAXRING). Les couplages sont fixes, c-à-d, l'ensemble de couplages ne change jamais, il change seulement le nombre de sommets pour lequel nous les générons, donc pour calculer les $\Phi_i$ (c'est à ce moment là que nous utilisons les couplages), générer tous ces couplages n'était pas efficace. 
 
 De l'autre coté, nous avons calculé une tableau de modifications. Sur cet aspect nous ne pouvons pas dire grande chose parce qu'il nécessite des autres concepts que nous allons définir au long de cette description. Il s'agit d'un tableau qui stocke les valeurs de la formule suivante,
 $$
@@ -682,38 +707,45 @@ Donc, ce tableau aussi, nous l'avons calculé en avance afin de ne pas répéter
 
 Dans ce partie nous exhibons l'algorithme du programme, une idée générale de ce que le programme fait. Nous allons observer que nous nous appuyons sur les bases de la réductibilité que nous venons d'étudier dans le chapitre \ref{chap:red}. 
 
-Commençons prenant en entrée $H$ et $H'$, une paire des configurations avec le même ensemble des arêtes sortantes. Nous allons vérifier si $H$ se réduit vers $H'$. Nous allons générer d'abord, toutes les colorations $\psi$ de $H$ qui s'étendent ne gardant que la coloration des arêtes sortantes, c-à-d nous gardons $\beta = \psi|_{\partial_G(H)}$. Cet ensemble des colorations sera $\Phi_0$. Puis, le prochain pas (suivant les notions théoriques de la réductibilité) sera générer les colorations adjacentes aux colorations qui s'étendent déjà tant qu'ils existent des nouvelles colorations adjacentes. C-à-d à chaque itération nous allons trouver des nouvelles colorations qui s'étendent vers des colorations qui s'étendent directement (celles qui appartiennent à $\Phi_0$)ou vers des colorations adjacentes aux colorations étendues (colorations qui se sont étendues dans une itération précédente). On répète ces processus tant qu'il y a des colorations qui s'étendent. Pour chaque itération, l'ensemble des colorations étendues est $\Phi_i$. L'ensemble de toutes les colorations étendues de $H$ est noté par $\Phi$.
+Commençons prenant en entrée $H$ et $H'$, une paire des configurations avec le même ensemble des arêtes sortantes et vérifions si $H$ se réduit vers $H'$. Nous générons d'abord, toutes les colorations $\psi$ de $H$ qui s'étendent, ne gardant que la coloration des arêtes sortantes, c-à-d nous gardons $\beta = \psi|_{\partial_G(H)}$. Cet ensemble des colorations sera $\Phi_0$. Puis, le prochain pas (suivant les notions théoriques de la réductibilité) sera générer les colorations adjacentes aux colorations qui s'étendent déjà tant qu'ils en existent. C-à-d à chaque itération nous allons trouver des nouvelles colorations qui s'étendent vers des colorations qui s'étendent directement (celles qui appartiennent à $\Phi_0$) ou vers des colorations adjacentes aux colorations étendues (colorations qui se sont étendues dans une itération précédente). On répète ces processus tant qu'il y a des colorations qui s'étendent. Pour chaque itération, l'ensemble des colorations étendues est $\Phi_i$. L'ensemble de toutes les colorations étendues de $H$ est noté par $\Phi$.
 
 Une coloration $\beta$ des arêtes sortantes de $H$ s'étend s'il existe une paire de couleurs, pour laquelle n'importe quel couplage des arêtes sortantes coloriés avec ces deux couleurs il existe une coloration $\beta$ (qui s'étend) adjacente à $\beta'$.
 
-Une fois nous avons généré toutes les colorations étendes de $H$, nous prenons $H'$ l'autre configuration et nous générons toutes les colorations $\psi'$ de $H'$ qui s'étendent directement obtenant l'ensemble $\Phi'_0$.
+Une fois générées toutes les colorations étendues de $H$, nous prenons $H'$ l'autre configuration et nous générons toutes les colorations $\psi'$ de $H'$ qui s'étendent directement obtenant l'ensemble $\Phi'_0$.
 
 Finalement si $\Phi'_0$ est inclus dans $Phi$ ($\Phi'_0(H')\subseteq \Phi(H)$), alors $H$ se réduit vers $H'$ et $H$ sera réductible.
 
 \subsection{Implémentation}
 
-Finalement lors de l'implémentation nous allons décrire comme ce programme a été conçu. Nous avons déjà mentionné que nous nous sommes inspirés du Théorème de 4 couleurs, alors nous avons pris aussi le programme que ils ont utilisé pour montrer la réductibilité dans leur cas et nous avons regardé les parties que nous pouvions utiliser. Vu que dans le Théorème de 4 couleurs ils regardent des configurations cubiques et triangulations, nous n'avons pas pu utiliser grande chose. Ensuite nous parlons plus en détail des aspects d'implémentation à remarquer dans notre programme.
+Finalement lors de l'implémentation nous allons décrire comme ce programme a été conçu. Nous avons déjà mentionné que nous nous sommes inspirés du Théorème de 4 couleurs, alors nous avons pris aussi le programme que ils ont utilisé pour montrer la réductibilité dans leur cas et nous avons regardé les parties que nous pouvions utiliser. Pourtant, les conditions requises dans le Théorème de 4 couleurs ne sont pas les mêmes que dans notre problème,  nous n'avons gardé que la structure du programme. Ensuite nous parlons plus en détail des aspects à remarquer dans le programme.
 
-Nous avons dit que le programme prend deux configurations en entrée. Ces configurations sont présentées sous forme d'une liste d'adjacence. Nous lisons les configurations et puis les deux configurations sont stockées dans deux matrices différentes. Puis le programme crée une étiquetage des arêtes de la configuration commençant par les arêtes sortantes et puis il continue vers l'intérieur du graphe. Ensuite pour générer les colorations de $H$, le programme utilise une méthode de retour sur le trace ou Backtrack, et il stocke les colorations de $H$ sous forme de code, gardant que la coloration des arêtes sortantes. Ce code a été calculé de la manière suivante,
-$$
-k = \sum_{i=0}^{r-1} \c(\beta(i)) \cdot 4^{i} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
-$$
+Nous avons dit que le programme prend deux configurations en entrée. Ces configurations sont présentées sous forme d'une liste d'adjacence. D'après une lecture, les deux configurations sont stockées dans deux matrices différentes. Puis le programme crée une numérotation des arêtes de la configuration. Le programme numérote d'abord, les arêtes sortantes et après il continue vers l'intérieur. 
 
-Une fois nous avons généré toutes ces colorations, passons à la partie des colorations voisines ou adjacentes. C'est dans ce parti où le programme utilise les couplages pré-calculés. l'ensemble de tous les couplages $M$ à $k$ (entier) sommets est $\mathcal{M}$. le programme se sert des couplages pour vérifier la condition d'adjacence de la réductibilité, c-à-d un couplage $M$ appliqué à deux arêtes coloriées avec deux couleurs, représente une arête du graph résiduel.
+%\begin{definition}
+%Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. 
+%\end{definition}
+
+%D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
+
+
+Ensuite pour générer l'ensemble $\Phi_0$ des colorations de $H$, le programme utilise une méthode de retour sur le trace ou Backtrack, et il stocke les colorations de $H$ sous forme de code, gardant que la coloration des arêtes sortantes. Ce code a été calculé de la manière suivante,
+$$
+k = \sum_{e=0}^{r-1} \c(\beta(e)) \cdot 4^{e} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \},
+$$
+étant $c$ le code qui donne la valeur 0, 1, 2 ou 3 selon la couleur de l'arête $e$.
+
+Une générées toutes ces colorations, passons à la partie des colorations voisines ou adjacentes. C'est dans ce parti où le programme utilise les couplages et les modifications pré-calculés. L'ensemble de tous les couplages $M$ à $k$ (entier) sommets est $\mathcal{M}$. Le programme se sert des couplages pour effectuer les changements des couleurs produits par des chaînes de Kempe. Remarquons que une seule modification de la coloration des arêtes sortantes est possible au même temps. C-à-d, une seule chaîne de Kempe produit un seul changement de la coloration pour une paire de couleurs $c$, $c'$. De cette façon le programme génère les colorations adjacentes qui seront stockées dans l'ensemble $\Phi_i$ à la $i$-ème itération. Ce processus itérative se répète tant que le programme trouve des nouvelles colorations adjacentes (tan que $Phi_{i-1} \subset Phi_i$).
 
 Finalement, pour savoir si une coloration $\beta$ est adjacente d'une autre coloration $\beta'$ il suffit trouver une modification de $\beta$ d'une paire de couleurs, le programme vérifie la formule suivante,
 $$
 \begin{cases}
-k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si l'arête $e \in X$ renverse ses couleurs}\\
-k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si l'arête $e \in X$ couplée à e' renverse ses couleurs}
+k' =  k + (-2\beta'(e)+c + c')\cdot 4^{e} \qquad si \quad d_M(e)=0\\
+k' = k  + (-2\beta'(e)+c + c')\cdot 4^{e} + (-2\beta'(e')+c + c')\cdot 4^{e'} \qquad si \quad d_M(e) = d_M(e') = 1.
 \end{cases}
 $$
 
-où $k$ et $k'$ sont les codes correspondantes aux colorations $\beta$ et $\beta'$ respectivement.
-%\begin{definition}
-%Soit $H$ une configuration du graphe $G$ et soit $\partial_G(H)$ l'ensemble des arêtes sortantes tel que $|\partial_G(H)|=r$. Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$. D'abord les arêtes de cet ensemble $\partial_G(H)$ s'identifient avec des chiffres  entre $1$ et $r$. Puis les arêtes restantes sont identifiées entre $r+1$ et $m$, étant $m$ le nombre d'arêtes totale de $H$.
-%\end{definition}
-%
+où $k$ et $k'$ sont les codes correspondantes aux colorations $\beta$ et $\beta'$ respectivement. Remarquons que le morceau de formule suivant $(-2\beta'(e)+c + c')\cdot 4^{e}$, est la modification de couleurs pour une arête quelconque sortante et c'est la partie pré-calculée que nous avons déjà mentionné.
+
 %\begin{definition}
 %Soit $H$ une configuration de $G$ avec une numérotation des arêtes. Alors, le \emph{voisinage} d'une arête $e$ est défini comme l'ensemble des arêtes adjacentes à $e$ qui ont été numérotés avec une chiffre plus grande que celle-ci de $e$. {\color{blue} Encore à revoir}
 %\end{definition}
@@ -812,7 +844,7 @@ Nous proposons la règle de déchargement provisionnelle suivante :
 \item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
 \end{enumerate}
 
-Dans la suite, il faut montrer que tout élément de graphe (sommet ou face) dont la charge reste strictement négative après la redistribution fait partie d'une configuration réductible.
+Dans la suite, il faut montrer que tout élément de graphe (sommet ou face) dont la charge reste strictement négative après la redistribution fait partie d'une configuration réductible. Regardons sur quelles configurations serait nécessaire trouver des réductions.
 
 %
 %Soit $v$ un sommet de degré 2. Afin que sa charge devienne positive, il est nécessaire que toutes les deux faces incidentes à $v$ soient de taille au moins 5. Donc, il va falloir trouver des configurations réductibles avec un sommet de degré 2 incident à une face de taille 4.
@@ -827,13 +859,16 @@ Dans la suite, il faut montrer que tout élément de graphe (sommet ou face) don
 
 %Il est essentiel de trouver aussi des configurations réductible contenant les sommets avec charge strictement négative (sommets de degré 2 et 3) ainsi que les faces sans charge strictement positive (des carrés). Il va falloir trouver également les configurations permettant d'éliminer le cas où une face de taille $k$ est incident à $\ell$ sommets de degré 2 ou 3, où $\ell \ge k-4$.
 
-À partir de ce point, regardons quelles configurations pourraient nous permettre de réduire les configurations qui ne se déchargent pas de façon positive.
+%À partir de ce point, regardons quelles configurations pourraient nous permettre de réduire les configurations qui ne se déchargent pas de façon positive.
 
-Pour un sommet de degré 2, par exemple par la règle défini dessus, nous devrions trouver des configurations réductibles pour les cas où le sommet de degré 2 il a deux faces de taille 4 autour de lui et le cas où ce même sommet-ci a une face de taille 4 et une autre de taille 5 pour que la configuration puisse se décharger. 
+Pour un sommet de degré 2, par la règle défini dessus, il faudrait trouver des configurations réductibles pour les cas où le sommet de degré 2 il a deux faces de taille 4 autour de lui car dans ce cas là le sommet il ne recevrait aucune charge positive des faces voisines. Et le cas où ce même sommet-ci a une face de taille 4 et une autre de taille 5 ne suffirait non plus pour décharger complètement la charge négative du sommet. 
 
-Puis pour un sommet de degré 3, d'abord il faudrait considérer les cas où le sommet a comme voisin un autre sommet de degré 3 et le cas où le sommet de degré 3 il est seul. Pour le premier cas il suffirait de trouver des réductions pour un cas où le pair de sommets de degré 3 a autour de lui 4 carrés et un autre cas où il y a une face de taille 5 et des autres faces de taille 4. Pour le sommet de degré 3 (seul) il faudrait trouver une réduction pour la configuration qui a un sommet de degré 3 avec que des faces de taille 4 autour de lui.
+Puis pour un sommet de degré 3, d'abord il faudrait considérer les cas où le sommet a comme voisin un autre sommet de degré 3 et le cas où le sommet de degré 3 il a des voisins de degré supérieur. Pour le premier cas il suffirait de trouver une réductions pour le cas où le pair de sommets de degré 3 a autour de lui 4 carrés et une autre réduction pour le cas où il y a une face de taille 5 et des autres faces de taille 4. S'il y a 4 faces de taille 4, observons que les faces de taille 4 ne donnent aucune charge ce qui laisserait le pair de sommets chargé négativement. Même dans le cas où il y a une face de taille 5, il ne serait pas suffisant, car une pentagone, d'après la règle de déchargement défini, donnerait sa charge à un des sommets mais l'autre sommet resterait chargé négativement.
 
-Finalement, un autre objective serait de trouver une réduction pour le cas où nous avons une face de grande taille avec beaucoup de sommets de petit degré incidentes. 
+
+Pour le sommet de degré 3 voisin des sommets de plus grand degré il faudrait trouver une réduction pour la configuration qui a un sommet de degré 3 avec que des faces de taille 4 autour de lui. Ce cas est similaire aux cas précédentes, le sommet reste chargé négativement.
+
+Finalement, un autre objectif serait de trouver une réduction pour le cas où nous avons une face de grande taille avec beaucoup de sommets de petit degré incidentes. 
 
 Dans le chapitre suivant nous allons montrer les réductions que nous avons réussi à trouver.
 %D'ailleurs, soit $v$ un sommet de degré 3. Selon le Lemme \ref{le:333} $v$ ne peut avoir que un seul voisin de degré 3, alors considérons les deux cas. D'abord considérons l'existence d'un sommet voisin $u$ de degré 3. Pour que la charge totale de l'environnement de l'arête $e=uv$ devient positive (par la règle (R2)) après la distribution de charge c'est nécessaire qu'il ait deux faces autour de $e$ de taille au moins 5 ou dans le cas échéant, une face de taille au moins 6. C'est à dire, c'est nécessaire trouver une réduction pour une configuration avec 3 carrés et un pentagone autour de $e$. 
@@ -894,7 +929,8 @@ Dans le chapitre suivant nous allons montrer les réductions que nous avons réu
 \section{Résultats}
 \label{chap:res}
 
-Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil de réductibilité. D'abord nous avons vérifié sur des configurations réductibles déjà connues qui montrent les Lemmes \ref{le:23}-\ref{le:333}, puis nous avons testé l'outil pour des configurations plus complexes qui ont été déjà prouvées aussi (Lemme \ref{le:33pent} (premier cas) et Lemme \ref{de:3343}) et finalement nous présentons les nouvelles configurations trouvées ainsi que ses réductions correspondantes lesquelles ont aidé a prouver certaines propriétés structurelles (Lemme \ref{le:33pent} (deuxième cas) et Lemme \ref{le:2pent})  
+Dans ce dernier chapitre, nous montrons les résultats obtenus grâce à l'outil de réductibilité. Nous avons essayé de trouver les réductions nécessaires pour pouvoir décharger le graphe correctement.
+
 \subsection{Pair de sommets de degré 3}
 Pour un pair de sommets de degré 3, nous devons différencier 3 cas. Les premiers deux cas correspondent à des configurations qui avaient déjà été prouvées à la main et nous les avons vérifié sur machine.
 
@@ -921,6 +957,7 @@ Pour un pair de sommets de degré 3, nous devons différencier 3 cas. Les premie
 \end{figure}
 
 Le troisième cas il s'agit de deux configurations dont deux des nouvelles réductions que nous avons trouvé, le pair de sommets de degré 3 avec un pentagone autour, soit en haut, soit de coté.
+
 \underbar{3-3 1 pentagone en haut:}
 \begin{figure}[ht]
 \centerline{
@@ -945,7 +982,20 @@ Le troisième cas il s'agit de deux configurations dont deux des nouvelles rédu
 
 
 \subsection{Sommet de degré 2}
-\subsection{Sommet de degré 3}
+Pour un sommet de degré 2, nous avons remarqué deux cas. Un cas où le sommet avait deux faces de taille 4 autour de lui et un autre où ce sommet-ci avait une face de taille 4 et une autre de taille 5. Pour le premier cas nous avons réussi à trouver la réductions, mais malheureusement nous n'avons pas pu trouver une réduction pour le deuxième cas. Voici la réduction trouvée.
+
+\underbar{2 avec 2 carrés}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.8}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.108}
+}
+\caption{La configuration 2 avec deux carrés (gauche) et sa réduction (droite).}
+\label{fig:2CC}
+\end{figure}
+
+%\subsection{Sommet de degré 3}
 
 \section{Conclusion}
 \label{chap:concl}
