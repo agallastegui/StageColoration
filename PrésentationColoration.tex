@@ -56,11 +56,11 @@ Le degré $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
 \centerline{
 \includegraphics[scale=1]{./Figures/Fig-def.1}
 }
-\caption{Un exemple d'un graphe de degré minimum 2 et degré maximum 4}
+\caption{Un exemple d'un graphe de $\delta(G)= 2$ et $\Delta(G)= 4$}
 \end{figure}
 
 
-La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur d'un plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
+La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur du plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
 \end{frame}
 
 \begin{frame}
@@ -127,14 +127,14 @@ L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessi
 \begin{theorem}[Vizing]
 Soit $G$ un graphe simple. Alors $\Delta(G) \leq \chi'(G) \leq \Delta(G) + 1$.
 \end{theorem}
-Si $\chi'(G) = \Delta(G)$,  $G$ est classe 1.
+Si $\chi'(G) = \Delta(G)$,  $G$ est de classe 1.
 
 \pause
 %Pour un graphe planaire $G$ voici quelques résultats connus
-Quels graphes planaires sont classe 1?
+Quels graphes planaires sont de classe 1?
 \begin{itemize}
-\item $\Delta(G) \geq 8$ $\implies$ $\chi'(G)=\Delta$. (Vizing 1965).
-\item $\Delta(G) = 7$ $\implies$ $\chi'(G)=7$. (Sanders, Zhao 2001).
+\item $\Delta(G) \geq 8$ $\implies$ $\chi'(G)=\Delta$ (Vizing 1965).
+\item $\Delta(G) = 7$ $\implies$ $\chi'(G)=7$ (Sanders, Zhao 2001).
 \item $\Delta(G) = 5$ $g(G) \geq 4$ $\implies$ $\chi'(G) = 5$.
 \item $\Delta(G) = 4$ $g(G) \geq 5$ $\implies$ $\chi'(G) = 4$.
 \end{itemize}
@@ -307,7 +307,6 @@ Dans ce cas là aussi, la somme totale de la charge reste invariante et la charg
 \begin{frame}
 Soit $H$ un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
 
-\pause
 
 
 Dans la suite, lorsque nous parlons d'une configuration $H$ dans un graphe $G$, nous identifions $H$ et sa copie $X=\xi(H)$ dans $G$.
@@ -340,7 +339,7 @@ Soit
 
 Une coloration $\varphi':E(G)\setminus E(H)\to \{1,2,3,4\}$ est \emph{adjacente} à $\varphi$, si $\varphi'$ peut être obtenu à partir de $\varphi$ en alternant les couleurs d'une $(c,c')$-chaîne de Kempe de $e$ pour un choix d'une arête $e\in\partial_G(H)$ et des couleurs $c,c'\in\{1,2,3,4\}$. 
 
-
+\pause
 
 Notons $N(\varphi)$ l'ensemble des colorations adjacentes à $\varphi$.
 \end{frame}
@@ -420,7 +419,7 @@ $$
 Soit 
 \begin{itemize}
 \item $H$ une configuration de $G$. 
-\item $H'$ une autre configuration t.q. $\partial(H)=\partial(H')$.
+\item $H'$ une autre configuration t.q. $\partial_G(H)=\partial_G(H')$.
 \item $G'$ le graphe obtenu à partir de $G$ en remplaçant $H$ par $H'$.
 \end{itemize}
 
@@ -468,8 +467,8 @@ Ensuite, nous décrivons l'outil de la manière suivante,
 \begin{frame}
 Partant d'une configuration $H$ de $G$ et $H'$ sa réduction potentielle,
 \begin{itemize}
-\item On génère l'ensemble des colorations $\psi$ de $H$ qui constituent $\Phi_0$,
-\item Tant que $\Phi_i \subset \Phi_{i+1}$, on génère des colorations adjacentes à $\beta \in \Phi_i$,
+\item On génère l'ensemble des colorations $\psi$ de $H^*$ t.q. $\psi|_{\partial_G(H)} = \beta$, constituent $\Phi_0$,
+\item Tant que $\Phi_i \subset \Phi_{i+1}$ pour $i \geq 0$, on génère des colorations adjacentes à $\beta \in \Phi_i$,
 \item L'ensemble totale des colorations qui s'étendent vers $H$ est $\Phi(H) = \bigcup_{i \in \mathbb{N}} \Phi_i(H)$,
 \item On génère l'ensemble $\Phi'_0$ des colorations $\psi'$ de $H'$ t.q. une coloration de $G'$ s'étend vers $H'$ et
 \item On regarde si $\Phi'_0(H') \subseteq \Phi(H)$.
@@ -501,7 +500,7 @@ Nous colorions les arêtes de $H$ partant de la dernière arête vers l'extérie
 
 Nous n'allons stocker que la coloration $\beta=\psi|_{\partial_G(H)}$ sous forme de code suivant,
 $$
-k = \sum_{i=0}^{r-1} c(\beta(e)) \cdot 4^{e} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
+k = \sum_{e=0}^{r-1} c(\beta(e)) \cdot 4^{e} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
 $$
 
 $\Phi_0(H)$ est un ensemble de $k$.
@@ -672,7 +671,7 @@ Les règles de déchargement:
 \end{frame}
 
 \begin{frame}
-\underbar{Objectives:}
+\underbar{Objectifs:}
 
 L'objectif est de réduire les configurations suivantes,
 \begin{itemize}
