@@ -1,8 +1,8 @@
-#define VERTS   25   /* max number of vertices in a free completion + 1 */
+#define VERTS   27   /* max number of vertices in a free completion + 1 */
 #define DEG     5  /*13    max degree of a vertex in a free completion + 1 */
          /* must be at least 13 because of row 0            */
 #define EDGES   62   /* max number of edges in a free completion + 1    */
-#define MAXRING 13   /* max ring-size */
+#define MAXRING 12   /* max ring-size */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -89,8 +89,10 @@ int main()
 
    printf("Avant de générer les couplages ça va.\n");
    for(i = 0; i <= MAXRING; i++){
+      printf("Je vais générer les couplages à %ld sommets\n",i);
       GenerCouplage(i);
    }
+   AffichageL(vector[9]);
 
    char *live = malloc(power[MAXRING+1] * sizeof(live));
    int *couleur = malloc(MAXRING * sizeof(couleur));
@@ -417,6 +419,7 @@ Couplage *c;
          return (d);
       }else if(a > c->premier){
          c->suivant = Inserer(a, b, c->suivant);
+         return c;
       }
    }
    
@@ -800,6 +803,7 @@ char *live;
 
    ring = angle[0][1];
    edges = angle[0][2];
+   for (i=1; i<EDGES; i++) forbidden[i]=0;
    //printf("edges %d\n", edges);
    j = edges + 1;
    c[j] = 1;
