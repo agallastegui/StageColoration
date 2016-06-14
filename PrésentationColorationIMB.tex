@@ -1,0 +1,784 @@
+\documentclass{beamer}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{array,multirow,makecell}
+\setcellgapes{1pt}
+\makegapedcells
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\mode<presentation>
+{ \usetheme{Berlin}
+%  \setbeamercovered{transparent}
+}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+
+\newtheorem{lemme}{Lemme}
+\newtheorem{proposition}{Proposition}
+
+\newtheorem{conjecture}{Conjecture}
+
+\def\ceps{3656}
+
+\title[Coloration des arêtes des graphes planaires]{Coloration des arêtes des graphes planaires}
+\author[A. Gallastegui and F. Kardo\v s]{\underbar{Antonio Gallastegui} \and Franti\v sek Kardo\v s}
+\institute[]{
+Laboratoire Bordelais de Recherche Informatique \\
+Université de Bordeaux\\
+}
+\date{Bordeaux, 10 juin, 2016}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+%\begin{frame}
+% \tableofcontents
+%\end{frame}
+\section{Introduction}
+\subsection{Notions de Base}
+\begin{frame}
+Le degré $d_G(v)$ de $v\in V(G)$ est le nombre de sommets voisins de $v$.
+\begin{itemize}
+\item $\Delta(G)$ degré maximum
+\item $\delta(G)$ degré minimum
+\end{itemize} 
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Fig-def.1}
+}
+\caption{Un exemple d'un graphe de $\delta(G)= 2$ et $\Delta(G)= 4$}
+\end{figure}
+
+
+La \emph{maille} $g(G)$ d'un graphe $G$ est la longueur du plus petit cycle dans $G$, s'il en existe un. Sinon $g(G)$ est infinie.
+\end{frame}
+
+\begin{frame}
+Soit un graphe $G$. Un \emph{couplage} $M$ est un ensemble d'arêtes deux à deux non-adjacentes.
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Couplage.1}
+\hfil
+\includegraphics[scale=1]{./Figures/Couplage.2}
+}
+\caption{Un exemple d'un couplage maximal (gauche) et un couplage maximum que dans ce cas là c'est aussi un couplage parfait (droite)}
+
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+Le graphe $G$ est \emph{planaire} ssi il peut être dessiné sur le plan sans croisement des arêtes.
+Une face $f$, est une région connexe délimitée par des arêtes. Il y a toujours une face infinie.
+\pause
+\begin{theorem}[Euler, 1750]
+%\underbar{Formule d'Euler (1750)}
+Soit $G$ un graphe planaire connexe à $n$ sommets, $m$ arêtes et $f$ faces. Alors,
+$$
+n-m+f=2
+$$
+\end{theorem}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Fig-def.2}
+}
+\end{figure}
+\end{frame}
+
+
+\subsection{Coloration de Graphes}
+\begin{frame}
+Soit $G$ graphe, une \emph{coloration propre} de $G$ est application $\varphi: V(G) \to C$ où $C=\{1,2,...,k\}$ ensemble d'entiers, t.q. $\forall uv\in E(G) \implies\varphi(u) \neq \varphi(v)$. 
+
+Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier $G$.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Coloration.1}
+}
+\caption{Un exemple d'une coloration propre d'un graphe $G$ avec $\chi(G)=3$.}
+\end{figure}
+
+\end{frame}
+\begin{frame}
+Soit $G$ un graphe. Une coloration d'arêtes de $G$ est une application $\varphi:E(G) \to C$, où $C=\{1,2,...,k\}$ t.q. $\forall e$, $e' \in E(G)$ adjacentes $\implies$ $\varphi(e) \neq \varphi(e')$. 
+
+L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
+
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/Coloration.2}
+}
+\caption{Un exemple d'une coloration d'arêtes d'un graphe $G$ avec $\chi'(G)=3$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{theorem}[Vizing]
+Soit $G$ un graphe simple. Alors $\Delta(G) \leq \chi'(G) \leq \Delta(G) + 1$.
+\end{theorem}
+Si $\chi'(G) = \Delta(G)$,  $G$ est de classe 1.
+
+\pause
+%Pour un graphe planaire $G$ voici quelques résultats connus
+Quels graphes planaires sont de classe 1?
+\begin{itemize}
+\item $\Delta(G) \geq 8$ $\implies$ $\chi'(G)=\Delta$ (Vizing 1965).
+\item $\Delta(G) = 7$ $\implies$ $\chi'(G)=7$ (Sanders, Zhao 2001).
+\item $\Delta(G) = 5$ $g(G) \geq 4$ $\implies$ $\chi'(G) = 5$ (Li, Luo 2003).
+\item $\Delta(G) = 4$ $g(G) \geq 5$ $\implies$ $\chi'(G) = 4$ (Li, Luo 2003).
+\end{itemize}
+\begin{conjecture}
+Soit $G$ un graphe planaire. Alors,
+
+$\Delta(G) = 4$ $g(G) \geq 4$ $\implies$ $\chi'(G) = 4$
+\end{conjecture}
+\end{frame}
+
+\begin{frame}
+Tableau des résultats connus pour des graphes de classe 1.
+\begin{center}
+\begin{tabular}{|  c  |  c  |  c  |  c  |  c  |  c  |  c  |}
+\hline $\Delta$ & 3 & 4 & 5 & 6 &  7  &  $\geq$8  \\
+\hline $g \geq 3$ & {\color{red} \textsf{X}} & {\color{red} \textsf{X}}  & {\color{red} \textsf{X}} & {\color{blue} \textsf{?}} &  {\color{green}\checkmark} &  {\color{green}\checkmark}\\
+\hline $g \geq 4$ & {\color{red} \textsf{X}} & {\color{blue} \textsf{?}}  &  {\color{green} \checkmark} &  &  &   \\
+\hline $g \geq 5$ & {\color{red} \textsf{X}} & {\color{green}\checkmark} &  &  &  &  \\
+\hline
+\end{tabular}
+
+\end{center}
+\end{frame}
+
+\section{Résultats Connus}
+%\begin{frame}
+%Soit $G$ graphe avec arêtes coloriées et $G[c1,c2]$ sous graphe de $G$ induit par arêtes coloriées $c1$ et $c2$. 
+%
+%Tout composante connexe $C$ de $G[c1,c2]$ est une chaîne à laquelle renversants les couleurs on obtient nouvelle coloration de $G$.
+%
+%Pour $e\in E(G)$ t.q. $\varphi(e)=c$ et une autre couleur $c'$. Alors il existe une et une seule chaîne de $G[c,c']$ contenant $e$. C'est \emph{$(c, c')$-chaîne de Kempe}. 
+%\end{frame}
+
+\subsection{$\Delta(G)=5$, $g(G)\geq 4$ $\implies$ $\chi'(G)=5$}
+\begin{frame}
+\begin{proposition}
+Soit $G$ un graphe planaire avec $\Delta(G) = 5$ et $g(G) \geq 4$. Alors $\chi'(G)=5$.
+\end{proposition}
+
+\end{frame}
+\begin{frame}
+Propriétés structurelles de un contre-exemple minimal $G$:
+\begin{itemize}
+\item Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\item Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 5$.
+\item Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, $\forall u \in N(v)$, $4\le d_G(u) \le 5$.
+\item Soit $v\in V(G)$ tel que $d_G(v) = 3$. Alors, au moins deux voisins de $v$ sont de degré $5$.
+\item Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 5$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $5$. 
+\item Soit $v \in V(G)$ tel que $d_G(v) = 5$. Alors, $v$ a au plus deux voisins de degré $3$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Déchargement:
+
+La charge initiale est définie par
+ $$
+\gathered
+w(v) = d_G(v) - 4 \qquad \textrm{pour tout $v\in V(G)$,} \\
+w(f) = d_G(f) - 4 \qquad \textrm{pour tout $f\in F(G)$,} 
+\endgathered 
+$$
+
+$$ 
+\gathered
+w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2, \\
+w(v) = -1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 3, \\
+w(v) =  0 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4, \\
+w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 5.
+\endgathered
+$$
+
+La charge initiale de toutes les faces est positive puisque $g(G)\ge 4$.
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $G$ un graphe planaire connexe. Alors,
+$$ \sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F(G)} (d_G(f) -4) = -8.$$
+\end{lemme}
+Preuve.
+$$
+\gathered 
+\sum_{v \in V(G)} (d_G(v) - 4) + \sum_{f\in F(G)} (d_G(f) -4) = 2m -4n + 2m - 4f = \\
+ =-4(n - m + f) = -4\cdot 2 = -8.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+\underbar{Les règles de déchargement:}
+\begin{enumerate}
+\item[(R1)] Tout sommet de degré 5 donne une unité de charge à chacun de ses voisins de degré 2.
+\item[(R2)] Tout sommet de degré 5 donne $1/2$ de charge à chaque voisin de degré 3.
+\end{enumerate}
+\end{frame}
+
+\subsection{$\Delta(G)=4$, $g(G)\geq 5$ $\implies$ $\chi'(G)=4$}
+\begin{frame}
+\begin{proposition}
+Soit $G$ un graphe planaire avec $\Delta(G) = 4$ et $g(G) \geq 5$. Alors $G$ est $4$-arête-coloriable.
+\end{proposition}
+Propriétés structurelles d'un contre-exemple minimal $G$:
+\begin{itemize}
+\item Il n'existe pas de sommet $v$ de $G$ tel que $d_G(v) = 1$.
+\item Soit $v \in V(G)$ tel que $d_G(v) = 2$. Alors $\forall u \in N(v)$, $d_G(u) = 4$.
+\item Soit $uv \in E(G)$ tel que $d_G(u) = 2$ et $d_G(v) = 4$. Alors, tous les voisins de $v$ sauf $u$ sont de degré $4$.
+\item Soit $v \in V(G)$ tel que $d_G(v)=3$. Alors, $v$ a au moins deux voisins de degré $4$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Déchargement:
+
+La charge initiale est définie par,
+
+$$
+\gathered
+w(v) = \frac{3}{2} d_G(v) - 5 \qquad \textrm{pour tout $v\in V(G)$,} \\
+w(f) = d_G(f) - 5 \qquad \textrm{pour tout $f\in F(G)$.}
+\endgathered
+$$
+
+
+
+%$$
+%\gathered
+%w(v) = -2 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 2,\\
+%w(v) = -\frac{1}{2} \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 3,\\
+%w(v) =  1 \qquad \textrm{pour tout $v \in V(G)$, tel que } d_G(v) = 4.
+%\endgathered
+%$$
+%
+%D'ailleurs, la charge initiale de toutes les faces est positive puisque $g(G) \geq 5$.
+%\end{frame}
+%
+%\begin{frame}
+%\begin{lemme}
+%Soit $G$ un graphe planaire connexe. Alors,
+%$$
+%\sum_{v \in V(G)} \left(\frac{3}{2} d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) = -10.
+%$$
+%\end{lemme}
+%Preuve.
+%$$ 
+%\gathered
+%\sum_{v \in V(G)} \left(\frac{3}{2}d_G(v) - 5\right) + \sum_{f\in F(G)} \left(d_G(f) -5\right) =\\
+%= 3m -5n + 2m - 5f = -5(n - m + f) = -5 \cdot 2 = -10.
+%\endgathered
+%$$
+%\end{frame}
+%
+%\begin{frame}
+\underbar{Les règles de déchargement:}
+\begin{enumerate}
+\item[(R1)] tout sommet de degré 4 donne $1$ de charge à chacun de ses voisins de degré 2.
+\item[(R2)] tout sommet de degré 4 donne $1/4$ de charge à chaque voisin de degré 3.
+\end{enumerate}
+%Dans ce cas là aussi, la somme totale de la charge reste invariante et la charge de toutes les faces reste positive.
+\end{frame}
+
+
+\section{Réductibilité}
+\subsection{ }
+%\begin{frame}
+%Les démonstrations de Lemmes \ref{le:1}-\ref{le:5333} et \ref{le:14}-\ref{le:333} ont toutes la même structure: La supposition que le contre-exemple minimal $G$ contienne un arrangement de sommets de certains degrés entraîne une contradiction avec non-colorabilité de $G$.
+%  
+%
+%Nous allons généraliser cette notion.
+%\end{frame}
+
+\begin{frame}
+Soit $H$ un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
+%
+%
+%
+%Dans la suite, lorsque nous parlons d'une configuration $H$ dans un graphe $G$, nous identifions $H$ et sa copie $X=\xi(H)$ dans $G$.
+%\end{frame}
+
+%\begin{frame}
+\pause
+
+Soit $H$ une configuration de $G$. Notons
+$$
+\partial_G(H) = \{e =uv \in E(G) : u \in V(H)\textrm{ et }v \in V(G \setminus H)\}.
+$$ 
+%l'ensemble des arêtes sortantes de $H$ et $r=|\partial_G(H)|$.
+
+
+
+Notons $H^* = H \cup \partial_G(H)$ et $G'=G\setminus H \cup \partial_G(H)$.
+\end{frame}
+
+%\begin{frame}
+%Si $\varphi:E(G)\to \{1,2,3,4\}$ est une 4-arête-coloration de $G$, alors $\varphi$ induit une coloration de $\partial_G(H)$, de $H^*$, et de $G'$. Pour capturer la structure de la coloration $\varphi$ dans $G'$, nous introduisons les notions et notations suivantes :
+%\end{frame}
+
+\begin{frame}
+Soit 
+\begin{itemize}
+\item $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$,
+\item $\varphi:E(G')\to \{1,2,3,4\}$ une 4-arête-coloration de $G'$,
+\item $c, c' \in \{1,2,3,4\}$, $c\ne c'$ deux couleurs quelconques. 
+\end{itemize}
+
+Une coloration $\varphi':E(G)\setminus E(H)\to \{1,2,3,4\}$ est \emph{adjacente} à $\varphi$, si $\varphi'$ peut être obtenu à partir de $\varphi$ en alternant les couleurs d'une $(c,c')$-chaîne de Kempe de $e$ pour un choix d'une arête $e\in\partial_G(H)$ et des couleurs $c,c'\in\{1,2,3,4\}$. 
+
+\pause
+
+%Notons $N(\varphi)$ l'ensemble des colorations adjacentes à $\varphi$.
+%\end{frame}
+%
+%\begin{frame}
+%Soit 
+%\begin{itemize}
+%\item $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$,
+%\item $\varphi:E(G')\to \{1,2,3,4\}$ une 4-arête-coloration de $G'$,
+%\item $c, c' \in \{1,2,3,4\}$, $c\ne c'$ deux couleurs quelconques. 
+%\end{itemize}
+%
+%
+
+Le \emph{graphe résiduel}
+$\mathcal{X}^{\varphi}_{c,c'}$ est défini par
+\begin{itemize}
+\item $V(\mathcal{X}^{\varphi}_{c,c'}) = \partial_G(H)$, 
+\item $E(\mathcal{X}^{\varphi}_{c,c'}) = \{ e_ie_j$ tels que $(c,c')$-chaîne de Kempe de $e_i$ est la même que la $(c,c')$-chaîne de Kempe de $e_j\}$.
+\end{itemize}
+
+
+Le graphe résiduel est donc un couplage planaire de $\partial_G(H)$.
+\end{frame}
+
+\begin{frame}
+\begin{proposition}
+Soit 
+\begin{itemize}
+\item $G$ avec $\Delta(G)=4$ et $H$ une configuration de $G$,
+\item $\varphi:E(G')\to \{1,2,3,4\}$ 4-arête-coloration de $G'$, 
+\item $\varphi' \in N(\varphi)$ une coloration adjacente à $\varphi$,
+\item $\beta = \varphi|_{\partial_G(H)}$ et $\beta' = \varphi'|_{\partial_G(H)}$.
+\end{itemize}
+Alors,
+$$
+|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}| \in \{1,2\},
+$$
+de plus, on a \\
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=1$ $\Leftrightarrow$ $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=0$, et \\
+$|\{e\in \partial_H(G) : \beta(e)\ne \beta'(e)\}|=2$ $\Leftrightarrow$ $d_{\mathcal{X}_{\varphi}^{c,c'}}(e)=1$. 
+\end{proposition}
+\end{frame}
+
+\begin{frame}
+Considérons des coloration de $H$.
+\end{frame}
+
+\begin{frame}
+Soit $H$ une configuration de $G$ et $\beta$ une coloration de $\partial_G(H)$. 
+
+Alors, $\beta$ \emph{s'étend} vers $H$ si $\exists \psi$ de $H^*$  t.q.   $\psi|_{\partial_G(H)}= \beta$
+
+$$
+\Phi_0 = \{\beta : \exists \psi : E(H^*)\to\{1,2,3,4\} \textrm{t.q.} \psi|_{\partial_G(H)} = \beta\}.
+$$
+Pour $i\in\mathbb{N}$, soit
+$$
+\gathered
+\Phi_{i+1} = 
+\{ 
+\beta : 
+\beta\in \Phi_i
+\textrm{ ou }
+\exists c,c'\in \{1,2,3,4\},\,\\ 
+\forall X\textrm{ couplage planaire de $\partial_G(H)$, }
+N^X_{c,c'}(\beta) \cap \Phi_i \neq \emptyset 
+\},\\
+\Phi(H)=\bigcup_{i\in \mathbb{N}} \Phi_i(H).
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+\begin{theorem}
+Soit 
+\begin{itemize}
+\item $H$ une configuration de $G$. 
+\item $H'$ une autre configuration t.q. $\partial_G(H)=\partial_G(H')$.
+\item $G'$ le graphe obtenu à partir de $G$ en remplaçant $H$ par $H'$.
+\end{itemize}
+
+Si $\Phi_0(H')\subseteq \Phi(H)$, alors, pour toute 4-arête-coloration $\varphi'$ de $G'$ il existe une 4-arête-coloration $\varphi$ de $G$.
+\end{theorem}
+
+Preuve.
+il suffit de modifier la coloration $\varphi'$ le long des chaînes de Kempe un nombre fini de fois afin d'obtenir une coloration qui s'étend directement vers $H$.
+\end{frame}
+
+%\begin{frame}
+%Soit $H$ et $H'$ deux configurations telles que $\partial(H)=\partial(H')$. La configuration $H$ \emph{se réduit} vers $H'$ si $\Phi_0(H')\subseteq \Phi(H)$. La configuration $H$ est \emph{réductible} s'il existe une configuration $H'$ vers la quelle elle se réduit.
+%
+%%\pause
+%%
+%%Ce théorème permet d'automatiser la vérification de réductibilité de configurations -- on n'a pas besoin de connaître la structure du graphe $G$, il suffit de deviner la réduction (la configuration $H'$) et vérifier que la condition de la définition dé réductibilité est satisfaite.
+%\end{frame}
+
+\section{Description de l'outil}
+
+\begin{frame}
+C'est un programme qui prend,
+\begin{itemize}
+\item Entrée:  Une configuration $H$ et sa réduction potentielle $H'$.
+\item Sortie:  Une réponse de OUI/NON à la question de réductibilité.
+\end{itemize}
+Ensuite, nous décrivons l'outil de la manière suivante,
+\begin{itemize}
+\item Pré-calcul,
+\item Traitement,
+\item Implémentation.
+\end{itemize} 
+\end{frame}
+
+\subsection{Pré-calcul}
+\begin{frame}
+\begin{itemize}
+\item Génération de Couplages de $r$ sommets, pour $r$ allant de 1 à MAXRING.
+\item Variation entre deux codes adjacents (Plus Tard).
+\end{itemize}
+\end{frame}
+
+\subsection{Traitement}
+
+\begin{frame}
+Partant d'une configuration $H$ de $G$ et $H'$ sa réduction potentielle,
+\begin{itemize}
+\item On génère l'ensemble des colorations $\psi$ de $H^*$ t.q. $\psi|_{\partial_G(H)} = \beta$, constituent $\Phi_0$,
+\item Tant que $\Phi_i \subset \Phi_{i+1}$ pour $i \geq 0$, on génère des colorations adjacentes à $\beta \in \Phi_i$,
+\item L'ensemble totale des colorations qui s'étendent vers $H$ est $\Phi(H) = \bigcup_{i \in \mathbb{N}} \Phi_i(H)$,
+\item On génère l'ensemble $\Phi'_0$ des colorations $\psi'$ de $H'$ t.q. une coloration de $G'$ s'étend vers $H'$ et
+\item On regarde si $\Phi'_0(H') \subseteq \Phi(H)$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+Alors,
+pour $\beta'$ quelconque qui ne s'étend pas,
+s'il existe une paire de couleurs $c$, $c'$ tel que pour n'importe quel couplage des arêtes coloriées avec $c$ ou $c'$ il existe un code $\beta$ adjacent à $\beta'$, $\beta'$ s'étend.
+\end{frame}
+
+\subsection{Implémentation}
+
+\begin{frame}
+\underbar{Lecture de $H$ et $H'$:}
+\begin{itemize}
+\item Lecture de configuration $H$ et sa réduction potentielle $H'$ présentées sous forme d'une liste d'adjacence.
+\item Les deux seront stockées dans deux matrices différentes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\underbar{Coloration de $H$:}
+
+Nous commençons par numéroter les arêtes du graphe $H$, commençant par les arêtes sortantes et nous continuons vers l'intérieur.
+
+Nous colorions les arêtes de $H$ partant de la dernière arête vers l'extérieur à l'aide de la méthode de retour sur le trace (Backtrack).
+
+Nous n'allons stocker que la coloration $\beta=\psi|_{\partial_G(H)}$ sous forme de code suivant,
+$$
+k = \sum_{e=0}^{r-1} c(\beta(e)) \cdot 4^{e} \qquad \textrm{tel que   } c(i) \in \{ 0,1,2,3 \} \qquad \textrm{pour  } i \in \{1,2,3,4 \}.
+$$
+
+$\Phi_0(H)$ est un ensemble de $k$.
+\end{frame}
+
+\begin{frame}
+\underbar{Colorations voisines:}
+
+Soit $H$ une configuration, une coloration $\beta$ avec son code $k$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
+
+Alors $\mathcal{M}$ est l'ensemble de tous les couplages $M$ possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$.
+
+\pause
+
+Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+$$
+\begin{cases}
+k' = k + (-2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si  }d_M(e)=0 \\
+k' = k  + (-2\beta'(e)+c + c')\cdot 4^{e} + (-2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si  }d_M(e)=1.
+\end{cases}
+$$
+
+Cet ensemble de codes de coloration $k'$ forment $\Phi_{i+1}$ pour tout $i\in \mathbb{N}$.
+\end{frame}
+
+
+%Soit $H$ configuration de $G$ et $\partial_G(H)$ t.q. $|\partial_G(H)|=r$. 
+%
+%Alors, une \emph{numérotation} de $H$ est l'identification des arêtes de $H$.
+%
+%\pause
+%
+%Soit $H$ configuration de $G$ numérotée. 
+%
+%Alors, le \emph{voisinage} de $e$ est 
+%$$
+%N(e) = \{e': \textrm{ numérotation de $e'$ est plus grande}\}
+%$$
+%\end{frame}
+%
+%\begin{frame}
+%Soit $H$ configuration de $G$ numérotée. 
+%
+%Alors, une \emph{coloration des arêtes} $\psi$ de $H$ est obtenu partant du sommet $v$ numéroté avec $m$ et coloriant un par un, sans créer conflits de voisinage, à l'aide du méthode de retour sur le trace (Backtrack).
+%
+%\pause
+%
+%-image-
+%\end{frame}
+%
+%\begin{frame}
+%Ces colorations correspondent aux colorations de l'ensemble $\Psi_0$ de coloration qui s'étendent.
+%
+%\pause
+%
+%Pour colorier les arêtes de $H$, nous utilisons les couleurs $1$, $2$, $4$ et $8$, sous forme binaire. Pour un nombre $r$ d'arêtes sortantes de $H$ il existe $4^r$ possibles colorations. Nous allons s'intéresser aux colorations des arêtes sortantes de $H$, c-à-d deux colorations différentes de $H$ avec une même coloration des arêtes sortantes sont prises comme une même coloration.
+%\end{frame}
+%
+%\begin{frame}
+%Soit $H$ configuration du graphe $G$, $\partial_G(H)$  et $\beta$ coloration de $\partial_G(H)$. 
+%
+%Alors un \emph{code de coloration} est un entier $k$ qui représente $\beta$.
+%
+%
+%\end{frame}
+
+%\begin{frame}
+%Soit $H$ configuration de $G$, une coloration $\beta$ de $\partial_G(H)$ et deux couleurs $c$ et $c'$. 
+%
+%Alors $M$ est l'ensemble de tous les couplages possibles des arêtes de $\partial_G(H)$ coloriées avec $c$ ou $c'$. 
+%
+%\pause
+%
+%Soit 
+%\begin{itemize}
+%\item $H$ configuration de $G$\\
+%\item $\Psi_0$ l'ensemble de $\beta$ colorations étendues vers $H$ \\
+%\item $k$ Codes de colorations des $\beta$. 
+%\end{itemize}
+%Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
+%$$
+%\begin{cases}
+%k' =  k - (2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si $e \in X$ renverse ses couleurs}\\
+%k' = k  - (2\beta'(e)+c + c')\cdot 4^{e} - (2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si $(e,e')$-chaîne de Kempe renverse ses couleurs}
+%\end{cases}
+%$$
+%\end{frame}
+
+%\begin{frame}
+%Soit $H$ configuration de $G$ et $\Psi_0$.
+%
+% Alors, pour tout $i \in \mathbb{N}$ $\Psi_{i+1}$ est l'ensemble des colorations $\beta'$ de $\partial_G(H)$ adjacentes aux colorations $\beta$ de $\Psi_i$.
+% 
+%\pause
+%
+%$$
+%\Psi = \Psi_0 \bigcup_{i\in \mathbb{N}}\Psi_i.
+%$$
+%\end{frame}
+
+%\begin{frame}
+%\begin{theorem}
+%Soit $H$ configuration de $G$ et $H'$ une configuration t.q. $\partial_G(H)=\partial_G(H')$. 
+%
+%Alors,
+%\begin{center}
+%$H'$ est une réduction de  $H$ $\Leftrightarrow$ $\Psi_0$  $\Psi'_0 \subseteq \Psi$.
+%\end{center}
+%\end{theorem}
+%\end{frame}
+
+\section{Déchargement}
+\subsection{ }
+\begin{frame}
+Soit $G$ un graphe planaire. V(G) ensemble de sommets et F ensemble de faces de $G$.
+
+La \emph{charge initiale} des sommets et des faces,
+
+$$
+\gathered
+w: V(G)\cup F(G) \to \mathbb{R}, \\
+w(x) = d_G(x) - 4. \\
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+\begin{lemme}
+Soit $G$ un graphe planaire et $w$ la application de la charge initiale. Alors la charge initiale totale du graphe est $-8$.
+\end{lemme}
+
+Preuve.
+$$
+\gathered
+\sum_{u \in V(G)} (d_G(v) - 4) + \sum_{f \in F} (d_G(f) - 4) = 2m - 4n + 2m - 4f =\\
+= -4( n - m + f) = -4 \cdot 2 = -8.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+Alors les charges pour chaque sommet et face,
+$$
+\gathered
+w(v) = -2 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 2,\\
+w(v) = -1 \qquad \forall v \in V(G) \textrm{,  t.q.  } d_G(v) = 3,\\
+w(v) = 0 \qquad \forall  v \in V(G) \textrm{,  t.q.  } d_G(v) = 4
+\endgathered
+$$
+et
+$$
+\gathered
+w(f) = 0 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 4,\\
+w(f) = 1 \qquad \forall f \in F(G) \textrm{,  t.q.  } d_G(f) = 5,\\
+w(f) \geq 2 \qquad \forall f \in F(G) \textrm{, t.q.  } d_G(f) \geq 6.
+\endgathered
+$$
+\end{frame}
+
+\begin{frame}
+%Il ne suffit pas de définir les règles de déchargement parmi les sommets, puisqu'il n'y a pas de sommet de charge strictement positive. Nous sommes forcés à utiliser la charge des faces de taille au moins 5 pour éliminer la charge négative des sommets de degré 2 et 3.
+
+\underbar{Les règles de déchargement:}
+
+\begin{enumerate}
+\item [(R)] Toute face de taille au moins 5 donne une unité de charge à chaque sommet incident de degré 2 ou 3.
+\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}
+\pause
+
+\underbar{Objectifs:}
+
+L'objectif est de réduire les configurations suivantes,
+\begin{itemize}
+\item Un sommet de degré 2 avec 1 pentagone autour de lui.
+\item Les sommets de degré 3 avec un pentagone autour d'eux.
+\item Une face de grande taille avec beaucoup de sommets de petit degré autour d'elle.
+\end{itemize}
+\end{frame}
+
+\section{Résultats}
+\subsection{Sommet de degré 3}
+\begin{frame}
+\underbar{3-3-4-3:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.6}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.106}
+}
+\caption{La configuration 3-3-4-3 (gauche) et sa réduction (droite).}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\underbar{Pair de sommets avec 4 carrées:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.4}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.104}
+}
+\caption{La configuration 3-3 avec 4 carrés autour de ce pair (gauche) et sa réduction (droite).}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\underbar{3-3  1 pentagone en haut:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.5}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.105}
+}
+\caption{La configuration 3-3 avec un pentagone en haut (gauche) et sa réduction (droite).}
+\label{fig:33PH}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\underbar{3-3 1 pentagone de coté:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.7}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.107}
+}
+\caption{La configuration 3-3 avec un pentagone de coté (gauche) et sa réduction (droite).}
+\label{fig:33PC}
+\end{figure}
+\end{frame}
+
+\subsection{Sommet de degré 2}
+\begin{frame}
+\underbar{2 carrés:}
+\begin{figure}[ht]
+\centerline{
+\includegraphics[scale=1]{./Figures/ConfRed.8}
+\hfil
+\includegraphics[scale=1]{./Figures/ConfRed.108}
+}
+\caption{La configuration 2 avec deux carrés (gauche) et sa réduction (droite).}
+\label{fig:2CC}
+\end{figure}
+%Parler des pentagones qu'il faut mettre
+\end{frame}
+
+%\begin{frame}
+%\underbar{1 carré et 1 pentagone:}
+%\end{frame}
+
+\section{Conclusion}
+\begin{frame}
+\begin{enumerate}
+\item Réussi:
+\begin{itemize}
+\item Développement d'un outil de vérification.
+\item 3 nouvelles configurations réductibles parmi plus de 50 essais des paires $H$, $H'$.
+\end{itemize}
+\item En cours de travail:
+\begin{itemize}
+\item Réduction pour $v$ de degré 2.
+\item Réduction pour $v$ de degré 3.
+\item Vérification de connexité et aucune présence des triangles autour des réductions
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\begin{center}
+Merci pour votre attention!
+\end{center}
+\end{frame}
+
+\end{document}
+
