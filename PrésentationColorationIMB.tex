@@ -100,7 +100,7 @@ $$
 \begin{frame}
 Soit $G$ graphe, une \emph{coloration propre} de $G$ est application $\varphi: V(G) \to C$ où $C=\{1,2,...,k\}$ ensemble d'entiers, t.q. $\forall uv\in E(G) \implies\varphi(u) \neq \varphi(v)$. 
 
-Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier $G$.
+Le nombre chromatique $\chi(G)$.
 
 \begin{figure}[ht]
 \centerline{
@@ -113,7 +113,7 @@ Le nombre chromatique $\chi(G)$ est le nombre de couleurs minimum pour colorier 
 \begin{frame}
 Soit $G$ un graphe. Une coloration d'arêtes de $G$ est une application $\varphi:E(G) \to C$, où $C=\{1,2,...,k\}$ t.q. $\forall e$, $e' \in E(G)$ adjacentes $\implies$ $\varphi(e) \neq \varphi(e')$. 
 
-L'indice chromatique $\chi'(G)$ est le nombre de couleurs minimum qu'on nécessite pour colorier les arêtes de $G$.
+L'indice chromatique $\chi'(G)$.
 
 \begin{figure}[ht]
 \centerline{
@@ -307,7 +307,7 @@ $$
 %\end{frame}
 
 \begin{frame}
-Soit $H$ un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
+%Soit un graphe $H$, un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ telle que $\forall v \in V(H)$ on a $\gamma(v) \geq d_H(v)$. Le graphe $H$ est une \emph{configuration} dans $G$ s'il existe un sous-graphe $X$ de $G$ et un isomorphisme $\xi$: $H \to X$ tel que $\forall v \in V(H)$, $\gamma(v) = d_G(\xi(v))$. 
 %
 %
 %
@@ -315,7 +315,7 @@ Soit $H$ un graphe étiqueté avec une fonction $\gamma$: $V(G) \to \mathbb{N}$ 
 %\end{frame}
 
 %\begin{frame}
-\pause
+%\pause
 
 Soit $H$ une configuration de $G$. Notons
 $$
@@ -340,14 +340,16 @@ Soit
 \item $c, c' \in \{1,2,3,4\}$, $c\ne c'$ deux couleurs quelconques. 
 \end{itemize}
 
-Une coloration $\varphi':E(G)\setminus E(H)\to \{1,2,3,4\}$ est \emph{adjacente} à $\varphi$, si $\varphi'$ peut être obtenu à partir de $\varphi$ en alternant les couleurs d'une $(c,c')$-chaîne de Kempe de $e$ pour un choix d'une arête $e\in\partial_G(H)$ et des couleurs $c,c'\in\{1,2,3,4\}$. 
+Une coloration $\varphi':E(G)\setminus E(H)\to \{1,2,3,4\}$ est \emph{adjacente} à $\varphi$, si $\varphi'$ peut être obtenu à partir de $\varphi$ en alternant les couleurs d'une $(c,c')$-chaîne de Kempe de $e$ pour $e\in\partial_G(H)$
 
-\pause
+%pour un choix d'une arête  et des couleurs $c,c'\in\{1,2,3,4\}$. 
+
+%\pause
 
 %Notons $N(\varphi)$ l'ensemble des colorations adjacentes à $\varphi$.
-%\end{frame}
+\end{frame}
 %
-%\begin{frame}
+\begin{frame}
 %Soit 
 %\begin{itemize}
 %\item $G$ un graphe avec $\Delta(G)=4$ et $H$ une configuration de $G$,
@@ -520,8 +522,8 @@ Alors $\mathcal{M}$ est l'ensemble de tous les couplages $M$ possibles des arêt
 Alors, il existe des colorations $\beta'$ de $\partial_G(H)$ avec code de coloration $k'$ \emph{adjacentes} de $\beta$ si pour une paire de couleurs $c$ et $c'$,
 $$
 \begin{cases}
-k' = k + (-2\beta'(e)+c + c')\cdot 4^{e} \textrm{ si  }d_M(e)=0 \\
-k' = k  + (-2\beta'(e)+c + c')\cdot 4^{e} + (-2\beta'(e')+c + c')\cdot 4^{e'} \textrm{ si  }d_M(e)=1.
+k' = k + (c + c'-2\beta'(e))\cdot 4^{e} \textrm{ si  }d_M(e)=0 \\
+k' = k  + (c + c'-2\beta'(e))\cdot 4^{e} + (c + c'-2\beta'(e'))\cdot 4^{e'} \textrm{ si }d_M(e)=1.
 \end{cases}
 $$
 
